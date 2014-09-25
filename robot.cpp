@@ -1,64 +1,12 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include <stdlib.h>
+#include <iostream>
 
-class Transformer
-{
-   public:
-   int rshoulder;
-   int relbow;
-   int fullx;
-   int fully;
-   int fullz;
-   int headside;
-   int headforward;
-   int headcurve;
-   int lshoulder;
-   int lelbow;
-   int lltside;
-   int lltforward;
-   int rltside;
-   int rltforward;
-   int llbforward;
-   int rlbforward;
-   GLUquadricObj *neck;
-   GLUquadricObj *rshoulderhand;
-   GLUquadricObj *relbowhand;
-   GLUquadricObj *lshoulderhand;
-   GLUquadricObj *lelbowhand;
-   GLUquadricObj *rtopleg;
-   GLUquadricObj *rbottomleg;
-   GLUquadricObj *ltopleg;
-   GLUquadricObj *lbottomleg;
-   Transformer()
-   {
-	  rshoulder = -45;
-	  relbow = 0;
-	  fullx = 0;
-	  fully = 0;
-	  fullz = 0;
-	  headside = 0;
-	  headforward = 0;
-	  headcurve = 0;
-	  lshoulder = -135;
-	  lelbow = 0;
-	  lltside = -90;
-	  lltforward = 0;
-	  rltside = -90;
-	  rltforward = 0;
-	  llbforward = 0;
-	  rlbforward = 0;
-	  neck = gluNewQuadric();
-	  rshoulderhand = gluNewQuadric();
-	  relbowhand = gluNewQuadric();
-	  lshoulderhand = gluNewQuadric();
-	  lelbowhand = gluNewQuadric();
-	  rtopleg = gluNewQuadric();
-	  rbottomleg = gluNewQuadric();
-	  ltopleg = gluNewQuadric();
-	  lbottomleg = gluNewQuadric();
-   }
-};
+#include "transformer.h"
+
+using namespace std;
+
 
 Transformer T;
 
@@ -210,129 +158,105 @@ void keyboard (unsigned char key, int x, int y)
    switch (key) 
    {
 	  case 'v':
-	  T.fullx = (T.fullx + 5) % 360;
-	  glutPostRedisplay();
+	  T.rotateX(5);
 	  break;
 	  case 'V':
-	  T.fullx = (T.fullx - 5) % 360;
-	  glutPostRedisplay();
+	  T.rotateX(-5);
 	  break;
 	  case 'b':
-	  T.fully = (T.fully + 5) % 360;
-	  glutPostRedisplay();break;
+	  T.rotateY(5);
+	  break;
 	  case 'B':
-	  T.fully = (T.fully - 5) % 360;
-	  glutPostRedisplay();
+	  T.rotateY(-5);
 	  break;
 	  case 'n':
-	  T.fullz = (T.fullz + 5) % 360;
-	  glutPostRedisplay();
+	  T.rotateZ(5);
 	  break;
 	  case 'N':
-	  T.fullz = (T.fullz - 5) % 360;
-	  glutPostRedisplay();
+	  T.rotateZ(-5);
 	  break;
 
 
 	  case 'z':
-	  T.headside = (T.headside + 5) % 360;
-	  glutPostRedisplay();
+	  T.tiltHeadSide(5);
 	  break;
 	  case 'Z':
-	  T.headside = (T.headside - 5) % 360;
-	  glutPostRedisplay();
+	  T.tiltHeadSide(-5);
 	  break;
 	  case 'x':
-	  T.headforward = (T.headforward + 5) % 360;
-	  glutPostRedisplay();break;
+	  T.tiltHeadFB(5);
+	  break;
 	  case 'X':
-	  T.headforward = (T.headforward - 5) % 360;
-	  glutPostRedisplay();
+	  T.tiltHeadFB(-5);
 	  break;
 	  case 'c':
-	  T.headcurve = (T.headcurve + 5) % 360;
-	  glutPostRedisplay();
+	  T.turnHead(5);
 	  break;
 	  case 'C':
-	  T.headcurve = (T.headcurve - 5) % 360;
-	  glutPostRedisplay();
+	  T.turnHead(-5);
 	  break;
 
 	  case 's':
-	  T.rshoulder = (T.rshoulder + 5) % 360;
-	  glutPostRedisplay();
+	  T.rShoulderSide(5);
 	  break;
 	  case 'S':
-	  T.rshoulder = (T.rshoulder - 5) % 360;
-	  glutPostRedisplay();
+	  T.rShoulderSide(-5);
 	  break;
 	  case 'e':
-	  T.relbow = (T.relbow + 5) % 360;
-	  glutPostRedisplay();break;
+	  T.rElbowBend(5);
+	  break;
 	  case 'E':
-	  T.relbow = (T.relbow - 5) % 360;
-	  glutPostRedisplay();
+	  T.rElbowBend(-5);
 	  break;
 	  case 'd':
-	  T.lshoulder = (T.lshoulder + 5) % 360;
-	  glutPostRedisplay();
+	  T.lShoulderSide(5);
 	  break;
 	  case 'D':
-	  T.lshoulder = (T.lshoulder - 5) % 360;
-	  glutPostRedisplay();
+	  T.lShoulderSide(-5);
 	  break;
 	  case 'r':
-	  T.lelbow = (T.lelbow + 5) % 360;
-	  glutPostRedisplay();break;
+	  T.lElbowBend(5);
+	  break;
 	  case 'R':
-	  T.lelbow = (T.lelbow - 5) % 360;
-	  glutPostRedisplay();
+	  T.lElbowBend(-5);
 	  break;
 	  case 'j':
-	  T.rltside = (T.rltside + 5) % 360;
-	  glutPostRedisplay();
+	  T.rLegSide(5);
 	  break;
 	  case 'J':
-	  T.rltside = (T.rltside - 5) % 360;
-	  glutPostRedisplay();
+	  T.rLegSide(-5);
 	  break;
 	  case 'k':
-	  T.rltforward = (T.rltforward + 5) % 360;
-	  glutPostRedisplay();break;
+	  T.rLegFB(5);
+	  break;
 	  case 'K':
-	  T.rltforward= (T.rltforward - 5) % 360;
-	  glutPostRedisplay();
+	  T.rLegFB(-5);
 	  break;
 	  case 'l':
-	  T.rlbforward = (T.rlbforward + 5) % 360;
-	  glutPostRedisplay();break;
+	  T.rCalfFB(5);
+	  break;
 	  case 'L':
-	  T.rlbforward= (T.rlbforward - 5) % 360;
-	  glutPostRedisplay();
+	  T.rCalfFB(-5);
 	  break;
 
 	  case 'i':
-	  T.lltside = (T.lltside + 5) % 360;
-	  glutPostRedisplay();
+	  T.lLegSide(5);
 	  break;
 	  case 'I':
-	  T.lltside = (T.lltside - 5) % 360;
-	  glutPostRedisplay();
+	  T.lLegSide(-5);
 	  break;
 	  case 'o':
-	  T.lltforward = (T.lltforward + 5) % 360;
-	  glutPostRedisplay();break;
+	  T.lLegFB(5);
+	  break;
 	  case 'O':
-	  T.lltforward= (T.lltforward - 5) % 360;
-	  glutPostRedisplay();
+	  T.lLegFB(-5);
 	  break;
 
 	  case 'p':
-	  T.llbforward = (T.llbforward + 5) % 360;
-	  glutPostRedisplay();break;
+	  T.lCalfFB(5);
+	  break;
 	  case 'P':
-	  T.llbforward= (T.llbforward - 5) % 360;
-	  glutPostRedisplay();          
+	  T.lCalfFB(-5);
 	  break;
 
 	  case 27:

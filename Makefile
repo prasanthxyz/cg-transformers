@@ -7,7 +7,7 @@ LDFLAGS=-L/usr/local/lib
 CPPFLAGS=-I/usr/local/include
 
 BIN=transformers
-SRCS=robot.cpp 
+SRCS=robot.cpp transformer.cpp 
 
 
 
