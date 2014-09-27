@@ -4,22 +4,31 @@
 class Transformer
 {
    public:
-	  int rshoulder;
-	  int relbow;
 	  int fullx;
 	  int fully;
 	  int fullz;
 	  int headside;
 	  int headforward;
 	  int headcurve;
-	  int lshoulder;
+	  int bend;
+	  int rshoulderside;
+	  int rshoulderforward;
+	  int rshouldercurve;
+	  int relbow;
+
+	  int lshoulderside;
+	  int lshoulderforward;
+	  int lshouldercurve;
 	  int lelbow;
-	  int lltside;
-	  int lltforward;
 	  int rltside;
 	  int rltforward;
-	  int llbforward;
+	  int rltcurve;
 	  int rlbforward;
+
+	  int lltside;
+	  int lltforward;
+	  int lltcurve;
+	  int llbforward;
 	  GLUquadricObj *neck;
 	  GLUquadricObj *rshoulderhand;
 	  GLUquadricObj *relbowhand;
@@ -38,16 +47,28 @@ class Transformer
 	  void tiltHeadSide(int);
 	  void tiltHeadFB(int);
 	  void turnHead(int);
+	  void bendForward(int);
+	  void bendBack(int);
 	  void rShoulderSide(int);
+	  void rShoulderFB(int);
+	  void rShoulderCurve(int);
+
 	  void rElbowBend(int);
 	  void lShoulderSide(int);
+	  void lShoulderFB(int);
+	  void lShoulderCurve(int);
+
 	  void lElbowBend(int);
 	  void rLegSide(int);
 	  void rLegFB(int);
+	  void rLegCurve(int);
 	  void rCalfFB(int);
 	  void lLegSide(int);
 	  void lLegFB(int);
+	  void lLegCurve(int);
 	  void lCalfFB(int);
+
+	  void transform();
 };
 
 #endif
