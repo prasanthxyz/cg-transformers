@@ -27,8 +27,10 @@ class Transformer
 
 	  int lltside;
 	  int lltforward;
+
 	  int lltcurve;
 	  int llbforward;
+	  GLuint left_arm;
 	  GLUquadricObj *neck;
 	  GLUquadricObj *rshoulderhand;
 	  GLUquadricObj *relbowhand;
@@ -67,6 +69,7 @@ class Transformer
 	  void lLegFB(int);
 	  void lLegCurve(int);
 	  void lCalfFB(int);
+	  void draw_left_arm();
 
 	  void transform();
 };

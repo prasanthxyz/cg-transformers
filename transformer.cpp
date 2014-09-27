@@ -31,7 +31,6 @@ Transformer::Transformer()
    lltforward=0;
    lltcurve=0;
    llbforward=0;
-     
    neck = gluNewQuadric();
    rshoulderhand = gluNewQuadric();
    relbowhand = gluNewQuadric();
@@ -168,6 +167,28 @@ void Transformer::lCalfFB(int angle)
 {
    llbforward = (llbforward + angle) % 360;
    glutPostRedisplay();
+}
+
+
+void Transformer::draw_left_arm(void)
+{
+   left_arm=glGenLists(1);
+   glNewList(left_arm,GL_COMPILE);
+
+   glPushMatrix();
+   glutSolidSphere(0.25,32,32);
+   glTranslatef (0.1, 0.0, 0.0);
+   glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+   gluCylinder(lshoulderhand,0.2f,0.2f,1.2f,32,32);
+   glPopMatrix();
+   glTranslatef (1.3, 0.0, 0.0);
+   glutSolidSphere(0.2,32,32);
+   glRotatef ((GLfloat) lelbow, 0.0, 0.0, 1.0);
+   glPushMatrix();
+   glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+   gluCylinder(lelbowhand,0.2f,0.2f,1.5f,32,32);
+   glPopMatrix();
+   glEndList();
 }
 
 void Transformer::transform()

@@ -1,4 +1,5 @@
 #include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <GL/glut.h>
 #include <stdlib.h>
 #include <iostream>
@@ -13,6 +14,7 @@ void init(void)
 {
    glClearColor (0.0, 0.0, 0.0, 0.0);
    glShadeModel (GL_SMOOTH);
+   T.draw_left_arm();
 }
 
 
@@ -103,19 +105,7 @@ void display(void)
    glRotatef ((GLfloat) T.lshoulderside, 0.0, 0.0, 1.0);
    glRotatef ((GLfloat) T.lshoulderforward, 1.0, 0.0, 0.0);
    glRotatef ((GLfloat) T.lshouldercurve, 0.0, 1.0, 0.0);
-   glPushMatrix();
-   glutSolidSphere(0.25,32,32);
-   glTranslatef (0.1, 0.0, 0.0);
-   glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-   gluCylinder(T.lshoulderhand,0.2f,0.2f,1.2f,32,32);
-   glPopMatrix();
-   glTranslatef (1.3, 0.0, 0.0);
-   glutSolidSphere(0.2,32,32);
-   glRotatef ((GLfloat) T.lelbow, 0.0, 0.0, 1.0);
-   glPushMatrix();
-   glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-   gluCylinder(T.lelbowhand,0.2f,0.2f,1.5f,32,32);
-   glPopMatrix();
+   glCallList(T.left_arm);
    glPopMatrix();
    glPopMatrix();
 
@@ -391,7 +381,7 @@ int main(int argc, char** argv)
    glutInitWindowSize (500, 500);
    glutInitWindowPosition (100, 100);
    glutCreateWindow (argv[0]);
-   init ();
+   init();
    glutDisplayFunc(display);
    glutReshapeFunc(reshape);
    glutKeyboardFunc(keyboard);
