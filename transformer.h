@@ -31,7 +31,26 @@ class Transformer
 	  int lltcurve;
 	  int llbforward;
 	  GLuint left_arm;
-	  GLUquadricObj *neck;
+	  GLuint left_forearm;
+	  GLuint left_elbow;
+	  GLuint right_arm;
+	  GLuint right_forearm;
+	  GLuint right_elbow;
+
+	  GLuint right_thigh;
+	  GLuint right_knee;
+	  GLuint right_calf;
+	  GLuint right_foot;
+	  GLuint left_thigh;
+	  GLuint left_knee;
+	  GLuint left_calf;
+	  GLuint left_foot;
+	  GLuint hip;
+	  GLuint torso;
+	  GLuint head;
+	  GLuint eyes;
+	  GLuint neck;
+	  GLUquadricObj *Cneck;
 	  GLUquadricObj *rshoulderhand;
 	  GLUquadricObj *relbowhand;
 	  GLUquadricObj *lshoulderhand;
@@ -70,6 +89,26 @@ class Transformer
 	  void lLegCurve(int);
 	  void lCalfFB(int);
 	  void draw_left_arm();
+	  void draw_left_elbow();
+	  void draw_left_forearm();
+	  void draw_right_arm();
+	  void draw_right_elbow();
+	  void draw_right_forearm();
+	  void draw_hip();
+	  void draw_torso();
+	  void draw_head();
+	  void draw_eyes();
+	  void draw_neck();
+
+	  void draw_right_thigh();
+	  void draw_right_knee();
+	  void draw_right_calf();
+	  void draw_right_foot();
+
+	  void draw_left_thigh();
+	  void draw_left_knee();
+	  void draw_left_calf();
+	  void draw_left_foot();
 
 	  void transform();
 };

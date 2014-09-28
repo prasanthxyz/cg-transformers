@@ -15,6 +15,26 @@ void init(void)
    glClearColor (0.0, 0.0, 0.0, 0.0);
    glShadeModel (GL_SMOOTH);
    T.draw_left_arm();
+   T.draw_left_elbow();
+   T.draw_left_forearm();
+   T.draw_right_arm();
+   T.draw_right_elbow();
+   T.draw_right_forearm();
+   T.draw_hip();
+   T.draw_torso();
+   T.draw_head();
+   T.draw_eyes();
+   T.draw_neck();
+   T.draw_left_thigh();
+   T.draw_left_knee();
+   T.draw_left_calf();
+   T.draw_left_foot();
+
+   T.draw_right_thigh();
+   T.draw_right_knee();
+   T.draw_right_calf();
+   T.draw_right_foot();
+
 }
 
 
@@ -24,147 +44,131 @@ void display(void)
 
    //hip
 
-   glPushMatrix();
+   glPushMatrix(); //identity matrix pushed
    glColor3f(0.96,0.8,0.69);
    glRotatef ((GLfloat) T.fullz, 0.0, 0.0, 1.0);
    glRotatef ((GLfloat) T.fullx,1.0, 0.0, 0.0);
    glRotatef ((GLfloat) T.fully, 0.0, 1.0, 0.0);
-   glPushMatrix();
-   glTranslatef(0.0,-1.1,0.0);
-   glScalef(1.6,0.3,1.0);
-   glutSolidCube(1.0);
-   glPopMatrix();
- 
+   glPushMatrix(); //rotations for EVERYTHING pushed
+
+   glCallList(T.hip);
+   glPopMatrix(); //ID; have rotations
+   
    //torso
 
-   glPushMatrix();
+   glPushMatrix(); //univ rotations
+
    glTranslatef(0.0,-1.1,0.0);
    glRotatef ((GLfloat) T.bend, 1.0, 0.0, 0.0);
    glTranslatef(0.0,1.1,0.0);
-   glPushMatrix();
-   glScalef(1.6,2.0,1.0);
-   glutSolidCube(1.0);
-   glPopMatrix();
+  
+   glPushMatrix(); //univ rotations, bend
+   glCallList(T.torso);
+   glPopMatrix(); //univ rotations; have bend
  
-   //head		 
+   //head
  
-   glPushMatrix();
+   glPushMatrix(); //univ rotations, bend
    glTranslatef (0.0, 1.9, 0.0);
    glRotatef ((GLfloat) T.headside, 0.0, 0.0, 1.0);
    glRotatef ((GLfloat) T.headforward,1.0, 0.0, 0.0);
    glRotatef ((GLfloat) T.headcurve, 0.0, 1.0, 0.0);
-   glutSolidSphere(0.7,12,32);
+   glCallList(T.head);
    glColor3f(0,0,0);
-   glPushMatrix();
-   glTranslatef(-0.4,0.1,0.0);
-   glutSolidSphere(0.15,32,32);
-   glPopMatrix();
-   glPushMatrix();
-   glTranslatef(0.4,0.1,0.0);
-   glutSolidSphere(0.15,32,32);
-   glPopMatrix();
+   glPushMatrix(); //univ rotations, bend, head rotations
+   glCallList(T.eyes);
+   glPopMatrix(); //univ rotations, bend; have head rotations
    glColor3f(0.96,0.8,0.69);  
-   glPopMatrix();
+   glPopMatrix(); //univ rotations; have bend
    
    //neck
    
-   glPushMatrix();
-   glTranslatef (0.0, 1.3, 0.0);
-   glPushMatrix();
-   glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-   gluCylinder(T.neck,0.35f,0.35f,0.3f,32,32);
-   glPopMatrix();
-   glPopMatrix();
+   glPushMatrix(); //univ rotations, bend
+   glCallList(T.neck);
+   glPopMatrix(); //univ rotations; have bend
    
    //righthand
    
-   glPushMatrix();
+   glPushMatrix(); //univ rotations, bend
    glTranslatef (-1.0, 0.9, 0.0);
    glRotatef ((GLfloat) T.rshoulderside, 0.0, 0.0, 1.0);
    glRotatef ((GLfloat) T.rshoulderforward,1.0, 0.0, 0.0);
    glRotatef ((GLfloat) T.rshouldercurve ,0.0, 1.0, 0.0);
-   glPushMatrix();
-   glutSolidSphere(0.25,32,32);
-   glTranslatef (0.1, 0.0, 0.0);
-   glRotatef(90.0f, 0.0f,1.0f, 0.0f);
-   gluCylinder(T.rshoulderhand,0.2f,0.2f,1.2f,32,32);
-   glPopMatrix();
-   glTranslatef (1.3, 0.0, 0.0);
-   glutSolidSphere(0.2,32,32);
+
+   glPushMatrix(); //univ rotations, bend, rshoulder
+   glCallList(T.right_arm);
+   glPopMatrix(); //univ rotations, bend; have rshoulder
+   glCallList(T.right_elbow);
    glRotatef ((GLfloat) T.relbow, 0.0, 0.0, 1.0);
-   glPushMatrix();
-   glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-   gluCylinder(T.relbowhand,0.2f,0.2f,1.5f,32,32);
-   glPopMatrix();
-   glPopMatrix();
+   glPushMatrix(); //univ rotations, bend, rshoulder+relbow
+   glCallList(T.right_forearm);
+   glPopMatrix(); //univ rotations, bend; has rshoulder+relbow
+
+   glPopMatrix(); //univ rotations; has bend
 
    //lefthand
    
-   glPushMatrix();
+   glPushMatrix(); //univ rotations, bend
    glTranslatef (1.0, 0.9, 0.0);
    glRotatef ((GLfloat) T.lshoulderside, 0.0, 0.0, 1.0);
    glRotatef ((GLfloat) T.lshoulderforward, 1.0, 0.0, 0.0);
    glRotatef ((GLfloat) T.lshouldercurve, 0.0, 1.0, 0.0);
+   glPushMatrix(); //univ rotations, bend, lshoulder
    glCallList(T.left_arm);
-   glPopMatrix();
-   glPopMatrix();
+   glPopMatrix(); //univ rotations, bend; has lshoulder
+   glCallList(T.left_elbow);
+   glRotatef ((GLfloat) T.lelbow, 0.0, 0.0, 1.0);
+   glPushMatrix(); //univ rotations, bend, lshoulder+lelbow
+   glCallList(T.left_forearm);
+   glPopMatrix(); //univ rotations, bend; has lshoulder+lelbow
+
+   glPopMatrix(); //univ rotations; has bend
+
+   glPopMatrix(); //ID; has univ rotations
 
    //rightleg
 
-   glPushMatrix();
+   glPushMatrix(); //univ rotations
    glTranslatef (-0.58, -1.38, 0.0);
    glRotatef ((GLfloat) T.rltcurve, 0.0, 1.0, 0.0);
    glRotatef ((GLfloat) T.rltforward, 1.0, 0.0, 0.0);
    glRotatef ((GLfloat) T.rltside, 0.0, 0.0, 1.0);
-   glPushMatrix();
-   glutSolidSphere(0.35,32,32);
-   glRotatef(90.0f, 0.0f,1.0f, 0.0f);
-   gluCylinder(T.rtopleg,0.3f,0.3f,1.0f,32,32);
-   glPopMatrix();
-   glTranslatef (1.0, 0.0, 0.0);
-   glutSolidSphere(0.3,32,32);
+   glPushMatrix(); //univ rotations, right leg rots
+   glCallList(T.right_thigh);
+   glPopMatrix(); //univ rotations; has right leg rots
+   glCallList(T.right_knee);
    glRotatef ((GLfloat) T.rlbforward, 0.0, 1.0, 0.0);
-   glPushMatrix();
-   glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-   gluCylinder(T.rbottomleg,0.3f,0.3f,1.2f,32,32);
-   glPopMatrix();
-   glTranslatef(1.3,0.0,0.2);
-   glPushMatrix();
-   glScalef(0.2,0.6,1.0);
-   glutSolidCube(1.0);
-   glPopMatrix();
-   glPopMatrix();   
+   glPushMatrix(); //univ rotations, rleg+rknee
+   glCallList(T.right_calf);
+   glPopMatrix(); //univ rotations; has rleg+rknee
+   glPushMatrix(); //univ rotations, rleg+rknee
+   glCallList(T.right_foot);
+   glPopMatrix(); //univ rotations; has rleg+rknee
+
+   glPopMatrix(); //ID; has univ rotations
 
    //leftleg   
 
-   glPushMatrix();
+   glPushMatrix(); //univ rotations
    glTranslatef (0.58, -1.38, 0.0);
    glRotatef ((GLfloat) T.lltcurve, 0.0, 1.0, 0.0);
    glRotatef ((GLfloat) T.lltforward, 1.0, 0.0, 0.0);
    glRotatef ((GLfloat) T.lltside, 0.0, 0.0, 1.0);
-   glPushMatrix();
-   glutSolidSphere(0.35,32,32);
-   glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-   gluCylinder(T.ltopleg,0.3f,0.3f,1.0f,32,32);
-   glPopMatrix();
-   glTranslatef (1.0, 0.0, 0.0);
-   glutSolidSphere(0.3,32,32);
+   glPushMatrix(); //univ rotations, lleg
+   glCallList(T.left_thigh);
+   glPopMatrix(); //univ rotations; has lleg
+   glCallList(T.left_knee);
    glRotatef ((GLfloat) T.llbforward, 0.0, 1.0, 0.0);
-   glPushMatrix();
-   glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-   gluCylinder(T.lbottomleg,0.3f,0.3f,1.2f,32,32);
-   glPopMatrix();
-   glTranslatef(1.3,0.0,0.2);
-   glPushMatrix();
-
-   glScalef(0.2,0.6,1.0);
-   glutSolidCube(1.0);
-   glPopMatrix();
-   glPopMatrix();
+   glPushMatrix(); //univ rots,lleg+lknee
+   glCallList(T.left_calf);
+   glPopMatrix(); //univ rots; has lleg+lknee
+   glPushMatrix(); //univ rots, lleg+lknee
+   glCallList(T.left_foot);
+   glPopMatrix(); //univ rots; has lleg+lknee
+   glPopMatrix(); //ID; has univ rots
    glColor3f(1,0.5,0.5);
 
-   glPopMatrix();
-
+   glPopMatrix(); //empty
 
    glutSwapBuffers();
 }
@@ -365,10 +369,10 @@ void keyboard (unsigned char key, int x, int y)
     timer(0);
     break;
 
-      case 27:
-      break;
-      default:
-      break;
+    case 27:
+	 break;
+    default:
+    break;
 
 
    }
@@ -388,3 +392,66 @@ int main(int argc, char** argv)
    glutMainLoop();
    return 0;
 }
+/*
+
+int main (int argc, char *argv[]) 
+{
+  //! The pointer to the GLFW window
+  GLFWwindow* window;
+
+  //! Setting up the GLFW Error callback
+  //if not working, make namespace
+  glfwSetErrorCallback(error_callback);
+
+  //! Initialize GLFW
+  if (!glfwInit())
+    return -1;
+
+  int win_width=500;
+  int win_height=500;
+
+  //! Create a windowed mode window and its OpenGL context
+  window = glfwCreateWindow(win_width, win_height, "Transformer", NULL, NULL);
+  if (!window)
+    {
+      glfwTerminate();
+      return -1;
+    }
+  
+  //! Make the window's context current 
+  glfwMakeContextCurrent(window);
+
+  //Keyboard Callback
+  //OurOwn: set up key_callback
+  glfwSetKeyCallback(window, key_callback);
+  //Framebuffer resize callback
+  glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+  // Ensure we can capture the escape key being pressed below
+  glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+  glfwGetFramebufferSize(window, &win_width, &win_height);
+  framebuffer_size_callback(window, win_width, win_height);
+  //Initialize GL state
+  initGL();
+
+  // Loop until the user closes the window
+  while (glfwWindowShouldClose(window) == 0)
+    {
+       
+      // Render here
+      //renderGL();
+	  display();
+
+      // Swap front and back buffers
+      glfwSwapBuffers(window);
+      
+      // Poll for and process events
+      glfwPollEvents();
+    }
+
+  glfwDestroyWindow(window);
+  glfwTerminate();
+  return 0;
+}
+*/
