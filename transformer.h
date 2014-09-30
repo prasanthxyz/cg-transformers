@@ -35,6 +35,9 @@ class Transformer
 
 	  int lltcurve;
 	  int llbforward;
+	  int vehiclefront;
+	  GLfloat fronttyretrans;
+	  GLfloat backtyretrans;
 	  GLuint left_shoulder;
 	  GLuint left_arm;
 	  GLuint left_forearm;
