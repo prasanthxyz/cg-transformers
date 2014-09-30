@@ -1,6 +1,11 @@
 #ifndef _TRANSFORMER_CLASS_
 #define _TRANSFORMER_CLASS_
 
+#include <GL/glut.h>
+#include<unistd.h>
+#include <GLFW/glfw3.h>
+#include <cmath>
+
 class Transformer
 {
    public:
@@ -30,17 +35,21 @@ class Transformer
 
 	  int lltcurve;
 	  int llbforward;
+	  GLuint left_shoulder;
 	  GLuint left_arm;
 	  GLuint left_forearm;
 	  GLuint left_elbow;
+	  GLuint right_shoulder;
 	  GLuint right_arm;
 	  GLuint right_forearm;
 	  GLuint right_elbow;
 
+	  GLuint right_butt;
 	  GLuint right_thigh;
 	  GLuint right_knee;
 	  GLuint right_calf;
 	  GLuint right_foot;
+	  GLuint left_butt;
 	  GLuint left_thigh;
 	  GLuint left_knee;
 	  GLuint left_calf;
@@ -50,21 +59,12 @@ class Transformer
 	  GLuint head;
 	  GLuint eyes;
 	  GLuint neck;
-	  GLUquadricObj *Cneck;
-	  GLUquadricObj *rshoulderhand;
-	  GLUquadricObj *relbowhand;
-	  GLUquadricObj *lshoulderhand;
-	  GLUquadricObj *lelbowhand;
-	  GLUquadricObj *rtopleg;
-	  GLUquadricObj *rbottomleg;
-	  GLUquadricObj *ltopleg;
-	  GLUquadricObj *lbottomleg;
 
 	  Transformer();
 	  void rotateX(int);
 	  void rotateY(int);
 	  void rotateZ(int);
-
+      void display();
 	  void tiltHeadSide(int);
 	  void tiltHeadFB(int);
 	  void turnHead(int);
@@ -88,9 +88,15 @@ class Transformer
 	  void lLegFB(int);
 	  void lLegCurve(int);
 	  void lCalfFB(int);
+	  void drawCube();
+	  void drawSphere(GLint,GLint);
+	  void drawCircle(float,int);
+	  void drawCylinder(float,float,GLint,GLint);
+	  void draw_left_shoulder();
 	  void draw_left_arm();
 	  void draw_left_elbow();
 	  void draw_left_forearm();
+	  void draw_right_shoulder();
 	  void draw_right_arm();
 	  void draw_right_elbow();
 	  void draw_right_forearm();
@@ -100,16 +106,18 @@ class Transformer
 	  void draw_eyes();
 	  void draw_neck();
 
+	  void draw_right_butt();
 	  void draw_right_thigh();
 	  void draw_right_knee();
 	  void draw_right_calf();
 	  void draw_right_foot();
 
+	  void draw_left_butt(); 
 	  void draw_left_thigh();
 	  void draw_left_knee();
 	  void draw_left_calf();
 	  void draw_left_foot();
-
+	void timer();
 	  void transform();
 };
 
