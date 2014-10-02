@@ -239,21 +239,7 @@ void Transformer::draw_head()
 {
     head = glGenLists(1);
     glNewList(head, GL_COMPILE);
-    glPushMatrix();
-    glPushMatrix();
-    glRotatef((GLfloat)carfront,1.0,0.0,0.0);
-    glTranslatef(0.0,0.0+move,0.3);
-    glScalef(1.7,1.25,0.5);
     drawCube();
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslatef(0.0,0.0,0.3);
-    glScalef(1.7,1.25,0.8);
-
-    drawCube();
-    glPopMatrix();
-    glPopMatrix();
     glEndList();
 }
 void Transformer::draw_eyes()
@@ -320,7 +306,6 @@ void Transformer::draw_right_foot()
 {
     right_foot = glGenLists(1);
     glNewList(right_foot, GL_COMPILE);
-    glRotatef((GLfloat)rfootrot,1.0,0.0,0.0);
     glTranslatef(1.3,0.0,0.2);
     glScalef(0.2,0.6,1.0);
     drawCube();
@@ -366,7 +351,6 @@ void Transformer::draw_left_foot()
 { 
     left_foot = glGenLists(1);
     glNewList(left_foot, GL_COMPILE);
-    glRotatef((GLfloat)lfootrot,1.0,0.0,0.0);
     glTranslatef(1.3,0.0,0.2);
     glScalef(0.2,0.6,1.0);
     drawCube();
@@ -383,10 +367,6 @@ void Transformer::tocar()
         }
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         transform();
-        draw_neck();
-        draw_head();
-        draw_right_foot();
-        draw_left_foot();
         display();
         GLFWwindow * win=glfwGetCurrentContext();
         glfwPollEvents();
@@ -406,10 +386,6 @@ void Transformer::tohuman()
         }
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         transform();
-        draw_neck();
-        draw_head();
-        draw_right_foot();
-        draw_left_foot();
         display();
         GLFWwindow * win=glfwGetCurrentContext();
         glfwPollEvents();

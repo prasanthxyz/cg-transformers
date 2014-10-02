@@ -44,21 +44,34 @@ void drawNeck()
 
 void drawHead()
 {
-    glPushMatrix();
-    glTranslatef (0.0, 1.9, 0.0);
-    glRotatef ((GLfloat) T.headside, 0.0, 0.0, 1.0);
-    glRotatef ((GLfloat) T.headforward,1.0, 0.0, 0.0);
-    glRotatef ((GLfloat) T.headcurve, 0.0, 1.0, 0.0);
+   glPushMatrix();
+   glTranslatef (0.0, 1.9, 0.0);
+   glRotatef ((GLfloat) T.headside, 0.0, 0.0, 1.0);
+   glRotatef ((GLfloat) T.headforward,1.0, 0.0, 0.0);
+   glRotatef ((GLfloat) T.headcurve, 0.0, 1.0, 0.0);
 
-    glPushMatrix();
-    glColor3f(0,0,0);
-    glCallList(T.eyes);
-    glPopMatrix();
-    //glColor3f(0,0,1);
-    glColor3f(1,1,1);
-    //glEnable(GL_TEXTURE_2D);
-    //glBindTexture(GL_TEXTURE_2D, T.textures[WOOD]);
-    glCallList(T.head);
+   glPushMatrix();
+   glColor3f(0,0,0);
+   glCallList(T.eyes);
+   glPopMatrix();
+   //glColor3f(0,0,1);
+   glColor3f(1,1,1);
+
+   glPushMatrix();
+   glRotatef((GLfloat)T.carfront,1.0,0.0,0.0);
+   glTranslatef(0.0,0.0+T.move,0.3);
+   glScalef(1.7,1.25,0.5);
+   glCallList(T.head);
+   glPopMatrix();
+   //glEnable(GL_TEXTURE_2D);
+   //glBindTexture(GL_TEXTURE_2D, T.textures[WOOD]);
+   glPushMatrix();
+   glTranslatef(0.0,0.0,0.3);
+   glScalef(1.7,1.25,0.8);
+
+
+   glCallList(T.head);
+   glPopMatrix();
     //glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
@@ -166,6 +179,7 @@ void drawRightLeg()
     glPopMatrix();
     glColor3f(0,0,1);
     glPushMatrix(); //rleg+rknee
+    glRotatef((GLfloat)T.rfootrot,1.0,0.0,0.0);
     glCallList(T.right_foot);
     glPopMatrix(); 
     glPopMatrix();
@@ -209,6 +223,7 @@ void drawLeftLeg()
 
     glColor3f(0,0,1);
     glPushMatrix(); //lleg+lknee
+    glRotatef((GLfloat)T.lfootrot,1.0,0.0,0.0);
     glCallList(T.left_foot);
     glPopMatrix(); 
     glPopMatrix();
@@ -259,7 +274,7 @@ void drawCube(){
     glBegin(GL_QUADS);
     glTexCoord2f(1,0);
     glVertex3f( 0.5f, -0.5f, 0.5f);
-    glTexCoord2f(0,0);
+   glTexCoord2f(0,0);
     glVertex3f(-0.5f, -0.5f, 0.5f);
     glTexCoord2f(0,1);
     glVertex3f(-0.5f,  0.5f, 0.5f);
@@ -316,15 +331,14 @@ void drawCircle( float r, int num_segments)
     }
     glEnd();
 }
-#include <iostream>
 void drawCylinder(float radius,float height,GLint numMajor, GLint numMinor)
 {
-    //glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);
     double majorStep = height / numMajor;
     double minorStep = 2.0 * M_PI / numMinor;
     int i, j;
 
-   // glBindTexture(GL_TEXTURE_2D, T.textures[FACE]);
+    glBindTexture(GL_TEXTURE_2D, T.textures[FACE]);
    // glBindTexture(GL_TEXTURE_2D, T.textures[WOOD]);
 //    std::cout<<T.textures[WOOD]<<","<<T.textures[FACE];
     for (i = 0; i < numMajor; ++i) {
@@ -354,6 +368,6 @@ void drawCylinder(float radius,float height,GLint numMajor, GLint numMinor)
     glTranslatef(0.0,0.0,0.6*height/2);
     drawCircle(radius,32);
     glPopMatrix();
-    //glDisable(GL_TEXTURE_2D);
+    glDisable(GL_TEXTURE_2D);
 }
 
