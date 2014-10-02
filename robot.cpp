@@ -1,11 +1,12 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <GL/glut.h>
 #include <stdlib.h>
 #include <iostream>
 #include <cmath>
-#include "transformer.h"
-#include "gl_framework.h"
+#include "transformer.hpp"
+#include "gl_framework.hpp"
+#include "display.hpp"
+
 using namespace std;
 
 Transformer T;
@@ -58,7 +59,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
        
       // Render here
       //renderGL();
-	  T.display();
+	  display();
 
 
       // Swap front and back buffers
