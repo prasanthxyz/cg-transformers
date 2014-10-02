@@ -189,7 +189,7 @@ case GLFW_KEY_L:
 if(mods==GLFW_MOD_SHIFT)
 {if(T.rlbforward<=180)
 T.rCalfFB(5);
-   }else{if(T.rlbforward>=T.rltforward)
+   }else{if(T.rlbforward>=0)
    T.rCalfFB(-5);}
    break;
    case GLFW_KEY_U:
@@ -217,7 +217,7 @@ T.lLegCurve(-5);
    if(mods==GLFW_MOD_SHIFT)
    {if(T.llbforward<=180)
    T.lCalfFB(5);
-}else{if(T.llbforward>=T.lltforward)
+}else{if(T.llbforward>=0)
 T.lCalfFB(-5);}
 break;
 case GLFW_KEY_G:

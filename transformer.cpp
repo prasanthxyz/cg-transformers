@@ -1,6 +1,5 @@
 #include <GL/glew.h>
 #include "transformer.h"
-
 Transformer::Transformer()
 {
 
@@ -10,10 +9,22 @@ Transformer::Transformer()
    rshoulderside=-135; rshoulderforward=0; rshouldercurve=0; relbow=90;
    lshoulderside=-45; lshoulderforward=0; lshouldercurve=0; lelbow=-90;
    rltside=-90; rltforward=0; rltcurve=0; rlbforward=0;
+   ldoor=0.0;
+   rdoor=0.0;
+   rshift=0.0;
+   lshift=0.0;
+   upshift=1.6;
+   move=0.0;
    fronttyretrans=0.0;
    backtyretrans=0.0;
    lltside=-90; lltforward=0; lltcurve=0; llbforward=0;
    vehiclefront=0;
+   carfront=0.0;
+   down=0.0;
+   rfootrot=0.0;
+   lfootrot=0.0;
+   carback=0.0;
+   carbackshift=0.0;
    draw_left_shoulder();
    draw_left_arm();
    draw_left_elbow();
@@ -157,14 +168,14 @@ void Transformer::draw_left_shoulder()
    glEndList();
 }
 
-void Transformer::draw_left_arm(void)
+void Transformer::draw_left_arm()
 {
    left_arm=glGenLists(1);
    glNewList(left_arm,GL_COMPILE);
 
    glTranslatef (0.5, 0.0, 0.0);
    glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-   drawCylinder(0.2,1.2,32,32);
+   drawCylinder(0.3,1.2,32,32);
 
    glEndList();
 }
@@ -216,7 +227,7 @@ void Transformer::draw_right_arm()
    glNewList(right_arm, GL_COMPILE);
    glTranslatef (0.5, 0.0, 0.0);
    glRotatef(90.0f, 0.0f,1.0f, 0.0f);
-   drawCylinder(0.2,1.2,32,32);
+   drawCylinder(0.3,1.2,32,32);
    glEndList();
 }
 
@@ -236,7 +247,7 @@ void Transformer::draw_hip()
    glNewList(hip, GL_COMPILE);
 
    glTranslatef(0.0,-1.1,0.0);
-   glScalef(1.6,0.3,1.0);
+   glScalef(1.6,0.3,1.1);
    drawCube();
    glEndList();
 }
@@ -246,7 +257,7 @@ void Transformer::draw_torso()
    torso = glGenLists(1);
    glNewList(torso, GL_COMPILE);
 
-   glScalef(1.6,2.0,1.0);
+   glScalef(1.6,2.0,1.1);
    drawCube();
    glEndList();
 }
@@ -256,8 +267,21 @@ void Transformer::draw_head()
    head = glGenLists(1);
    glNewList(head, GL_COMPILE);
    glPushMatrix();
-   glScalef(0.7,0.7,0.7);
-   drawSphere(32,32);
+   //glScalef(0.7,0.7,0.7);
+   // drawSphere(32,32);
+   glPushMatrix();
+   glRotatef((GLfloat)carfront,1.0,0.0,0.0);
+   glTranslatef(0.0,0.0+move,0.3);
+   glScalef(1.7,1.1,0.5);
+   drawCube();
+   glPopMatrix();
+
+   glPushMatrix();
+   glTranslatef(0.0,0.0,0.3);
+   glScalef(1.7,1.1,0.8);
+
+   drawCube();
+   glPopMatrix();
    glPopMatrix();
    glEndList();
 }
@@ -281,25 +305,56 @@ void Transformer::draw_neck()
 {
    neck = glGenLists(1);
    glNewList(neck, GL_COMPILE);
+ /* 
+   //top
+glPushMatrix();
+glColor3f(1.0,1.0,1.0);
 
+glTranslatef(0.0,1.5+rshift,-0.7+move);
+  glRotatef ((GLfloat) rdoor, 1.0, 0.0, 0.0);
+   glScalef(1.6,1.8,0.1);
+   drawCube();
+   glPopMatrix();
+   
+//lside
+glPushMatrix();
+glColor3f(1.0,1.0,1.0);
+   //   glRotatef ((GLfloat) vehiclefront, 0.0, 1.0, 0.0);
+   glTranslatef(0.0+lshift,1.5,-0.7+move);
+glRotatef ((GLfloat) ldoor, 0.0, 1.0, 0.0);
+
+   glScalef(1.6,1.8,0.1);
+   drawCube();
+   glPopMatrix();
+   
+//rside
+glPushMatrix();
+glColor3f(1.0,1.0,1.0);
+glTranslatef(0.0+rshift,1.5,-0.7+move);
+//glTranslatef(-1.6,0.0,0.0);
+glRotatef ((GLfloat) rdoor, 0.0, 1.0, 0.0);
+//glTranslatef(1.6,0.0,0.0);
+//glTranslatef(-rshift,0.0,0.0);
+   glScalef(1.6,1.8,0.1);
+   drawCube();
+   glPopMatrix();
+
+//front
    glPushMatrix();
    glColor3f(1.0,1.0,1.0);
-   glTranslatef(0.0,1.8,-0.7);
-   //   glRotatef ((GLfloat) vehiclefront, 0.0, 1.0, 0.0);
-   glScalef(1.6,1.4,0.1);
+   glTranslatef(0.0,1.5,-0.7);
+   glScalef(1.6,1.8,0.1);
    drawCube();
    glPopMatrix();
 
    glPushMatrix();
    glColor3f(0.0,0.0,0.0);
-   glTranslatef(0.0,1.8,-0.6);
-   // glRotatef ((GLfloat) vehiclefront, 0.0, 1.0, 0.0);
-   glScalef(1.6,1.4,0.1);
+   glTranslatef(0.0,1.5,-0.6);
+   glScalef(1.6,1.8,0.1);
    drawCube();
    glPopMatrix();
-
-
-   glColor3f(0,0,.7);
+*/
+glColor3f(1,0,0);
    glTranslatef (0.0, 1.15, 0.0);
    glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
    drawCylinder(0.35,0.3,32,32);
@@ -323,10 +378,12 @@ void Transformer::draw_right_thigh()
 {
    right_thigh = glGenLists(1);
    glNewList(right_thigh, GL_COMPILE);
-   glTranslatef(0.65,0.0,0.0);
-   glRotatef(90.0f, 0.0f,1.0f, 0.0f);
-   drawCylinder(0.3,1.0,32,32);
-
+//   glTranslatef(0.65,0.0,0.0);
+glTranslatef(0.6,0.0,0.0);
+glRotatef(90.0f, 0.0f,1.0f, 0.0f);
+   //drawCylinder(0.4,1.0,32,32);
+   glScalef(0.6,0.6,1.0);
+   drawCube();
    glEndList();
 }
 
@@ -356,8 +413,8 @@ void Transformer::draw_right_foot()
 {
    right_foot = glGenLists(1);
    glNewList(right_foot, GL_COMPILE);
-
-   glTranslatef(1.3,0.0,0.2);
+  glRotatef((GLfloat)rfootrot,1.0,0.0,0.0);
+  glTranslatef(1.3,0.0,0.2);
    glScalef(0.2,0.6,1.0);
    drawCube();
    glEndList();
@@ -383,7 +440,10 @@ void Transformer::draw_left_thigh()
    glNewList(left_thigh, GL_COMPILE);
    glTranslatef(0.6,0.0,0.0);   
    glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-   drawCylinder(0.3,1.0,32,32);
+   //   drawCylinder(0.4,1.0,32,32);
+   glScalef(0.6,0.6,1.0);
+   drawCube();
+ 
    glEndList();
 }
 
@@ -413,6 +473,7 @@ void Transformer::draw_left_foot()
 { 
    left_foot = glGenLists(1);
    glNewList(left_foot, GL_COMPILE);
+   glRotatef((GLfloat)lfootrot,1.0,0.0,0.0);
 
    glTranslatef(1.3,0.0,0.2);
    glScalef(0.2,0.6,1.0);
@@ -479,7 +540,7 @@ void Transformer::drawSphere(GLint slices, GLint stacks ){
 }
 void Transformer::drawCircle( float r, int num_segments)
 {
-   glBegin(GL_LINE_LOOP);
+   glBegin(GL_POLYGON);
    for(int i = 0; i < num_segments; i++)
    {
 	  float theta = 2.0f * 3.14159f * float(i) / float(num_segments);
@@ -517,27 +578,167 @@ void Transformer::drawCylinder(float radius,float height,GLint numMajor, GLint n
 	  }
 	  glEnd();
    }
-
+   drawCircle(radius,32);
 
 }
-
 void Transformer::timer()
 {
    while(1){
-	  if(fullx==0&&fully==0&&fullz==0&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==0&&rshoulderforward==0&&rshouldercurve==0&&relbow==-90&&lshoulderside==-180&&lshoulderforward==0&&lshouldercurve==0&&lelbow==90&&rltside==-90&&rltforward==180&&rltcurve==0&&rlbforward==180&&lltside==-90&&lltforward==180&&lltcurve==0&&llbforward==180&&vehiclefront==90)
+	  if(rdoor==90&&ldoor==-90&&fronttyretrans!=0&&backtyretrans!=0&&fullx==0&&fully==90&&fullz==90&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==0&&rshoulderforward==0&&rshouldercurve==0&&relbow==-90&&lshoulderside==-180&&lshoulderforward==0&&lshouldercurve==0&&lelbow==90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==180&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==180&&vehiclefront==90)
 	  break;
 	  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	  transform();
+	  draw_neck();
+	  draw_head();
+	  draw_right_foot();
+	  draw_left_foot();
 	  display();
 	  GLFWwindow * win=glfwGetCurrentContext();
 	  glfwPollEvents();
 	  glfwSwapBuffers(win);
-	  usleep(40000);
+	  usleep(400000);
 
    }
 }
 
 
+void Transformer::transform()
+{ 
+rshift=.8;
+lshift=-.8;
+ if(bend!=0)
+   {
+	  bend=0;
+	  return;
+   }
+   if(headside!=0){
+   headside=0;
+}
+if(headforward!=0)
+{
+   headforward=0;
+}
+
+if(headcurve!=0)
+{
+   headcurve=0;
+   return;
+}
+ 
+if(relbow!=-90)
+{
+   relbow=-90;
+}
+  if(lelbow!=90){
+	  lelbow=90;
+	  return;
+   }
+
+
+if(rshoulderside!=0){
+   rshoulderside=0;
+}
+if(lshoulderside!=-180){
+   lshoulderside=-180;
+   return;
+}
+if(rshoulderforward!=0){
+   rshoulderforward=0;
+}
+   if(lshoulderforward!=0){
+   lshoulderforward=0;
+   return;
+}
+
+if(rshouldercurve!=0)
+{
+rshouldercurve=0;
+}
+
+   if(lshouldercurve!=0){
+   lshouldercurve=0;
+   return;
+}
+
+if(down==0.0)
+{
+   down=-0.9;
+   return;
+}
+ 
+if(llbforward!=180)
+   {
+   llbforward=180;
+}
+  if(rlbforward!=180){
+	  rlbforward=180;
+	  return;
+   }
+ 
+   if(lltside!=-90){
+   lltside=-90;
+}
+if(rltside!=-90){
+   rltside=-90;
+   return;
+}
+
+   if(lltforward!=0){
+   lltforward=0;
+}
+      if(rltforward!=0){
+   rltforward=0;
+   return;
+}
+ 
+if(lltcurve!=0){
+   lltcurve=0;
+}
+  if(rltcurve!=0){
+	  rltcurve=0;
+	  return;
+   }
+ 
+  if(ldoor!=-90)
+   {
+//move=0.7;
+	  ldoor=-90;
+   }
+   if(rdoor!=90){
+	  rdoor=90;
+	  return;
+   }
+   
+
+   if(vehiclefront!=90){
+	  move=-0.3;
+	  vehiclefront=90;
+	  return;
+   }
+      
+   if(fullx!=0){
+	  fullx=0;
+	  return ;
+   }
+   if(fully!=90)
+   {
+	  fully=90;
+	  return;
+   }
+   if(fullz!=90)
+   {
+	  fullz=90;
+	  return;
+   }
+	  fronttyretrans=-0.7;
+	  backtyretrans=-0.7;
+	  carfront=90.0;
+	  rfootrot=-90.0;
+	  lfootrot=90.0;
+	  carback=-0.2;
+	  carbackshift=0.5;
+   }
+/*
 void Transformer::transform()
 { 
    fronttyretrans=-0.7;
@@ -639,15 +840,6 @@ void Transformer::transform()
    else if(vehiclefront<90)
    vehiclefront=(vehiclefront+5)%360;
 }
-
-/*void Transformer::transformToCar()
-{
-   if(rltside>-60)
-   rltside=(rltside-5)%360;
-   else if(rltside<-90)
-   rltside=(rltside+5)%360;
-
-}
 */
 void Transformer::display()
 {
@@ -656,7 +848,7 @@ void Transformer::display()
 
 
    //hip
-   glColor3f(0,1,0);
+   glColor3f(0,0,1);
 
    glPushMatrix(); //identity matrix pushed
    glRotatef ((GLfloat)fullz, 0.0, 0.0, 1.0);
@@ -680,15 +872,13 @@ void Transformer::display()
 
    //neck
    glPushMatrix(); //univ rotations, bend
-
-   glTranslatef(0.0,1.0,0.0);
+   glColor3f(0,0,1);
+ glTranslatef(0.0,1.0,0.0);
    glRotatef ((GLfloat) vehiclefront, 1.0, 0.0, 0.0);
    glTranslatef(0.0,-1.0,0.0);
-
-   glColor3f(0,0,1);
+   glTranslatef(0.0,0.0+down,0.0);
    glPushMatrix();
    glCallList(neck);
-
    glPopMatrix(); //univ rotations; have bend
 
    //head
@@ -701,7 +891,7 @@ void Transformer::display()
    glPushMatrix(); //univ rotations, bend, head rotations
    glCallList(eyes);
    glPopMatrix(); //univ rotations, bend; have head rotations
-   glColor3f(0,1,0);
+   glColor3f(0,0,1);
    glCallList(head);
    glPopMatrix(); //univ rotations; have bend
    glPopMatrix();
@@ -777,11 +967,12 @@ void Transformer::display()
    glColor3f(1,0,0);
    glCallList(right_butt);
    glPopMatrix();
+   glTranslatef(carback,0.0,carback);
    glColor3f(0,.4,1);
    glPushMatrix();
    glCallList(right_thigh);
    glPopMatrix(); //univ rotations; has right leg rots
-   glTranslatef(1.0,0.0,0.0);
+   glTranslatef(1.2,0.0,0.0);
    glColor3f(1,0,0);
    glPushMatrix();
    glCallList(right_knee);
@@ -789,9 +980,11 @@ void Transformer::display()
    glRotatef ((GLfloat) rlbforward, 0.0, 1.0, 0.0);
    glColor3f(0,.4,1);
    glPushMatrix(); //univ rotations, rleg+rknee
+   glTranslatef(0.0,carbackshift,0.0);
+
    glCallList(right_calf);
    glPopMatrix();
-   glColor3f(.1,0,0.7);
+   glColor3f(0,0,1);
    glPushMatrix(); //univ rotations, rleg+rknee
    glCallList(right_foot);
    glPopMatrix(); //univ rotations; has rleg+rknee
@@ -812,10 +1005,12 @@ void Transformer::display()
    glCallList(left_butt);
    glPopMatrix();
    glColor3f(0,.4,1);
+   glTranslatef(carback,0.0,carback);
+
    glPushMatrix();
    glCallList(left_thigh);
    glPopMatrix(); //univ rotations; has lleg
-   glTranslatef(1.0,0.0,0.0);
+   glTranslatef(1.2,0.0,0.0);
    glColor3f(1,0,0);
    glPushMatrix();
    glCallList(left_knee);
@@ -823,9 +1018,10 @@ void Transformer::display()
    glRotatef ((GLfloat) llbforward, 0.0, 1.0, 0.0);
    glColor3f(0,.4,1);
    glPushMatrix(); //univ rots,lleg+lknee
+   glTranslatef(0.0,-carbackshift,0.0);
    glCallList(left_calf);
    glPopMatrix(); //univ rots; has lleg+lknee
-   glColor3f(.1,0,0.7);
+   glColor3f(0,0,1);
    glPushMatrix(); //univ rots, lleg+lknee
    glCallList(left_foot);
    glPopMatrix(); //univ rots; has lleg+lknee
