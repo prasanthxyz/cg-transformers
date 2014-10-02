@@ -8,15 +8,17 @@
 #include <stdio.h>
 #include "display.hpp"
 #include "loadBmpTexture.hpp"
+#include "cube.hpp"
 
-#define NTEX 2
-enum Textures {WOOD, FACE};
+#define NTEX 10
+enum Textures {HDTOP, HDBOTTOM, HDBACK, HDFRONT, HDLEFT, HDRIGHT, WOOD, FACE};
 
 class Transformer
 {
     public:
         int flag;
 
+        //Cube headObj;
         GLuint textures[NTEX];
         GLuint something;
         //angles and shifting lengths

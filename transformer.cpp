@@ -4,14 +4,23 @@
 void Transformer::getTextures()
 {
     glGenTextures(NTEX, textures);
-    loadBmpTexture("wood.bmp", textures[WOOD]);
-    loadBmpTexture("face.bmp", textures[FACE]);
+
+    loadBmpTexture("hdfront.bmp", textures[HDFRONT]);
+    loadBmpTexture("hdback.bmp", textures[HDBACK]);
+    loadBmpTexture("hdleft.bmp", textures[HDLEFT]);
+    loadBmpTexture("hdright.bmp", textures[HDRIGHT]);
+    loadBmpTexture("hdtop.bmp", textures[HDTOP]);
+    loadBmpTexture("hdbottom.bmp", textures[HDBOTTOM]);
 //    std::cout<<textures[WOOD]<<","<<textures[FACE];
 }
 
 Transformer::Transformer()
 {
     getTextures();
+    /*
+    for(int i = 0; i < 6; i++)
+        headObj.T[i] = i+1;
+        */
     flag=0;
 
     fullx=0; fully=0; fullz=0;
@@ -239,7 +248,8 @@ void Transformer::draw_head()
 {
     head = glGenLists(1);
     glNewList(head, GL_COMPILE);
-    drawCube();
+    //headObj.draw();
+    drawCube(textures[HDTOP],textures[HDBOTTOM],textures[HDBACK],textures[HDFRONT],textures[HDLEFT],textures[HDRIGHT]);
     glEndList();
 }
 void Transformer::draw_eyes()

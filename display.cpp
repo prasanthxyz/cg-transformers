@@ -38,7 +38,6 @@ void drawNeck()
     //glEnable(GL_TEXTURE_2D);
     //glBindTexture(GL_TEXTURE_2D, T.textures[FACE]);
     glCallList(T.neck);
-    //glDisable(GL_TEXTURE_2D);
     glPopMatrix(); 
 }
 
@@ -63,8 +62,6 @@ void drawHead()
    glScalef(1.7,1.25,0.5);
    glCallList(T.head);
    glPopMatrix();
-   //glEnable(GL_TEXTURE_2D);
-   //glBindTexture(GL_TEXTURE_2D, T.textures[WOOD]);
    glPushMatrix();
    glTranslatef(0.0,0.0,0.3);
    glScalef(1.7,1.25,0.8);
@@ -72,10 +69,9 @@ void drawHead()
 
    glCallList(T.head);
    glPopMatrix();
-    //glDisable(GL_TEXTURE_2D);
-    glPopMatrix();
+   glPopMatrix();
 
-    glPopMatrix();
+   glPopMatrix();
 }
 
 void drawRightHand()
@@ -248,53 +244,84 @@ void display()
     drawLeftLeg();
 }
 
-void drawCube(){
-   //glBindTexture(GL_TEXTURE_2D, T.textures[WOOD]);
-    glEnable(GL_TEXTURE_2D);
+void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
+    //top - back(right;left) - front(left;right)
+    glBindTexture(GL_TEXTURE_2D, T0);
     glBegin(GL_QUADS);
-    //top
+    glTexCoord2f(0,0);
     glVertex3f( 0.5f, 0.5f, -0.5f);
+    glTexCoord2f(0,1);
     glVertex3f(-0.5f, 0.5f, -0.5f);
+    glTexCoord2f(1,1);
     glVertex3f(-0.5f, 0.5f,  0.5f);
+    glTexCoord2f(1,0);
     glVertex3f( 0.5f, 0.5f,  0.5f);
-    // bottom
-    //glBindTexture(GL_TEXTURE_2D, T.textures[FACE]);
+    glEnd();
+
+    // bottom - front(right;left) - back(left;right)
+    glBindTexture(GL_TEXTURE_2D, T1);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0,0);
     glVertex3f( 0.5f, -0.5f,  0.5f);
+    glTexCoord2f(0,1);
     glVertex3f(-0.5f, -0.5f,  0.5f);
+    glTexCoord2f(1,1);
     glVertex3f(-0.5f, -0.5f, -0.5f);
-    glVertex3f( 0.5f, -0.5f, -0.5f);
-    //back
-    glVertex3f( 0.5f,  0.5f, -0.5f);
-    glVertex3f(-0.5f,  0.5f, -0.5f);
-    glVertex3f(-0.5f, -0.5f, -0.5f);
+    glTexCoord2f(1,0);
     glVertex3f( 0.5f, -0.5f, -0.5f);
     glEnd();
-    //front
-    glBindTexture(GL_TEXTURE_2D, T.textures[FACE]);
+
+    //back - top(right;left) - bottom(left;right)
+    glBindTexture(GL_TEXTURE_2D, T2);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0,0);
+    glVertex3f( 0.5f,  0.5f, -0.5f);
+    glTexCoord2f(0,1);
+    glVertex3f(-0.5f,  0.5f, -0.5f);
+    glTexCoord2f(1,1);
+    glVertex3f(-0.5f, -0.5f, -0.5f);
+    glTexCoord2f(1,0);
+    glVertex3f( 0.5f, -0.5f, -0.5f);
+    glEnd();
+
+    //front - bottom(right;left) - top(left;right)
+    glBindTexture(GL_TEXTURE_2D, T3);
     glBegin(GL_QUADS);
     glTexCoord2f(1,0);
     glVertex3f( 0.5f, -0.5f, 0.5f);
-   glTexCoord2f(0,0);
+    glTexCoord2f(0,0);
     glVertex3f(-0.5f, -0.5f, 0.5f);
     glTexCoord2f(0,1);
     glVertex3f(-0.5f,  0.5f, 0.5f);
     glTexCoord2f(1,1);
     glVertex3f( 0.5f,  0.5f, 0.5f);
     glEnd();
-    //left
-    glBegin(GL_QUADS);
-    glVertex3f(-0.5f,  0.5f,  0.5f);
-    glVertex3f(-0.5f,  0.5f, -0.5f);
-    glVertex3f(-0.5f, -0.5f, -0.5f);
-    glVertex3f(-0.5f, -0.5f,  0.5f);
-    //right
-    glVertex3f(0.5f,  0.5f, -0.5f);
-    glVertex3f(0.5f,  0.5f,  0.5f);
-    glVertex3f(0.5f, -0.5f,  0.5f);
-    glVertex3f(0.5f, -0.5f, -0.5f);
 
+    //left - top(front;back) - bottom(back;front)
+    glBindTexture(GL_TEXTURE_2D, T4);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0,0);
+    glVertex3f(-0.5f,  0.5f,  0.5f);
+    glTexCoord2f(0,1);
+    glVertex3f(-0.5f,  0.5f, -0.5f);
+    glTexCoord2f(1,1);
+    glVertex3f(-0.5f, -0.5f, -0.5f);
+    glTexCoord2f(1,0);
+    glVertex3f(-0.5f, -0.5f,  0.5f);
     glEnd();
-    glDisable(GL_TEXTURE_2D);
+
+    //right - front(back;front) - bottom(front;back)
+    glBindTexture(GL_TEXTURE_2D, T5);
+    glBegin(GL_QUADS);
+    glTexCoord2f(0,0);
+    glVertex3f(0.5f,  0.5f, -0.5f);
+    glTexCoord2f(0,1);
+    glVertex3f(0.5f,  0.5f,  0.5f);
+    glTexCoord2f(1,1);
+    glVertex3f(0.5f, -0.5f,  0.5f);
+    glTexCoord2f(1,0);
+    glVertex3f(0.5f, -0.5f, -0.5f);
+    glEnd();
 }
 
 
@@ -333,14 +360,11 @@ void drawCircle( float r, int num_segments)
 }
 void drawCylinder(float radius,float height,GLint numMajor, GLint numMinor)
 {
-    glEnable(GL_TEXTURE_2D);
     double majorStep = height / numMajor;
     double minorStep = 2.0 * M_PI / numMinor;
     int i, j;
 
-    glBindTexture(GL_TEXTURE_2D, T.textures[FACE]);
-   // glBindTexture(GL_TEXTURE_2D, T.textures[WOOD]);
-//    std::cout<<T.textures[WOOD]<<","<<T.textures[FACE];
+//    glBindTexture(GL_TEXTURE_2D, X[1]);
     for (i = 0; i < numMajor; ++i) {
         GLfloat z0 = 0.5 * height - i * majorStep;
         GLfloat z1 = z0 - majorStep;
@@ -368,6 +392,5 @@ void drawCylinder(float radius,float height,GLint numMajor, GLint numMinor)
     glTranslatef(0.0,0.0,0.6*height/2);
     drawCircle(radius,32);
     glPopMatrix();
-    glDisable(GL_TEXTURE_2D);
 }
 
