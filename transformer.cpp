@@ -1,16 +1,17 @@
 #include "transformer.hpp"
+#include <iostream>
 
 void Transformer::getTextures()
 {
     glGenTextures(NTEX, textures);
-    textures[FACE]=loadBmpTexture("face.bmp", textures[FACE]);
-    textures[WOOD]=loadBmpTexture("wood.bmp", textures[WOOD]);
-    glGenTextures(1, &something);
-    something=loadBmpTexture("wood.bmp", something);
+    loadBmpTexture("wood.bmp", textures[WOOD]);
+    loadBmpTexture("face.bmp", textures[FACE]);
+//    std::cout<<textures[WOOD]<<","<<textures[FACE];
 }
 
 Transformer::Transformer()
 {
+    getTextures();
     flag=0;
 
     fullx=0; fully=0; fullz=0;
@@ -37,7 +38,6 @@ Transformer::Transformer()
     draw_left_butt(); draw_left_thigh(); draw_left_knee(); draw_left_calf(); draw_left_foot();
     draw_right_butt(); draw_right_thigh(); draw_right_knee(); draw_right_calf(); draw_right_foot();
 
-    getTextures();
 }
 
 void Transformer::rotateX(int angle)

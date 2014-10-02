@@ -35,7 +35,10 @@ void drawNeck()
     glTranslatef(0.0,-1.0,0.0);
     glTranslatef(0.0,0.0+T.down,0.0);
     glPushMatrix();
+    //glEnable(GL_TEXTURE_2D);
+    //glBindTexture(GL_TEXTURE_2D, T.textures[FACE]);
     glCallList(T.neck);
+    //glDisable(GL_TEXTURE_2D);
     glPopMatrix(); 
 }
 
@@ -53,10 +56,10 @@ void drawHead()
     glPopMatrix();
     //glColor3f(0,0,1);
     glColor3f(1,1,1);
-    glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, T.something);
+    //glEnable(GL_TEXTURE_2D);
+    //glBindTexture(GL_TEXTURE_2D, T.textures[WOOD]);
     glCallList(T.head);
-    glDisable(GL_TEXTURE_2D);
+    //glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
     glPopMatrix();
@@ -232,7 +235,7 @@ void display()
 
 void drawCube(){
    //glBindTexture(GL_TEXTURE_2D, T.textures[WOOD]);
-    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR , GL_REPLACE);
+    glEnable(GL_TEXTURE_2D);
     glBegin(GL_QUADS);
     //top
     glVertex3f( 0.5f, 0.5f, -0.5f);
@@ -252,7 +255,7 @@ void drawCube(){
     glVertex3f( 0.5f, -0.5f, -0.5f);
     glEnd();
     //front
-    glBindTexture(GL_TEXTURE_2D, T.something);
+    glBindTexture(GL_TEXTURE_2D, T.textures[FACE]);
     glBegin(GL_QUADS);
     glTexCoord2f(1,0);
     glVertex3f( 0.5f, -0.5f, 0.5f);
@@ -276,6 +279,7 @@ void drawCube(){
     glVertex3f(0.5f, -0.5f, -0.5f);
 
     glEnd();
+    glDisable(GL_TEXTURE_2D);
 }
 
 
@@ -312,13 +316,17 @@ void drawCircle( float r, int num_segments)
     }
     glEnd();
 }
-
+#include <iostream>
 void drawCylinder(float radius,float height,GLint numMajor, GLint numMinor)
 {
+    //glEnable(GL_TEXTURE_2D);
     double majorStep = height / numMajor;
     double minorStep = 2.0 * M_PI / numMinor;
     int i, j;
 
+   // glBindTexture(GL_TEXTURE_2D, T.textures[FACE]);
+   // glBindTexture(GL_TEXTURE_2D, T.textures[WOOD]);
+//    std::cout<<T.textures[WOOD]<<","<<T.textures[FACE];
     for (i = 0; i < numMajor; ++i) {
         GLfloat z0 = 0.5 * height - i * majorStep;
         GLfloat z1 = z0 - majorStep;
@@ -346,5 +354,6 @@ void drawCylinder(float radius,float height,GLint numMajor, GLint numMinor)
     glTranslatef(0.0,0.0,0.6*height/2);
     drawCircle(radius,32);
     glPopMatrix();
+    //glDisable(GL_TEXTURE_2D);
 }
 

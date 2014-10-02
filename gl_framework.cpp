@@ -6,7 +6,7 @@ extern Transformer T;
 
 void initGL(void)
 {
-    glClearColor(0, 0, 0, 0);
+    glClearColor(0, 0, 0, 1);
     glClearDepth(1);
 }
 

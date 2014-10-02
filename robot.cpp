@@ -59,6 +59,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
        
       // Render here
       //renderGL();
+        T.draw_neck();
 	  display();
 
 

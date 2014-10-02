@@ -1,6 +1,6 @@
 #include "loadBmpTexture.hpp"
 
-GLuint loadBmpTexture(const char *fileName, GLuint texture)
+void loadBmpTexture(const char *fileName, GLuint texture)
 {
 	FILE *file;
 	unsigned char header[54];
@@ -12,13 +12,13 @@ GLuint loadBmpTexture(const char *fileName, GLuint texture)
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Invaild file path '%s'!", fileName);
-		return false;
+		return;
 	}
 	fread(header, 1, 54, file);
 	if (header[0] != 'B' || header[1] != 'M')
 	{
 		fprintf(stderr, "Error: Invaild file '%s'!", fileName);
-		return false;
+		return;
 	}
 
 	width = *(int*)&(header[0x12]);
@@ -33,10 +33,11 @@ GLuint loadBmpTexture(const char *fileName, GLuint texture)
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR , GL_REPLACE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-    return texture;
+    delete data;
 }
