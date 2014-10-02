@@ -9,6 +9,7 @@
 class Transformer
 {
    public:
+   int flag;
 	  int fullx;
 	  int fully;
 	  int fullz;
@@ -49,7 +50,10 @@ class Transformer
 	  GLfloat fronttyretrans;
 	  GLfloat carback;
 	  GLfloat carbackshift;
+	  GLfloat carbackinsert;
 	  GLfloat backtyretrans;
+	  GLfloat rbtyreshift;
+	  GLfloat lbtyreshift;
 	  GLuint left_shoulder;
 	  GLuint left_arm;
 	  GLuint left_forearm;
@@ -132,7 +136,8 @@ class Transformer
 	  void draw_left_knee();
 	  void draw_left_calf();
 	  void draw_left_foot();
-	void timer();
+	  void tocar();
+	  void tohuman();
 	  void transform();
 };
 

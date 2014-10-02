@@ -17,14 +17,14 @@ void error_callback(int error, const char* description)
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
- const GLdouble pi = 3.14159;
+   const GLdouble pi = 3.14159;
    GLdouble fW, fH;
    double aspect;
 
 
    if (height == 0)
    {
-	  height = 1;
+      height = 1;
    }
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
@@ -33,11 +33,11 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
    if(width > height)
    {
-	  aspect = (double)width/(double)height;
+      aspect = (double)width/(double)height;
    }
    else
    {
-	  aspect = (double)height/(double)width;
+      aspect = (double)height/(double)width;
    }
    fH = tan(90.0 / 360 * pi ) * 1.0;
    fW = fH * aspect;
@@ -53,44 +53,44 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
    switch(key)
    {
-	  case GLFW_KEY_ESCAPE:
-	  glfwSetWindowShouldClose(window, GL_TRUE);
-	  break;
-	  case GLFW_KEY_V:
-	  if(mods==GLFW_MOD_SHIFT)
-	  T.rotateX(5);
-	  else 
-	  T.rotateX(-5);
-	  break;
-	  case GLFW_KEY_B:
-	  if(mods==GLFW_MOD_SHIFT)
-	  T.rotateY(5);
-	  else
-	  T.rotateY(-5);
-	  break;
-	  case GLFW_KEY_N:
-	  if(mods==GLFW_MOD_SHIFT)
-	  T.rotateZ(5);
-	  else
-	  T.rotateZ(-5);
-	  break;
-	  case GLFW_KEY_Z:
-	  if(mods==GLFW_MOD_SHIFT)
-	  {if(T.headside<=45)
-	  T.tiltHeadSide(5);}
-	  else{
-		 if(T.headside>=-45)
-		 T.tiltHeadSide(-5);
-	  }
-	  break;
-	  case GLFW_KEY_X:
-	  if(mods==GLFW_MOD_SHIFT)
-	  {if(T.headforward<45)
-	  T.tiltHeadFB(5);
+      case GLFW_KEY_ESCAPE:
+      glfwSetWindowShouldClose(window, GL_TRUE);
+      break;
+      case GLFW_KEY_V:
+      if(mods==GLFW_MOD_SHIFT)
+      T.rotateX(5);
+      else 
+      T.rotateX(-5);
+      break;
+      case GLFW_KEY_B:
+      if(mods==GLFW_MOD_SHIFT)
+      T.rotateY(5);
+      else
+      T.rotateY(-5);
+      break;
+      case GLFW_KEY_N:
+      if(mods==GLFW_MOD_SHIFT)
+      T.rotateZ(5);
+      else
+      T.rotateZ(-5);
+      break;
+      case GLFW_KEY_Z:
+      if(mods==GLFW_MOD_SHIFT)
+      {if(T.headside<=45)
+      T.tiltHeadSide(5);}
+      else{
+         if(T.headside>=-45)
+         T.tiltHeadSide(-5);
+      }
+      break;
+      case GLFW_KEY_X:
+      if(mods==GLFW_MOD_SHIFT)
+      {if(T.headforward<45)
+      T.tiltHeadFB(5);
    }
    else{
-	  if(T.headforward>=-10)
-	  T.tiltHeadFB(-5);
+      if(T.headforward>=-10)
+      T.tiltHeadFB(-5);
    }
    break;
    case GLFW_KEY_C:
@@ -221,10 +221,13 @@ T.lLegCurve(-5);
 T.lCalfFB(-5);}
 break;
 case GLFW_KEY_G:
-    T.timer();
-    break;
-    default:
-    break;
+if(T.flag==0)
+T.tocar();
+else
+T.tohuman();
+break;
+default:
+break;
 }
 }
 

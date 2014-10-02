@@ -1,8 +1,9 @@
 #include <GL/glew.h>
 #include "transformer.h"
+#include <stdio.h>
 Transformer::Transformer()
 {
-
+   flag=0;
    fullx=0; fully=0; fullz=0;
    bend=0;
    headside=0; headforward=0; headcurve=0;
@@ -25,6 +26,9 @@ Transformer::Transformer()
    lfootrot=0.0;
    carback=0.0;
    carbackshift=0.0;
+   carbackinsert=0.0;
+   lbtyreshift=0.0;
+   rbtyreshift=0.0;
    draw_left_shoulder();
    draw_left_arm();
    draw_left_elbow();
@@ -247,7 +251,7 @@ void Transformer::draw_hip()
    glNewList(hip, GL_COMPILE);
 
    glTranslatef(0.0,-1.1,0.0);
-   glScalef(1.6,0.3,1.1);
+   glScalef(1.6,0.3,1.25);
    drawCube();
    glEndList();
 }
@@ -257,7 +261,7 @@ void Transformer::draw_torso()
    torso = glGenLists(1);
    glNewList(torso, GL_COMPILE);
 
-   glScalef(1.6,2.0,1.1);
+   glScalef(1.6,2.0,1.25);
    drawCube();
    glEndList();
 }
@@ -272,13 +276,13 @@ void Transformer::draw_head()
    glPushMatrix();
    glRotatef((GLfloat)carfront,1.0,0.0,0.0);
    glTranslatef(0.0,0.0+move,0.3);
-   glScalef(1.7,1.1,0.5);
+   glScalef(1.7,1.25,0.5);
    drawCube();
    glPopMatrix();
 
    glPushMatrix();
    glTranslatef(0.0,0.0,0.3);
-   glScalef(1.7,1.1,0.8);
+   glScalef(1.7,1.25,0.8);
 
    drawCube();
    glPopMatrix();
@@ -291,11 +295,11 @@ void Transformer::draw_eyes()
    eyes = glGenLists(1);
    glNewList(eyes, GL_COMPILE);
    glPushMatrix();
-   glTranslatef(-0.3,-0.1,0.7);
+   glTranslatef(-0.35,0.05,0.7);
    drawCircle(0.15,32);
    glPopMatrix();
    glPushMatrix();
-   glTranslatef(0.3,-0.1,0.7);
+   glTranslatef(0.35,0.05,0.7);
    drawCircle(0.15,32);
    glPopMatrix();
    glEndList();
@@ -305,55 +309,6 @@ void Transformer::draw_neck()
 {
    neck = glGenLists(1);
    glNewList(neck, GL_COMPILE);
- /* 
-   //top
-glPushMatrix();
-glColor3f(1.0,1.0,1.0);
-
-glTranslatef(0.0,1.5+rshift,-0.7+move);
-  glRotatef ((GLfloat) rdoor, 1.0, 0.0, 0.0);
-   glScalef(1.6,1.8,0.1);
-   drawCube();
-   glPopMatrix();
-   
-//lside
-glPushMatrix();
-glColor3f(1.0,1.0,1.0);
-   //   glRotatef ((GLfloat) vehiclefront, 0.0, 1.0, 0.0);
-   glTranslatef(0.0+lshift,1.5,-0.7+move);
-glRotatef ((GLfloat) ldoor, 0.0, 1.0, 0.0);
-
-   glScalef(1.6,1.8,0.1);
-   drawCube();
-   glPopMatrix();
-   
-//rside
-glPushMatrix();
-glColor3f(1.0,1.0,1.0);
-glTranslatef(0.0+rshift,1.5,-0.7+move);
-//glTranslatef(-1.6,0.0,0.0);
-glRotatef ((GLfloat) rdoor, 0.0, 1.0, 0.0);
-//glTranslatef(1.6,0.0,0.0);
-//glTranslatef(-rshift,0.0,0.0);
-   glScalef(1.6,1.8,0.1);
-   drawCube();
-   glPopMatrix();
-
-//front
-   glPushMatrix();
-   glColor3f(1.0,1.0,1.0);
-   glTranslatef(0.0,1.5,-0.7);
-   glScalef(1.6,1.8,0.1);
-   drawCube();
-   glPopMatrix();
-
-   glPushMatrix();
-   glColor3f(0.0,0.0,0.0);
-   glTranslatef(0.0,1.5,-0.6);
-   glScalef(1.6,1.8,0.1);
-   drawCube();
-   glPopMatrix();
-*/
 glColor3f(1,0,0);
    glTranslatef (0.0, 1.15, 0.0);
    glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
@@ -443,7 +398,7 @@ void Transformer::draw_left_thigh()
    //   drawCylinder(0.4,1.0,32,32);
    glScalef(0.6,0.6,1.0);
    drawCube();
- 
+
    glEndList();
 }
 
@@ -481,32 +436,33 @@ void Transformer::draw_left_foot()
    glEndList();
 }
 void Transformer::drawCube(){
-   glBegin(GL_QUADS);    
+   glBegin(GL_QUADS);
+   //top
    glVertex3f( 0.5f, 0.5f, -0.5f);
    glVertex3f(-0.5f, 0.5f, -0.5f);
    glVertex3f(-0.5f, 0.5f,  0.5f);
    glVertex3f( 0.5f, 0.5f,  0.5f);
-
+   // bottom
    glVertex3f( 0.5f, -0.5f,  0.5f);
    glVertex3f(-0.5f, -0.5f,  0.5f);
    glVertex3f(-0.5f, -0.5f, -0.5f);
    glVertex3f( 0.5f, -0.5f, -0.5f);
-
+   //back
    glVertex3f( 0.5f,  0.5f, -0.5f);
    glVertex3f(-0.5f,  0.5f, -0.5f);
    glVertex3f(-0.5f, -0.5f, -0.5f);
    glVertex3f( 0.5f, -0.5f, -0.5f);
-
-   glVertex3f( 0.5f, -0.5f, -0.5f);
-   glVertex3f(-0.5f, -0.5f, -0.5f);
-   glVertex3f(-0.5f,  0.5f, -0.5f);
-   glVertex3f( 0.5f,  0.5f, -0.5f);
-
+   //front
+   glVertex3f( 0.5f, -0.5f, 0.5f);
+   glVertex3f(-0.5f, -0.5f, 0.5f);
+   glVertex3f(-0.5f,  0.5f, 0.5f);
+   glVertex3f( 0.5f,  0.5f, 0.5f);
+   //left
    glVertex3f(-0.5f,  0.5f,  0.5f);
    glVertex3f(-0.5f,  0.5f, -0.5f);
    glVertex3f(-0.5f, -0.5f, -0.5f);
    glVertex3f(-0.5f, -0.5f,  0.5f);
-
+   //right//
    glVertex3f(0.5f,  0.5f, -0.5f);
    glVertex3f(0.5f,  0.5f,  0.5f);
    glVertex3f(0.5f, -0.5f,  0.5f);
@@ -578,14 +534,24 @@ void Transformer::drawCylinder(float radius,float height,GLint numMajor, GLint n
 	  }
 	  glEnd();
    }
+   glPushMatrix();
+   glTranslatef(0.0,0.0,-0.6*height/2);
    drawCircle(radius,32);
+   glPopMatrix();
+   glPushMatrix();
+   glTranslatef(0.0,0.0,0.6*height/2);
+   drawCircle(radius,32);
+   glPopMatrix();
 
 }
-void Transformer::timer()
+void Transformer::tocar()
 {
    while(1){
-	  if(rdoor==90&&ldoor==-90&&fronttyretrans!=0&&backtyretrans!=0&&fullx==0&&fully==90&&fullz==90&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==0&&rshoulderforward==0&&rshouldercurve==0&&relbow==-90&&lshoulderside==-180&&lshoulderforward==0&&lshouldercurve==0&&lelbow==90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==180&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==180&&vehiclefront==90)
-	  break;
+	  if(rbtyreshift<=-0.25&&lbtyreshift>=0.25&&down<=-0.9&&carback<=-0.3&&carbackshift>=0.5&&carbackinsert<=-0.3&&rfootrot==-90&&lfootrot==90&&fronttyretrans<=-0.7&&backtyretrans<=-0.7&&fullx==0&&fully==90&&fullz==90&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==0&&rshoulderforward==0&&rshouldercurve==0&&relbow==-90&&lshoulderside==-180&&lshoulderforward==0&&lshouldercurve==0&&lelbow==90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==180&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==180&&vehiclefront==90&&carfront==90)
+      {
+		 flag=1;
+		 break;
+	  }
 	  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	  transform();
 	  draw_neck();
@@ -596,126 +562,137 @@ void Transformer::timer()
 	  GLFWwindow * win=glfwGetCurrentContext();
 	  glfwPollEvents();
 	  glfwSwapBuffers(win);
-	  usleep(400000);
+      usleep(50000);
 
    }
 }
+void Transformer::tohuman()
+{
+   while(1){
+      if(lbtyreshift<=0.025&&rbtyreshift>=-0.025&&down>=0.0&&carback>=-0.05&&carbackshift<=0.05&&carbackinsert>=-0.05&&rfootrot==0.0&&lfootrot==0.0&&fronttyretrans>=-0.5&&backtyretrans>=-0.5&&fullx==0&&fully==0&&fullz==0&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==-135&&rshoulderforward==0&&rshouldercurve==0&&relbow==90&&lshoulderside==-45&&lshoulderforward==0&&lshouldercurve==0&&lelbow==-90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==0&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==0&&vehiclefront==0&&carfront==0)
+      {
 
+		 flag=0;
+		 break;
+	  }
+	  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	  transform();
+	  draw_neck();
+	  draw_head();
+	  draw_right_foot();
+	  draw_left_foot();
+	  display();
+	  GLFWwindow * win=glfwGetCurrentContext();
+	  glfwPollEvents();
+	  glfwSwapBuffers(win);
+      usleep(50000);
+
+   }
+}
+/*
 
 void Transformer::transform()
 { 
-rshift=.8;
-lshift=-.8;
- if(bend!=0)
+   if(bend!=0)
    {
 	  bend=0;
 	  return;
    }
    if(headside!=0){
-   headside=0;
-}
-if(headforward!=0)
-{
-   headforward=0;
-}
+	  headside=0;
+   }
+   if(headforward!=0)
+   {
+	  headforward=0;
+   }
 
-if(headcurve!=0)
-{
-   headcurve=0;
-   return;
-}
- 
-if(relbow!=-90)
-{
-   relbow=-90;
-}
-  if(lelbow!=90){
+   if(headcurve!=0)
+   {
+	  headcurve=0;
+	  return;
+   }
+
+   if(relbow!=-90)
+   {
+	  relbow=-90;
+   }
+   if(lelbow!=90){
 	  lelbow=90;
 	  return;
    }
 
 
-if(rshoulderside!=0){
-   rshoulderside=0;
-}
-if(lshoulderside!=-180){
-   lshoulderside=-180;
-   return;
-}
-if(rshoulderforward!=0){
-   rshoulderforward=0;
-}
+   if(rshoulderside!=0){
+	  rshoulderside=0;
+   }
+   if(lshoulderside!=-180){
+	  lshoulderside=-180;
+	  return;
+   }
+   if(rshoulderforward!=0){
+	  rshoulderforward=0;
+   }
    if(lshoulderforward!=0){
-   lshoulderforward=0;
-   return;
-}
+	  lshoulderforward=0;
+	  return;
+   }
 
-if(rshouldercurve!=0)
-{
-rshouldercurve=0;
-}
+   if(rshouldercurve!=0)
+   {
+	  rshouldercurve=0;
+   }
 
    if(lshouldercurve!=0){
-   lshouldercurve=0;
-   return;
-}
+	  lshouldercurve=0;
+	  return;
+   }
 
-if(down==0.0)
-{
-   down=-0.9;
-   return;
-}
- 
-if(llbforward!=180)
+   if(down==0.0)
    {
-   llbforward=180;
-}
-  if(rlbforward!=180){
+	  down=-0.9;
+	  return;
+   }
+
+   if(llbforward!=180)
+   {
+	  llbforward=180;
+   }
+   if(rlbforward!=180){
 	  rlbforward=180;
 	  return;
    }
- 
+
    if(lltside!=-90){
-   lltside=-90;
-}
-if(rltside!=-90){
-   rltside=-90;
-   return;
-}
+	  lltside=-90;
+   }
+   if(rltside!=-90){
+	  rltside=-90;
+	  return;
+   }
 
    if(lltforward!=0){
-   lltforward=0;
-}
-      if(rltforward!=0){
-   rltforward=0;
-   return;
-}
- 
-if(lltcurve!=0){
-   lltcurve=0;
-}
-  if(rltcurve!=0){
+	  lltforward=0;
+   }
+   if(rltforward!=0){
+	  rltforward=0;
+	  return;
+   }
+
+   if(lltcurve!=0){
+	  lltcurve=0;
+   }
+   if(rltcurve!=0){
 	  rltcurve=0;
 	  return;
    }
- 
-  if(ldoor!=-90)
-   {
-//move=0.7;
-	  ldoor=-90;
-   }
-   if(rdoor!=90){
-	  rdoor=90;
-	  return;
-   }
-   
+
 
    if(vehiclefront!=90){
 	  move=-0.3;
 	  vehiclefront=90;
 	  return;
    }
-      
+
    if(fullx!=0){
 	  fullx=0;
 	  return ;
@@ -730,117 +707,563 @@ if(lltcurve!=0){
 	  fullz=90;
 	  return;
    }
-	  fronttyretrans=-0.7;
-	  backtyretrans=-0.7;
-	  carfront=90.0;
-	  rfootrot=-90.0;
-	  lfootrot=90.0;
-	  carback=-0.2;
-	  carbackshift=0.5;
-   }
-/*
-void Transformer::transform()
-{ 
    fronttyretrans=-0.7;
-   backtyretrans=0.7;
-   if(fullx>0)
-   fullx=(fullx-5)%360;
-   else if(fullx<0)
-   fullx=(fullx+5)%360;
-   if(fully>0)
-   fully=(fully-5)%360;
-   else if(fully<0)
-   fully=(fully+5)%360;
-   if(fullz>0)
-   fullz=(fullz-5)%360;
-   else if(fullz<0)
-   fullz=(fullz+5)%360;
-   if(bend>0)
-   bend=(bend-5)%360;
-   else if(bend<0)
-   bend=(bend+5)%360;
-   if(headside>0)
-   headside=(headside-5)%360;
-   else if(headside<0)
-   headside=(headside+5)%360;
-   if(headforward>0)
-   headforward=(headforward-5)%360;
-   else if(headforward<0)
-   headforward=(headforward+5)%360;
-   if(headcurve>0)
-   headcurve=(headcurve-5)%360;
-   else if(headcurve<0)
-   headcurve=(headcurve+5)%360;
-   if(rshoulderside>0)
-   rshoulderside=(rshoulderside-5)%360;
-   else if(rshoulderside<0)
-   rshoulderside=(rshoulderside+5)%360;
-   if(rshoulderforward>0)
-   rshoulderforward=(rshoulderforward-5)%360;
-   else if(rshoulderforward<0)
-   rshoulderforward=(rshoulderforward+5)%360;
-   if(rshouldercurve>0)
-   rshouldercurve=(rshouldercurve-5)%360;
-   else if(rshouldercurve<0)
-   rshouldercurve=(rshouldercurve+5)%360;
-   if(relbow>-90)
-   relbow=(relbow-5)%360;
-   else if(relbow<-90)
-   relbow=(relbow+5)%360;
-   if(lshoulderside>-180)
-   lshoulderside=(lshoulderside-5)%360;
-   else if(lshoulderside<-180)
-   lshoulderside=(lshoulderside+5)%360;
-   if(lshoulderforward>0)
-   lshoulderforward=(lshoulderforward-5)%360;
-   else if(lshoulderforward<-0)
-   lshoulderforward=(lshoulderforward+5)%360;
-   if(lshouldercurve>0)
-   lshouldercurve=(lshouldercurve-5)%360;
-   else if(lshouldercurve<0)
-   lshouldercurve=(lshouldercurve+5)%360;
-   if(lelbow>90)
-   lelbow=(lelbow-5)%360;
-   else if(lelbow<90)
-   lelbow=(lelbow+5)%360;
-   if(lltside>-90)
-   lltside=(lltside-5)%360;
-   else if(lltside<-90)
-   lltside=(lltside+5)%360;
-   if(lltforward>180)
-   lltforward=(lltforward-5)%360;
-   else if(lltforward<180)
-   lltforward=(lltforward+5)%360;
-   if(lltcurve>0)
-   lltcurve=(lltcurve-5)%360;
-   else if(lltcurve<0)
-   lltcurve=(lltcurve+5)%360;
-   if(llbforward>180)
-   llbforward=(llbforward-5)%360;
-   else if(llbforward<180)
-   llbforward=(llbforward+5)%360;
-   if(rltside>-90)
-   rltside=(rltside-5)%360;
-   else if(rltside<-90)
-   rltside=(rltside+5)%360;
-   if(rltforward>180)
-   rltforward=(rltforward-5)%360;
-   else if(rltforward<180)
-   rltforward=(rltforward+5)%360;
-   if(rltcurve>0)
-   rltcurve=(rltcurve-5)%360;
-   else if(rltcurve<0)
-   rltcurve=(rltcurve+5)%360;
-   if(rlbforward>180)
-   rlbforward=(rlbforward-5)%360;
-   else if(rlbforward<180)
-   rlbforward=(rlbforward+5)%360;
-   if(vehiclefront>90)
-   vehiclefront=(vehiclefront-5)%360;
-   else if(vehiclefront<90)
-   vehiclefront=(vehiclefront+5)%360;
+   backtyretrans=-0.7;
+   carfront=90.0;
+   rfootrot=-90.0;
+   lfootrot=90.0;
+   carback=-0.25;
+   carbackshift=0.5;
+   carbackinsert=-0.3;
 }
 */
+void Transformer::transform()
+{
+   if(flag==0){
+
+      if(bend>0){
+         bend=(bend-5)%360;
+
+         return;
+      }
+      else if(bend<0){
+         bend=(bend+5)%360;
+         return;
+      }
+      if(headside>0){
+         headside=(headside-5)%360;
+
+         return;
+      }
+      else if(headside<0){
+         headside=(headside+5)%360;
+         return;
+      }
+      if(headforward>0){
+         headforward=(headforward-5)%360;
+
+         return;
+      }
+      else if(headforward<0){
+         headforward=(headforward+5)%360;
+         return;
+      }
+      if(headcurve>0){
+         headcurve=(headcurve-5)%360;
+
+         return;
+      }
+      else if(headcurve<0){
+         headcurve=(headcurve+5)%360;
+         return;
+      }
+      if(relbow>-90){
+         relbow=(relbow-5)%360;
+      }
+      else if(relbow<-90){
+         relbow=(relbow+5)%360;
+      }
+      if(lelbow>90){
+         lelbow=(lelbow-5)%360;
+
+         return;
+      }
+      else if(lelbow<90){
+         lelbow=(lelbow+5)%360;
+         return;
+      }
+      if(rshoulderside>0){
+         rshoulderside=(rshoulderside-5)%360;
+      }
+      else if(rshoulderside<0){
+         rshoulderside=(rshoulderside+5)%360;
+      }
+      if(lshoulderside>-180){
+         lshoulderside=(lshoulderside-5)%360;
+
+         return;
+      }
+      else if(lshoulderside<-180){
+         lshoulderside=(lshoulderside+5)%360;
+         return;
+      }
+      if(rshoulderforward>0){
+         rshoulderforward=(rshoulderforward-5)%360;
+      }
+      else if(rshoulderforward<0){
+         rshoulderforward=(rshoulderforward+5)%360;
+      }
+      if(lshoulderforward>0){
+         lshoulderforward=(lshoulderforward-5)%360;
+
+         return;
+      }
+      else if(lshoulderforward<-0){
+         lshoulderforward=(lshoulderforward+5)%360;
+         return;
+      }
+      if(rshouldercurve>0){
+         rshouldercurve=(rshouldercurve-5)%360;
+      }
+      else if(rshouldercurve<0){
+         rshouldercurve=(rshouldercurve+5)%360;
+      }
+      if(lshouldercurve>0){
+         lshouldercurve=(lshouldercurve-5)%360;
+
+         return;
+      }
+      else if(lshouldercurve<0){
+         lshouldercurve=(lshouldercurve+5)%360;
+         return;
+      }
+      if(down>-0.9)
+      {
+         down=down-0.1;
+         return;
+      }
+      if(rlbforward>180){
+         rlbforward=(rlbforward-5)%360;
+      }
+      else if(rlbforward<180){
+         rlbforward=(rlbforward+5)%360;
+      }
+      if(llbforward>180){
+         llbforward=(llbforward-5)%360;
+
+         return;
+      }
+      else if(llbforward<180){
+         llbforward=(llbforward+5)%360;
+         return;
+      }
+      if(rltside>-90){
+         rltside=(rltside-5)%360;
+      }
+      else if(rltside<-90){
+         rltside=(rltside+5)%360;
+      }
+      if(lltside>-90){
+         lltside=(lltside-5)%360;
+
+         return;
+      }
+      else if(lltside<-90){
+         lltside=(lltside+5)%360;
+         return;
+      }
+      if(rltforward>0){
+         rltforward=(rltforward-5)%360;
+      }
+      else if(rltforward<0){
+         rltforward=(rltforward+5)%360;
+      }
+
+      if(lltforward>0){
+         lltforward=(lltforward-5)%360;
+
+         return;
+      }
+      else if(lltforward<0){
+         lltforward=(lltforward+5)%360;
+         return;
+      }
+      if(rltcurve>0){
+         rltcurve=(rltcurve-5)%360;
+      }
+      else if(rltcurve<0){
+         rltcurve=(rltcurve+5)%360;
+      }
+      if(lltcurve>0){
+         lltcurve=(lltcurve-5)%360;
+
+         return;
+      }
+      else if(lltcurve<0){
+         lltcurve=(lltcurve+5)%360;
+         return;
+      }
+      move=-0.3;
+      if(vehiclefront>90){
+         vehiclefront=(vehiclefront-5)%360;
+
+         return;
+      }
+      else if(vehiclefront<90){
+         vehiclefront=(vehiclefront+5)%360;
+         return;
+      }
+      if(rbtyreshift>-0.25)
+      {
+         rbtyreshift=rbtyreshift-0.05;
+      }
+
+      if(lbtyreshift<0.25)
+      {
+         lbtyreshift=lbtyreshift+0.05;
+         return;
+      }
+
+
+      if(fullx>0){
+         fullx=(fullx-5)%360;
+
+         return;
+      }
+      else if(fullx<0){
+         fullx=(fullx+5)%360;
+         return;
+      }
+      if(fully>90){
+         fully=(fully-5)%360;
+
+         return;
+      }
+      else if(fully<90){
+         fully=(fully+5)%360;
+         return;
+      }
+      if(fullz>90){
+         fullz=(fullz-5)%360;
+
+         return;
+      } 
+      else if(fullz<90){
+         fullz=(fullz+5)%360;
+         return;
+      }
+      if(fronttyretrans>-0.7)
+      {
+         fronttyretrans=fronttyretrans-0.1;
+      }
+      if(backtyretrans>-0.7)
+      {
+         backtyretrans=backtyretrans-0.1;
+         return;
+      }
+      if(carfront>90){
+         carfront=(carfront-5)%360;
+
+         return;
+      }
+      else if(carfront<90){
+         carfront=(carfront+5)%360;
+         return;
+      }
+      if(rfootrot>-90){
+         rfootrot=(rfootrot-5)%360;
+
+         return;
+      }
+      else if(rfootrot<-90){
+         rfootrot=(rfootrot+5)%360;
+         return;
+      }
+      if(lfootrot>90){
+         lfootrot=(lfootrot-5)%360;
+
+         return;
+      }
+      else if(lfootrot<90){
+         lfootrot=(lfootrot+5)%360;
+         return;
+      }
+      if(carback>-0.3)
+      {
+         carback=carback-0.1;
+         return;
+
+      }
+      if(carbackshift<0.5)
+      {
+         carbackshift=carbackshift+0.1;
+         return;
+      }
+      if(carbackinsert>-0.3)
+      {
+         carbackinsert=carbackinsert-0.1;
+         return;
+      }
+   }
+
+
+
+
+   else{
+      if(carbackinsert<-0.05)
+      {
+         carbackinsert=carbackinsert+0.1;
+         return;
+      }
+      if(carbackshift>0.05)
+      {
+         carbackshift=carbackshift-0.1;
+         return;
+      }
+
+      if(carback<-0.05)
+      {
+         carback=carback+0.1;
+         return;
+
+      }
+      if(lfootrot>0){
+         lfootrot=(lfootrot-5)%360;
+
+         return;
+      }
+      else if(lfootrot<0){
+         lfootrot=(lfootrot+5)%360;
+         return;
+      }
+
+
+      if(rfootrot>0){
+         rfootrot=(rfootrot-5)%360;
+
+         return;
+      }
+      else if(rfootrot<0){
+         rfootrot=(rfootrot+5)%360;
+         return;
+      }
+
+      if(carfront>0){
+         carfront=(carfront-5)%360;
+
+         return;
+      }
+      else if(carfront<0){
+         carfront=(carfront+5)%360;
+         return;
+      }
+
+
+      if(backtyretrans<-0.05)
+      {
+         backtyretrans=backtyretrans+0.1;
+      }
+      if(fronttyretrans<-0.05)
+      {
+         fronttyretrans=fronttyretrans+0.1;
+         return;
+      }
+      if(fullz>0){
+         fullz=(fullz-5)%360;
+
+         return;
+      }
+      else if(fullz<0){
+         fullz=(fullz+5)%360;
+         return;
+      }
+      if(fully>0){
+         fully=(fully-5)%360;
+         return;
+      }
+      else if(fully<0){
+         fully=(fully+5)%360;
+         return;
+      }
+      if(fullx>0){
+         fullx=(fullx-5)%360;
+         return;
+      }
+      else if(fullx<0){
+         fullx=(fullx+5)%360;
+         return;
+      }
+      if(lbtyreshift>0.025)
+      {
+         lbtyreshift=lbtyreshift-0.05;
+      }
+      if(rbtyreshift<-0.025)
+      {
+         rbtyreshift=rbtyreshift+0.05;
+         return;
+      }
+      move=0.0;
+      if(vehiclefront>0){
+         vehiclefront=(vehiclefront-5)%360;
+         return;
+      }
+      else if(vehiclefront<0){
+         vehiclefront=(vehiclefront+5)%360;
+         return;
+      }
+
+      if(lltcurve>0){
+         lltcurve=(lltcurve-5)%360;
+      }
+      else if(lltcurve<0){
+         lltcurve=(lltcurve+5)%360;
+      }
+      if(rltcurve>0){
+         rltcurve=(rltcurve-5)%360;
+
+         return;
+      }
+      else if(rltcurve<0){
+         rltcurve=(rltcurve+5)%360;
+         return;
+      }
+      if(lltforward>0){
+         lltforward=(lltforward-5)%360;
+      }
+      else if(lltforward<0){
+         lltforward=(lltforward+5)%360;
+      }
+
+
+
+      if(rltforward>0){
+         rltforward=(rltforward-5)%360;
+         return;
+      }
+      else if(rltforward<0){
+         rltforward=(rltforward+5)%360;
+         return;
+      }
+      if(lltside>-90){
+         lltside=(lltside-5)%360;
+      }
+      else if(lltside<-90){
+         lltside=(lltside+5)%360;
+      }
+      if(rltside>-90){
+         rltside=(rltside-5)%360;
+         return;
+      }
+      else if(rltside<-90){
+         rltside=(rltside+5)%360;
+         return;
+      }
+      if(llbforward>0){
+         llbforward=(llbforward-5)%360;
+      }
+      else if(llbforward<0){
+         llbforward=(llbforward+5)%360;
+      }
+
+      if(rlbforward>0){
+         rlbforward=(rlbforward-5)%360;
+         return;
+      }
+      else if(rlbforward<0){
+         rlbforward=(rlbforward+5)%360;
+         return;
+
+      }
+
+      if(down<0.0)
+      {
+         down=down+0.1;
+         return;
+      }
+
+      if(lshouldercurve>0){
+         lshouldercurve=(lshouldercurve-5)%360;
+      }
+      else if(lshouldercurve<0){
+         lshouldercurve=(lshouldercurve+5)%360;
+      }
+
+
+      if(rshouldercurve>0){
+         rshouldercurve=(rshouldercurve-5)%360;
+         return;
+      }
+      else if(rshouldercurve<0){
+         rshouldercurve=(rshouldercurve+5)%360;
+         return;
+      }
+      if(lshoulderforward>0){
+         lshoulderforward=(lshoulderforward-5)%360;
+      }
+      else if(lshoulderforward<0){
+         lshoulderforward=(lshoulderforward+5)%360;
+      }
+      if(rshoulderforward>0){
+         rshoulderforward=(rshoulderforward-5)%360;
+         return;
+      }
+      else if(rshoulderforward<0){
+         rshoulderforward=(rshoulderforward+5)%360;
+         return;
+      }
+
+      if(lshoulderside>-45){
+         lshoulderside=(lshoulderside-5)%360;
+      }
+      else if(lshoulderside<-45){
+         lshoulderside=(lshoulderside+5)%360;
+      }
+      if(rshoulderside>-135){
+         rshoulderside=(rshoulderside-5)%360;
+         return;
+      }
+      else if(rshoulderside<-135){
+         rshoulderside=(rshoulderside+5)%360;
+         return;
+      }
+
+      if(lelbow>-90){
+         lelbow=(lelbow-5)%360;
+      }
+      else if(lelbow<-90){
+         lelbow=(lelbow+5)%360;
+      }
+
+
+      if(relbow>90){
+         relbow=(relbow-5)%360;
+         return;
+      }
+   else if(relbow<90){
+      relbow=(relbow+5)%360;
+      return;
+   }
+
+
+ 
+  if(headcurve>0){
+     headcurve=(headcurve-5)%360;
+     return;
+   }
+   else if(headcurve<0){
+	  headcurve=(headcurve+5)%360;
+	  return;
+   }
+ 
+   if(headforward>0){
+
+      headforward=(headforward-5)%360;
+      return;
+   }
+   else if(headforward<0){
+	  headforward=(headforward+5)%360;
+	  return;
+   }
+  
+ if(headside>0){
+    headside=(headside-5)%360;
+    return;
+   }
+   else if(headside<0){
+	  headside=(headside+5)%360;
+	  return;
+   }
+   
+if(bend>0){
+   bend=(bend-5)%360;
+   return;
+   }
+   else if(bend<0){
+	  bend=(bend+5)%360;
+	  return;
+   }
+}
+}
 void Transformer::display()
 {
    glClear (GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -864,7 +1287,7 @@ void Transformer::display()
 
    glPushMatrix(); //univ rotations
    glTranslatef(0.0,-1.1,0.0);
-   glRotatef ((GLfloat)bend, 1.0, 0.0, 0.0);
+  glRotatef ((GLfloat)bend, 1.0, 0.0, 0.0);
    glTranslatef(0.0,1.1,0.0);
    glPushMatrix(); //univ rotations, bend
    glCallList(torso);
@@ -962,7 +1385,7 @@ void Transformer::display()
    glRotatef ((GLfloat) rltforward, 1.0, 0.0, 0.0);
    glRotatef ((GLfloat) rltside, 0.0, 0.0, 1.0);
    glPushMatrix(); //univ rotations, right leg rots
-   glTranslatef(0.0,0.0,(GLfloat)backtyretrans);
+   glTranslatef(0.0,0.0+rbtyreshift,(GLfloat)backtyretrans);
 
    glColor3f(1,0,0);
    glCallList(right_butt);
@@ -974,6 +1397,9 @@ void Transformer::display()
    glPopMatrix(); //univ rotations; has right leg rots
    glTranslatef(1.2,0.0,0.0);
    glColor3f(1,0,0);
+ glPushMatrix();
+   glTranslatef(carbackinsert,0.0,0.0);
+   
    glPushMatrix();
    glCallList(right_knee);
    glPopMatrix();
@@ -988,7 +1414,7 @@ void Transformer::display()
    glPushMatrix(); //univ rotations, rleg+rknee
    glCallList(right_foot);
    glPopMatrix(); //univ rotations; has rleg+rknee
-
+glPopMatrix();
    glPopMatrix(); //ID; has univ rotations
 
    //leftleg   
@@ -1000,18 +1426,19 @@ void Transformer::display()
    glRotatef ((GLfloat) lltforward, 1.0, 0.0, 0.0);
    glRotatef ((GLfloat) lltside, 0.0, 0.0, 1.0);
    glPushMatrix(); //univ rotations, lleg
-   glTranslatef(0.0,0.0,(GLfloat)backtyretrans);
+   glTranslatef(0.0,0.0+lbtyreshift,(GLfloat)backtyretrans);
 
    glCallList(left_butt);
    glPopMatrix();
    glColor3f(0,.4,1);
    glTranslatef(carback,0.0,carback);
-
    glPushMatrix();
    glCallList(left_thigh);
    glPopMatrix(); //univ rotations; has lleg
    glTranslatef(1.2,0.0,0.0);
    glColor3f(1,0,0);
+   glPushMatrix();
+   glTranslatef(carbackinsert,0.0,0.0);
    glPushMatrix();
    glCallList(left_knee);
    glPopMatrix();
@@ -1025,6 +1452,7 @@ void Transformer::display()
    glPushMatrix(); //univ rots, lleg+lknee
    glCallList(left_foot);
    glPopMatrix(); //univ rots; has lleg+lknee
+   glPopMatrix();
    glPopMatrix(); //ID; has univ rots
    glPopMatrix(); //empty
 
