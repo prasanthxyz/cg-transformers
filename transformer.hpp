@@ -1,5 +1,5 @@
-#ifndef _TRANSFORMER_CLASS_
-#define _TRANSFORMER_CLASS_
+#ifndef _TRANSFORMER_HPP_
+#define _TRANSFORMER_HPP_
 
 #include <unistd.h>
 #include <GL/glew.h>

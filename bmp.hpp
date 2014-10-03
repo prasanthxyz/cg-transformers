@@ -1,5 +1,5 @@
-#ifndef _BMP_H_
-#define _BMP_H_
+#ifndef _BMP_HPP_
+#define _BMP_HPP_
 
 #include <GL/gl.h>
 #include <stdio.h>
