@@ -5,36 +5,30 @@ void Transformer::getTextures()
 {
     glGenTextures(NTEX, textures);
 
-    loadBmpTexture("hdfront.bmp", textures[HDFRONT]);
-    loadBmpTexture("hdback.bmp", textures[HDBACK]);
-    loadBmpTexture("hdleft.bmp", textures[HDLEFT]);
-    loadBmpTexture("hdright.bmp", textures[HDRIGHT]);
-    loadBmpTexture("hdtop.bmp", textures[HDTOP]);
-    loadBmpTexture("hdbottom.bmp", textures[HDBOTTOM]);
-    loadBmpTexture("back.bmp", textures[VEHBACK]);
-    loadBmpTexture("tyre.bmp", textures[TYRE]);
-    loadBmpTexture("tyreTex.bmp", textures[TYRETEX]);
-    loadBmpTexture("military.bmp", textures[MILITARY]);
-    loadBmpTexture("grill.bmp", textures[GRILL]);
-    loadBmpTexture("rside.bmp", textures[RSIDE]);
-    loadBmpTexture("lside.bmp", textures[LSIDE]);
-    loadBmpTexture("hiprside.bmp", textures[HIPRSIDE]);
-    loadBmpTexture("hiplside.bmp", textures[HIPLSIDE]);
-    loadBmpTexture("rfoot.bmp", textures[RFOOT]);
-    loadBmpTexture("lfoot.bmp", textures[LFOOT]);
-    loadBmpTexture("frontPane.bmp", textures[FRONTPANE]);
-    loadBmpTexture("faceleft.bmp", textures[FACELEFT]);
-    loadBmpTexture("faceright.bmp", textures[FACERIGHT]);
-    loadBmpTexture("vehiclebackleft.bmp", textures[BACKLEFT]);
-    loadBmpTexture("vehiclebackright.bmp", textures[BACKRIGHT]);
-    loadBmpTexture("frontright.bmp", textures[FRONTRIGHT]);
-    loadBmpTexture("frontleft.bmp", textures[FRONTLEFT]);
-    loadBmpTexture("bonnetright.bmp", textures[BONNETRIGHT]);
-    loadBmpTexture("bonnetleft.bmp", textures[BONNETLEFT]);
-    loadBmpTexture("bonnetmid.bmp", textures[BONNETMID]);
-    loadBmpTexture("sparetyre.bmp", textures[SPARETYRE]);
-    loadBmpTexture("lightfront.bmp", textures[LIGHTFRONT]);
-//    std::cout<<textures[WOOD]<<","<<textures[FACE];
+    loadBmpTexture("textures/hdfront.bmp", textures[HDFRONT]);
+    loadBmpTexture("textures/back.bmp", textures[VEHBACK]);
+    loadBmpTexture("textures/tyre.bmp", textures[TYRE]);
+    loadBmpTexture("textures/tyreTex.bmp", textures[TYRETEX]);
+    loadBmpTexture("textures/military.bmp", textures[MILITARY]);
+    loadBmpTexture("textures/grill.bmp", textures[GRILL]);
+    loadBmpTexture("textures/rside.bmp", textures[RSIDE]);
+    loadBmpTexture("textures/lside.bmp", textures[LSIDE]);
+    loadBmpTexture("textures/hiprside.bmp", textures[HIPRSIDE]);
+    loadBmpTexture("textures/hiplside.bmp", textures[HIPLSIDE]);
+    loadBmpTexture("textures/rfoot.bmp", textures[RFOOT]);
+    loadBmpTexture("textures/lfoot.bmp", textures[LFOOT]);
+    loadBmpTexture("textures/frontPane.bmp", textures[FRONTPANE]);
+    loadBmpTexture("textures/faceleft.bmp", textures[FACELEFT]);
+    loadBmpTexture("textures/faceright.bmp", textures[FACERIGHT]);
+    loadBmpTexture("textures/vehiclebackleft.bmp", textures[BACKLEFT]);
+    loadBmpTexture("textures/vehiclebackright.bmp", textures[BACKRIGHT]);
+    loadBmpTexture("textures/frontright.bmp", textures[FRONTRIGHT]);
+    loadBmpTexture("textures/frontleft.bmp", textures[FRONTLEFT]);
+    loadBmpTexture("textures/bonnetright.bmp", textures[BONNETRIGHT]);
+    loadBmpTexture("textures/bonnetleft.bmp", textures[BONNETLEFT]);
+    loadBmpTexture("textures/bonnetmid.bmp", textures[BONNETMID]);
+    loadBmpTexture("textures/sparetyre.bmp", textures[SPARETYRE]);
+    loadBmpTexture("textures/lightfront.bmp", textures[LIGHTFRONT]);
 }
 
 Transformer::Transformer()
