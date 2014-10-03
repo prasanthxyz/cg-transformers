@@ -11,6 +11,7 @@ void Transformer::getTextures()
     loadBmpTexture("hdright.bmp", textures[HDRIGHT]);
     loadBmpTexture("hdtop.bmp", textures[HDTOP]);
     loadBmpTexture("hdbottom.bmp", textures[HDBOTTOM]);
+    loadBmpTexture("car_bonnet.bmp", textures[HDBOTTOM]);
 //    std::cout<<textures[WOOD]<<","<<textures[FACE];
 }
 
@@ -249,7 +250,8 @@ void Transformer::draw_head()
     head = glGenLists(1);
     glNewList(head, GL_COMPILE);
     //headObj.draw();
-    drawCube(textures[HDTOP],textures[HDBOTTOM],textures[HDBACK],textures[HDFRONT],textures[HDLEFT],textures[HDRIGHT]);
+    //drawCube(textures[HDTOP],textures[HDBOTTOM],textures[HDBACK],textures[HDFRONT],textures[HDLEFT],textures[HDRIGHT]);
+    drawCube(0,textures[HDBOTTOM]);
     glEndList();
 }
 void Transformer::draw_eyes()
@@ -388,7 +390,7 @@ void Transformer::tocar()
 void Transformer::tohuman()
 {
     while(1){
-        if(lbtyreshift<=0.025&&rbtyreshift>=-0.025&&down>=0.0&&carback>=-0.05&&carbackshift<=0.05&&carbackinsert>=-0.05&&rfootrot==0.0&&lfootrot==0.0&&fronttyretrans>=-0.5&&backtyretrans>=-0.5&&fullx==0&&fully==0&&fullz==0&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==-135&&rshoulderforward==0&&rshouldercurve==0&&relbow==90&&lshoulderside==-45&&lshoulderforward==0&&lshouldercurve==0&&lelbow==-90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==0&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==0&&vehiclefront==0&&carfront==0)
+        if(lbtyreshift<=0.025&&rbtyreshift>=-0.025&&down>=-0.05&&carback>=-0.05&&carbackshift<=0.05&&carbackinsert>=-0.05&&rfootrot==0.0&&lfootrot==0.0&&fronttyretrans>=-0.5&&backtyretrans>=-0.5&&fullx==0&&fully==0&&fullz==0&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==-135&&rshoulderforward==0&&rshouldercurve==0&&relbow==90&&lshoulderside==-45&&lshoulderforward==0&&lshouldercurve==0&&lelbow==-90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==0&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==0&&vehiclefront==0&&carfront==0)
         {
 
             flag=0;
@@ -837,7 +839,7 @@ void Transformer::transform()
 
         }
 
-        if(down<0.0)
+        if(down<-0.05)
         {
             down=down+0.1;
             return;

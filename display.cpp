@@ -261,13 +261,13 @@ void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
     // bottom - front(right;left) - back(left;right)
     glBindTexture(GL_TEXTURE_2D, T1);
     glBegin(GL_QUADS);
-    glTexCoord2f(0,0);
-    glVertex3f( 0.5f, -0.5f,  0.5f);
-    glTexCoord2f(0,1);
-    glVertex3f(-0.5f, -0.5f,  0.5f);
-    glTexCoord2f(1,1);
-    glVertex3f(-0.5f, -0.5f, -0.5f);
     glTexCoord2f(1,0);
+    glVertex3f( 0.5f, -0.5f,  0.5f);
+    glTexCoord2f(0,0);
+    glVertex3f(-0.5f, -0.5f,  0.5f);
+    glTexCoord2f(0,1);
+    glVertex3f(-0.5f, -0.5f, -0.5f);
+    glTexCoord2f(1,1);
     glVertex3f( 0.5f, -0.5f, -0.5f);
     glEnd();
 

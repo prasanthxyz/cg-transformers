@@ -41,10 +41,10 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     }
     fH = tan(90.0 / 360 * pi ) * 1.0;
     fW = fH * aspect;
-    glFrustum( -fW, fW, -fH, fH, 1.0, 20.0 );
+    glFrustum( -fW, fW, -fH, fH, 1.25, 20.0 );
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslatef (0.0, 0.0, -5.0);
+    glTranslatef (0.0, 0.8, -5.0);
 
 }
 

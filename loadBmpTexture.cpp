@@ -26,6 +26,7 @@ void loadBmpTexture(const char *fileName, GLuint texture)
 	size = width * height * 3;
 	data = new unsigned char[size];
 
+    fseek(file, 128, SEEK_SET);
 	fread(data, 1, size, file);
     fclose(file);
 
@@ -38,6 +39,6 @@ void loadBmpTexture(const char *fileName, GLuint texture)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
     delete data;
 }
