@@ -9,6 +9,7 @@
 
 #include "display.hpp"
 #include "loadBmpTexture.hpp"
+#include "drawing.hpp"
 
 #define NTEX 24
 
@@ -18,6 +19,7 @@ class Transformer
         enum Textures {HDFRONT,TYRE,TYRETEX,MILITARY,VEHBACK,GRILL,RSIDE,LSIDE,HIPRSIDE,HIPLSIDE,RFOOT,LFOOT,FRONTPANE,FACELEFT,FACERIGHT,BACKLEFT,BACKRIGHT,FRONTRIGHT,FRONTLEFT,BONNETLEFT,BONNETRIGHT,BONNETMID,SPARETYRE,LIGHTFRONT};
 
         int flag;
+        Drawing draw;
 
         //Cube headObj;
         GLuint textures[NTEX];

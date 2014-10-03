@@ -1,6 +1,7 @@
 #include "drawing.hpp"
 
-void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
+void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5)
+{
     glColor3f(1,1,1);
     //top - back(right;left) - front(left;right)
     glBindTexture(GL_TEXTURE_2D, T0);
