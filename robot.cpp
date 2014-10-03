@@ -1,13 +1,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <stdlib.h>
-#include <iostream>
-#include <cmath>
+
 #include "transformer.hpp"
 #include "gl_framework.hpp"
-#include "display.hpp"
-
-using namespace std;
 
 Transformer T;
 
@@ -60,7 +55,7 @@ int main (int argc, char *argv[])
 
         // Render here
         //renderGL();
-        display();
+        T.display();
 
 
         // Swap front and back buffers
@@ -71,6 +66,7 @@ int main (int argc, char *argv[])
     }
     glfwDestroyWindow(window);
     glfwTerminate();
+
     return 0;
 }
 

@@ -4,11 +4,8 @@
 #include <unistd.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <cmath>
-#include <stdio.h>
 
-#include "display.hpp"
-#include "loadBmpTexture.hpp"
+#include "bmp.hpp"
 #include "drawing.hpp"
 
 #define NTEX 24
@@ -20,6 +17,7 @@ class Transformer
 
         int flag;
         Drawing draw;
+        BMP bmp;
 
         //Cube headObj;
         GLuint textures[NTEX];
@@ -139,35 +137,35 @@ class Transformer
         void lCalfFB(int);
 
         //generate the display lists
-        void draw_left_shoulder();
-        void draw_left_arm();
-        void draw_left_elbow();
-        void draw_left_forearm();
+        void list_left_shoulder();
+        void list_left_arm();
+        void list_left_elbow();
+        void list_left_forearm();
 
-        void draw_right_shoulder();
-        void draw_right_arm();
-        void draw_right_elbow();
-        void draw_right_forearm();
+        void list_right_shoulder();
+        void list_right_arm();
+        void list_right_elbow();
+        void list_right_forearm();
 
-        void draw_hip();
-        void draw_torso();
+        void list_hip();
+        void list_torso();
 
-        void draw_head();
-        void draw_front();
-        void draw_eyes();
-        void draw_neck();
+        void list_head();
+        void list_front();
+        void list_eyes();
+        void list_neck();
 
-        void draw_right_butt();
-        void draw_right_thigh();
-        void draw_right_knee();
-        void draw_right_calf();
-        void draw_right_foot();
+        void list_right_butt();
+        void list_right_thigh();
+        void list_right_knee();
+        void list_right_calf();
+        void list_right_foot();
 
-        void draw_left_butt(); 
-        void draw_left_thigh();
-        void draw_left_knee();
-        void draw_left_calf();
-        void draw_left_foot();
+        void list_left_butt(); 
+        void list_left_thigh();
+        void list_left_knee();
+        void list_left_calf();
+        void list_left_foot();
 
         //transformation functions
         void tocar();
@@ -175,6 +173,18 @@ class Transformer
         void transform();
 
         void getTextures();
+
+        //display functions
+        void display();
+        void drawHip();
+        void drawTorso();
+        void drawNeck();
+        void drawHead();
+        void drawRightHand();
+        void drawLeftHand();
+        void drawRightLeg();
+        void drawLeftLeg();
+
 };
 
 #endif

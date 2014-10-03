@@ -1,8 +1,4 @@
 #include "gl_framework.hpp"
-int win_width;
-int win_height;
-
-extern Transformer T;
 
 void initGL(void)
 {
@@ -50,7 +46,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-
+    extern Transformer T;
     switch(key)
     {
         case GLFW_KEY_ESCAPE:
@@ -230,5 +226,4 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             break;
     }
 }
-
 
