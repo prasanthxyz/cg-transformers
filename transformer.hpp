@@ -10,8 +10,8 @@
 #include "loadBmpTexture.hpp"
 #include "cube.hpp"
 
-#define NTEX 10
-enum Textures {HDTOP, HDBOTTOM, HDBACK, HDFRONT, HDLEFT, HDRIGHT, WOOD, FACE, TYRE};
+#define NTEX 14
+enum Textures {HDTOP, HDBOTTOM, HDBACK, HDFRONT, HDLEFT, HDRIGHT, WOOD, FACE, TYRE, TYRETEX, MILITARY,VEHBACK,GRILL,RSIDE};
 
 class Transformer
 {

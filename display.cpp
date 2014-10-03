@@ -51,19 +51,19 @@ void drawHead()
 
    glPushMatrix();
    glColor3f(0,0,0);
-   glCallList(T.eyes);
+   //glCallList(T.eyes);
    glPopMatrix();
    //glColor3f(0,0,1);
    glColor3f(1,1,1);
 
    glPushMatrix();
    glRotatef((GLfloat)T.carfront,1.0,0.0,0.0);
-   glTranslatef(0.0,0.0+T.move,0.3);
-   glScalef(1.7,1.25,0.5);
+   glTranslatef(0.0,0.0+T.move,0.2);
+   glScalef(1.7,1.25,0.8);
    glCallList(T.head);
    glPopMatrix();
    glPushMatrix();
-   glTranslatef(0.0,0.0,0.3);
+   glTranslatef(0.0,0.0,0.2);
    glScalef(1.7,1.25,0.8);
 
 
@@ -77,7 +77,7 @@ void drawHead()
 void drawRightHand()
 {
     glPushMatrix();
-    glColor3f(1,0,0);
+    glColor3f(1,1,1);
     glTranslatef (-1.0, 0.9, 0.0);
     glRotatef ((GLfloat) T.rshoulderside, 0.0, 0.0, 1.0);
     glRotatef ((GLfloat) T.rshoulderforward,1.0, 0.0, 0.0);
@@ -88,7 +88,7 @@ void drawRightHand()
     glCallList(T.right_shoulder);
     glPopMatrix();
 
-    glColor3f(0,0,1);
+    glColor3f(1,1,1);
     glPushMatrix();
     glCallList(T.right_arm);
     glPopMatrix(); 
@@ -99,7 +99,7 @@ void drawRightHand()
     glCallList(T.right_elbow);
     glPopMatrix();
     glRotatef ((GLfloat) T.relbow, 0.0, 0.0, 1.0);
-    glColor3f(0,0,1);
+    glColor3f(1,1,1);
 
     glPushMatrix(); //rshoulder+relbow
     glCallList(T.right_forearm);
@@ -117,10 +117,10 @@ void drawLeftHand()
 
     glPushMatrix(); //lshoulder
     glTranslatef(0.0,0.0,(GLfloat)T.fronttyretrans);
-    glColor3f(1,0,0);
+    glColor3f(1,1,1);
     glCallList(T.left_shoulder);
     glPopMatrix();
-    glColor3f(0,0,1);
+    glColor3f(1,1,1);
     glPushMatrix();
     glCallList(T.left_arm);
     glPopMatrix();
@@ -131,7 +131,7 @@ void drawLeftHand()
     glCallList(T.left_elbow);
     glPopMatrix();
     glRotatef ((GLfloat) T.lelbow, 0.0, 0.0, 1.0);
-    glColor3f(0,0,1);
+    glColor3f(1,1,1);
     glPushMatrix(); //lshoulder+lelbow
     glCallList(T.left_forearm);
     glPopMatrix();
@@ -168,7 +168,7 @@ void drawRightLeg()
     glCallList(T.right_knee);
     glPopMatrix();
     glRotatef ((GLfloat) T.rlbforward, 0.0, 1.0, 0.0);
-    glColor3f(0,.4,1);
+    glColor3f(1,1,1);
 
     glPushMatrix(); //rleg+rknee
     glTranslatef(0.0,T.carbackshift,0.0);
@@ -212,7 +212,7 @@ void drawLeftLeg()
     glCallList(T.left_knee);
     glPopMatrix();
     glRotatef ((GLfloat) T.llbforward, 0.0, 1.0, 0.0);
-    glColor3f(0,.4,1);
+    glColor3f(1,1,1);
 
     glPushMatrix(); //lleg+lknee
     glTranslatef(0.0,-T.carbackshift,0.0);
@@ -261,7 +261,7 @@ void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
     glVertex3f( 0.5f, 0.5f,  0.5f);
     glEnd();
 
-    glColor3f(0,1,0);
+    glColor3f(1,1,1);
     // bottom - front(right;left) - back(left;right)
     glBindTexture(GL_TEXTURE_2D, T1);
     glBegin(GL_QUADS);
@@ -289,7 +289,7 @@ void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
     glVertex3f( 0.5f, -0.5f, -0.5f);
     glEnd();
 
-    glColor3f(1,0,1);
+    glColor3f(1,1,1);
     //front - bottom(right;left) - top(left;right)
     glBindTexture(GL_TEXTURE_2D, T3);
     glBegin(GL_QUADS);
@@ -303,21 +303,21 @@ void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
     glVertex3f( 0.5f,  0.5f, 0.5f);
     glEnd();
 
-    glColor3f(1,1,0);
+    glColor3f(1,1,1);
     //left - top(front;back) - bottom(back;front)
     glBindTexture(GL_TEXTURE_2D, T4);
     glBegin(GL_QUADS);
-    glTexCoord2f(0,0);
-    glVertex3f(-0.5f,  0.5f,  0.5f);
-    glTexCoord2f(0,1);
-    glVertex3f(-0.5f,  0.5f, -0.5f);
-    glTexCoord2f(1,1);
-    glVertex3f(-0.5f, -0.5f, -0.5f);
     glTexCoord2f(1,0);
+    glVertex3f(-0.5f,  0.5f,  0.5f);
+    glTexCoord2f(0,0);
+    glVertex3f(-0.5f,  0.5f, -0.5f);
+    glTexCoord2f(0,1);
+    glVertex3f(-0.5f, -0.5f, -0.5f);
+    glTexCoord2f(1,1);
     glVertex3f(-0.5f, -0.5f,  0.5f);
     glEnd();
 
-    glColor3f(0,1,1);
+    glColor3f(1,1,1);
     //right - front(back;front) - bottom(front;back)
     glBindTexture(GL_TEXTURE_2D, T5);
     glBegin(GL_QUADS);
@@ -382,13 +382,13 @@ void drawCircle( float r, int num_segments, GLuint Tex)
     }
     glEnd();
 }
-void drawCylinder(float radius,float height,GLint numMajor, GLint numMinor)
+void drawCylinder(float radius,float height,GLint numMajor, GLint numMinor, GLuint TS1, GLuint TS2, GLuint Tex)
 {
     double majorStep = height / numMajor;
     double minorStep = 2.0 * M_PI / numMinor;
     int i, j;
 
-//    glBindTexture(GL_TEXTURE_2D, X[1]);
+    glBindTexture(GL_TEXTURE_2D, Tex);
     for (i = 0; i < numMajor; ++i) {
         GLfloat z0 = 0.5 * height - i * majorStep;
         GLfloat z1 = z0 - majorStep;
@@ -409,12 +409,12 @@ void drawCylinder(float radius,float height,GLint numMajor, GLint numMinor)
     }
 
     glPushMatrix();
-    glTranslatef(0.0,0.0,height/2);
-    drawCircle(radius,32,9);//T.textures[TYRE]);
+    glTranslatef(0.0,0.0,-height/2);
+    drawCircle(radius,32,TS1);
     glPopMatrix();
     glPushMatrix();
     glTranslatef(0.0,0.0,height/2);
-    drawCircle(radius,32,9);//T.textures[TYRE]);
+    drawCircle(radius,32,TS2);
     glPopMatrix();
 }
 
