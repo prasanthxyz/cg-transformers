@@ -49,12 +49,12 @@ void Transformer::drawHead()
     glPushMatrix();
     glRotatef((GLfloat)carfront,1.0,0.0,0.0);
     glTranslatef(0.0,0.0+move,0.2);
-    glScalef(1.7,1.25,0.8);
+    glScalef(1.6,1.25,0.8);
     glCallList(front);
     glPopMatrix();
     glPushMatrix();
     glTranslatef(0.0,0.0,0.2);
-    glScalef(1.7,1.25,0.8);
+    glScalef(1.6,1.25,0.8);
 
 
     glCallList(head);

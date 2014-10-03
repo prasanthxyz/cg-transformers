@@ -55,7 +55,7 @@ Transformer::Transformer()
     list_left_shoulder(); list_left_arm(); list_left_elbow(); list_left_forearm();
     list_right_shoulder(); list_right_arm(); list_right_elbow(); list_right_forearm();
     list_hip(); list_torso();
-    list_head(); list_front(); list_eyes(); list_neck();
+    list_head(); list_front(); list_neck();
 
     list_left_butt(); list_left_thigh(); list_left_knee(); list_left_calf(); list_left_foot();
     list_right_butt(); list_right_thigh(); list_right_knee(); list_right_calf(); list_right_foot();
@@ -245,7 +245,7 @@ void Transformer::list_hip()
     glNewList(hip, GL_COMPILE);
     glTranslatef(0.0,-1.1,0.0);
     glScalef(1.6,0.3,1.25);
-    draw.drawCube(0,textures[FRONTPANE],textures[MILITARY],textures[MILITARY],textures[HIPRSIDE],textures[HIPLSIDE]);
+    draw.drawCube(textures[MILITARY],textures[FRONTPANE],textures[MILITARY],textures[MILITARY],textures[HIPRSIDE],textures[HIPLSIDE]);
     glEndList();
 }
 void Transformer::list_torso()
@@ -253,7 +253,7 @@ void Transformer::list_torso()
     torso = glGenLists(1);
     glNewList(torso, GL_COMPILE);
     glScalef(1.6,2.0,1.25);
-    draw.drawCube(0,0,textures[MILITARY],textures[MILITARY],textures[RSIDE],textures[LSIDE]);
+    draw.drawCube(textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[RSIDE],textures[LSIDE]);
     glEndList();
 }
 
@@ -273,20 +273,6 @@ void Transformer::list_front()
     glEndList();
 }
 
-void Transformer::list_eyes()
-{
-    eyes = glGenLists(1);
-    glNewList(eyes, GL_COMPILE);
-    glPushMatrix();
-    glTranslatef(-0.35,0.05,0.7);
-    draw.drawCircle(0.15,32);
-    glPopMatrix();
-    glPushMatrix();
-    glTranslatef(0.35,0.05,0.7);
-    draw.drawCircle(0.15,32);
-    glPopMatrix();
-    glEndList();
-}
 void Transformer::list_neck()
 {
     neck = glGenLists(1);
@@ -402,7 +388,7 @@ void Transformer::tocar()
         GLFWwindow * win=glfwGetCurrentContext();
         glfwPollEvents();
         glfwSwapBuffers(win);
-        usleep(10000);
+        usleep(30000);
     }
 }
 
@@ -421,7 +407,7 @@ void Transformer::tohuman()
         GLFWwindow * win=glfwGetCurrentContext();
         glfwPollEvents();
         glfwSwapBuffers(win);
-        usleep(10000);
+        usleep(30000);
 
     }
 }
