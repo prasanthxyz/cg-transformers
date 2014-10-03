@@ -6,16 +6,17 @@
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include <stdio.h>
+
 #include "display.hpp"
 #include "loadBmpTexture.hpp"
 #include "cube.hpp"
 
-#define NTEX 20
-enum Textures {HDTOP, HDBOTTOM, HDBACK, HDFRONT, HDLEFT, HDRIGHT, WOOD, FACE, TYRE, TYRETEX, MILITARY,VEHBACK,GRILL,RSIDE,LSIDE,HIPRSIDE,HIPLSIDE,RFOOT,LFOOT,FRONTPANE};
+#define NTEX 31
 
 class Transformer
 {
     public:
+        enum Textures {HDTOP, HDBOTTOM, HDBACK, HDFRONT, HDLEFT, HDRIGHT, WOOD, FACE, TYRE, TYRETEX, MILITARY,VEHBACK,GRILL,RSIDE,LSIDE,HIPRSIDE,HIPLSIDE,RFOOT,LFOOT,FRONTPANE,FACELEFT,FACERIGHT,BACKLEFT,BACKRIGHT,FRONTRIGHT,FRONTLEFT,BONNETLEFT,BONNETRIGHT,BONNETMID,SPARETYRE,LIGHTFRONT};
         int flag;
 
         //Cube headObj;
@@ -95,6 +96,7 @@ class Transformer
         GLuint hip;
         GLuint torso;
         GLuint head;
+        GLuint front;
         GLuint eyes;
         GLuint neck;
 
@@ -149,6 +151,7 @@ class Transformer
         void draw_torso();
 
         void draw_head();
+        void draw_front();
         void draw_eyes();
         void draw_neck();
 

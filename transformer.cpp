@@ -23,6 +23,17 @@ void Transformer::getTextures()
     loadBmpTexture("rfoot.bmp", textures[RFOOT]);
     loadBmpTexture("lfoot.bmp", textures[LFOOT]);
     loadBmpTexture("frontPane.bmp", textures[FRONTPANE]);
+    loadBmpTexture("faceleft.bmp", textures[FACELEFT]);
+    loadBmpTexture("faceright.bmp", textures[FACERIGHT]);
+    loadBmpTexture("vehiclebackleft.bmp", textures[BACKLEFT]);
+    loadBmpTexture("vehiclebackright.bmp", textures[BACKRIGHT]);
+    loadBmpTexture("frontright.bmp", textures[FRONTRIGHT]);
+    loadBmpTexture("frontleft.bmp", textures[FRONTLEFT]);
+    loadBmpTexture("bonnetright.bmp", textures[BONNETRIGHT]);
+    loadBmpTexture("bonnetleft.bmp", textures[BONNETLEFT]);
+    loadBmpTexture("bonnetmid.bmp", textures[BONNETMID]);
+    loadBmpTexture("sparetyre.bmp", textures[SPARETYRE]);
+    loadBmpTexture("lightfront.bmp", textures[LIGHTFRONT]);
 //    std::cout<<textures[WOOD]<<","<<textures[FACE];
 }
 
@@ -54,7 +65,7 @@ Transformer::Transformer()
     draw_left_shoulder(); draw_left_arm(); draw_left_elbow(); draw_left_forearm();
     draw_right_shoulder(); draw_right_arm(); draw_right_elbow(); draw_right_forearm();
     draw_hip(); draw_torso();
-    draw_head(); draw_eyes(); draw_neck();
+    draw_head(); draw_front(); draw_eyes(); draw_neck();
     
     draw_left_butt(); draw_left_thigh(); draw_left_knee(); draw_left_calf(); draw_left_foot();
     draw_right_butt(); draw_right_thigh(); draw_right_knee(); draw_right_calf(); draw_right_foot();
@@ -181,7 +192,7 @@ void Transformer::draw_left_arm()
 
     glTranslatef (0.5, 0.0, 0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    drawCylinder(0.3,1.2,32,32,textures[MILITARY],textures[MILITARY],textures[MILITARY]);
+    drawCylinder(0.3,1.2,32,32,textures[SPARETYRE],textures[SPARETYRE],textures[MILITARY]);
 
     glEndList();
 }
@@ -225,7 +236,7 @@ void Transformer::draw_right_arm()
     glNewList(right_arm, GL_COMPILE);
     glTranslatef (0.5, 0.0, 0.0);
     glRotatef(90.0f, 0.0f,1.0f, 0.0f);
-    drawCylinder(0.3,1.2,32,32,textures[MILITARY],textures[MILITARY],textures[MILITARY]);
+    drawCylinder(0.3,1.2,32,32,textures[SPARETYRE],textures[SPARETYRE],textures[MILITARY]);
     glEndList();
 }
 void Transformer::draw_right_forearm()
@@ -244,7 +255,7 @@ void Transformer::draw_hip()
     glNewList(hip, GL_COMPILE);
     glTranslatef(0.0,-1.1,0.0);
     glScalef(1.6,0.3,1.25);
-    drawCube(0,textures[FRONTPANE],0,0,textures[HIPRSIDE],textures[HIPLSIDE]);
+    drawCube(0,textures[FRONTPANE],textures[MILITARY],textures[MILITARY],textures[HIPRSIDE],textures[HIPLSIDE]);
     glEndList();
 }
 void Transformer::draw_torso()
@@ -262,9 +273,19 @@ void Transformer::draw_head()
     glNewList(head, GL_COMPILE);
     //headObj.draw();
     //drawCube(textures[HDTOP],textures[HDBOTTOM],textures[HDBACK],textures[HDFRONT],textures[HDLEFT],textures[HDRIGHT]);
-    drawCube(textures[MILITARY],textures[VEHBACK],textures[MILITARY],textures[HDFRONT],textures[MILITARY], textures[MILITARY]);
+    drawCube(textures[MILITARY],textures[VEHBACK],textures[MILITARY],textures[HDFRONT],textures[FACELEFT], textures[FACERIGHT]);
     glEndList();
 }
+
+void Transformer::draw_front()
+{
+    front = glGenLists(1);
+    glNewList(front, GL_COMPILE);
+    //drawCube(textures[HDTOP],textures[HDBOTTOM],textures[HDBACK],textures[HDFRONT],textures[HDLEFT],textures[HDRIGHT]);
+    drawCube(textures[MILITARY],textures[VEHBACK],textures[MILITARY],textures[HDFRONT],textures[BACKLEFT], textures[BACKRIGHT]);
+    glEndList();
+}
+
 void Transformer::draw_eyes()
 {
     eyes = glGenLists(1);
@@ -305,7 +326,7 @@ void Transformer::draw_right_thigh()
     glTranslatef(0.6,0.0,0.0);
     glRotatef(90.0f, 0.0f,1.0f, 0.0f);
     glScalef(0.6,0.6,1.0);
-    drawCube();
+    drawCube(textures[FRONTRIGHT],textures[FRONTRIGHT],textures[FRONTRIGHT],textures[LIGHTFRONT],textures[BONNETRIGHT],textures[FRONTRIGHT]);
     glEndList();
 }
 void Transformer::draw_right_knee()
@@ -322,7 +343,7 @@ void Transformer::draw_right_calf()
     glNewList(right_calf, GL_COMPILE);
     glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    drawCylinder(0.3,1.2,32,32,textures[GRILL],textures[GRILL],0);
+    drawCylinder(0.3,1.2,32,32,textures[GRILL],textures[GRILL],textures[BONNETMID]);
     glEndList();
 }
 void Transformer::draw_right_foot()
@@ -350,7 +371,7 @@ void Transformer::draw_left_thigh()
     glTranslatef(0.6,0.0,0.0);   
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
     glScalef(0.6,0.6,1.0);
-    drawCube();
+   drawCube(textures[FRONTLEFT],textures[FRONTLEFT],textures[FRONTLEFT],textures[LIGHTFRONT],textures[BONNETLEFT],textures[FRONTRIGHT]);
     glEndList();
 }
 void Transformer::draw_left_knee()
@@ -367,7 +388,7 @@ void Transformer::draw_left_calf()
     glNewList(left_calf, GL_COMPILE);
     glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    drawCylinder(0.3,1.2,32,32,textures[GRILL],textures[GRILL]);
+    drawCylinder(0.3,1.2,32,32,textures[GRILL],textures[GRILL],textures[BONNETMID]);
     glEndList();
 }
 void Transformer::draw_left_foot()
