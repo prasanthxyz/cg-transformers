@@ -247,7 +247,7 @@ void display()
 }
 
 void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
-    glColor3f(1,0,0);
+    glColor3f(1,1,1);
     //top - back(right;left) - front(left;right)
     glBindTexture(GL_TEXTURE_2D, T0);
     glBegin(GL_QUADS);
@@ -275,7 +275,7 @@ void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
     glVertex3f( 0.5f, -0.5f, -0.5f);
     glEnd();
 
-    glColor3f(0,0,1);
+    glColor3f(1,1,1);
     //back - top(right;left) - bottom(left;right)
     glBindTexture(GL_TEXTURE_2D, T2);
     glBegin(GL_QUADS);

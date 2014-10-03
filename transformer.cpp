@@ -17,6 +17,12 @@ void Transformer::getTextures()
     loadBmpTexture("military.bmp", textures[MILITARY]);
     loadBmpTexture("grill.bmp", textures[GRILL]);
     loadBmpTexture("rside.bmp", textures[RSIDE]);
+    loadBmpTexture("lside.bmp", textures[LSIDE]);
+    loadBmpTexture("hiprside.bmp", textures[HIPRSIDE]);
+    loadBmpTexture("hiplside.bmp", textures[HIPLSIDE]);
+    loadBmpTexture("rfoot.bmp", textures[RFOOT]);
+    loadBmpTexture("lfoot.bmp", textures[LFOOT]);
+    loadBmpTexture("frontPane.bmp", textures[FRONTPANE]);
 //    std::cout<<textures[WOOD]<<","<<textures[FACE];
 }
 
@@ -238,7 +244,7 @@ void Transformer::draw_hip()
     glNewList(hip, GL_COMPILE);
     glTranslatef(0.0,-1.1,0.0);
     glScalef(1.6,0.3,1.25);
-    drawCube();
+    drawCube(0,textures[FRONTPANE],0,0,textures[HIPRSIDE],textures[HIPLSIDE]);
     glEndList();
 }
 void Transformer::draw_torso()
@@ -246,7 +252,7 @@ void Transformer::draw_torso()
     torso = glGenLists(1);
     glNewList(torso, GL_COMPILE);
     glScalef(1.6,2.0,1.25);
-    drawCube(0,0,0,0,textures[RSIDE],0);
+    drawCube(0,0,textures[MILITARY],textures[MILITARY],textures[RSIDE],textures[LSIDE]);
     glEndList();
 }
 
@@ -256,7 +262,7 @@ void Transformer::draw_head()
     glNewList(head, GL_COMPILE);
     //headObj.draw();
     //drawCube(textures[HDTOP],textures[HDBOTTOM],textures[HDBACK],textures[HDFRONT],textures[HDLEFT],textures[HDRIGHT]);
-    drawCube(0,textures[VEHBACK],0,textures[HDFRONT],textures[HDLEFT], textures[HDRIGHT]);
+    drawCube(textures[MILITARY],textures[VEHBACK],textures[MILITARY],textures[HDFRONT],textures[MILITARY], textures[MILITARY]);
     glEndList();
 }
 void Transformer::draw_eyes()
@@ -325,7 +331,7 @@ void Transformer::draw_right_foot()
     glNewList(right_foot, GL_COMPILE);
     glTranslatef(1.3,0.0,0.2);
     glScalef(0.2,0.6,1.0);
-    drawCube();
+    drawCube(textures[RFOOT],textures[RFOOT],textures[RFOOT],textures[RFOOT],textures[RFOOT],textures[RFOOT]);
     glEndList();
 }
 
@@ -370,7 +376,7 @@ void Transformer::draw_left_foot()
     glNewList(left_foot, GL_COMPILE);
     glTranslatef(1.3,0.0,0.2);
     glScalef(0.2,0.6,1.0);
-    drawCube();
+    drawCube(textures[LFOOT],textures[LFOOT],textures[LFOOT],textures[LFOOT],textures[LFOOT],textures[LFOOT]);
     glEndList();
 }
 
@@ -388,7 +394,7 @@ void Transformer::tocar()
         GLFWwindow * win=glfwGetCurrentContext();
         glfwPollEvents();
         glfwSwapBuffers(win);
-        usleep(1000);
+        usleep(10000);
     }
 }
 
@@ -407,7 +413,7 @@ void Transformer::tohuman()
         GLFWwindow * win=glfwGetCurrentContext();
         glfwPollEvents();
         glfwSwapBuffers(win);
-        usleep(1000);
+        usleep(10000);
 
     }
 }
