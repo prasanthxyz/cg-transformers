@@ -11,7 +11,7 @@
 #include "cube.hpp"
 
 #define NTEX 10
-enum Textures {HDTOP, HDBOTTOM, HDBACK, HDFRONT, HDLEFT, HDRIGHT, WOOD, FACE};
+enum Textures {HDTOP, HDBOTTOM, HDBACK, HDFRONT, HDLEFT, HDRIGHT, WOOD, FACE, TYRE};
 
 class Transformer
 {

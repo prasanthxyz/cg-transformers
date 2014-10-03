@@ -12,6 +12,7 @@ void Transformer::getTextures()
     loadBmpTexture("hdtop.bmp", textures[HDTOP]);
     loadBmpTexture("hdbottom.bmp", textures[HDBOTTOM]);
     loadBmpTexture("car_bonnet.bmp", textures[HDBOTTOM]);
+    loadBmpTexture("tyre.bmp", textures[TYRE]);
 //    std::cout<<textures[WOOD]<<","<<textures[FACE];
 }
 

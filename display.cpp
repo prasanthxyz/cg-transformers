@@ -150,7 +150,8 @@ void drawRightLeg()
 
     glPushMatrix(); //rleg
     glTranslatef(0.0,0.0+T.rbtyreshift,(GLfloat)T.backtyretrans);
-    glColor3f(1,0,0);
+    //glColor3f(1,0,0);
+    glColor3f(1,1,1);
     glCallList(T.right_butt);
     glPopMatrix();
     glTranslatef(T.carback,0.0,T.carback);
@@ -186,7 +187,8 @@ void drawRightLeg()
 void drawLeftLeg()
 {
     glPushMatrix();
-    glColor3f(1,0,0);
+    //glColor3f(1,0,0);
+    glColor3f(1,1,1);
     glTranslatef (0.58, -1.38, 0.0);
     glRotatef ((GLfloat) T.lltcurve, 0.0, 1.0, 0.0);
     glRotatef ((GLfloat) T.lltforward, 1.0, 0.0, 0.0);
@@ -245,6 +247,7 @@ void display()
 }
 
 void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
+    glColor3f(1,0,0);
     //top - back(right;left) - front(left;right)
     glBindTexture(GL_TEXTURE_2D, T0);
     glBegin(GL_QUADS);
@@ -258,6 +261,7 @@ void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
     glVertex3f( 0.5f, 0.5f,  0.5f);
     glEnd();
 
+    glColor3f(0,1,0);
     // bottom - front(right;left) - back(left;right)
     glBindTexture(GL_TEXTURE_2D, T1);
     glBegin(GL_QUADS);
@@ -271,6 +275,7 @@ void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
     glVertex3f( 0.5f, -0.5f, -0.5f);
     glEnd();
 
+    glColor3f(0,0,1);
     //back - top(right;left) - bottom(left;right)
     glBindTexture(GL_TEXTURE_2D, T2);
     glBegin(GL_QUADS);
@@ -284,6 +289,7 @@ void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
     glVertex3f( 0.5f, -0.5f, -0.5f);
     glEnd();
 
+    glColor3f(1,0,1);
     //front - bottom(right;left) - top(left;right)
     glBindTexture(GL_TEXTURE_2D, T3);
     glBegin(GL_QUADS);
@@ -297,6 +303,7 @@ void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
     glVertex3f( 0.5f,  0.5f, 0.5f);
     glEnd();
 
+    glColor3f(1,1,0);
     //left - top(front;back) - bottom(back;front)
     glBindTexture(GL_TEXTURE_2D, T4);
     glBegin(GL_QUADS);
@@ -310,6 +317,7 @@ void drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5){
     glVertex3f(-0.5f, -0.5f,  0.5f);
     glEnd();
 
+    glColor3f(0,1,1);
     //right - front(back;front) - bottom(front;back)
     glBindTexture(GL_TEXTURE_2D, T5);
     glBegin(GL_QUADS);
@@ -346,14 +354,30 @@ void drawSphere(GLint slices, GLint stacks )
     }
 }
 
-void drawCircle( float r, int num_segments)
+void drawCircle( float r, int num_segments, GLuint Tex)
 {
+    float angle, radian, x, y,tx,ty,pi=3.14159f;
+    glBindTexture(GL_TEXTURE_2D, Tex);
     glBegin(GL_POLYGON);
+   /* for (angle=0.0; angle<360.0; angle+=2.0)
+    {
+        radian = angle * (pi/180.0f);
+
+        x = (float)cos(radian) * r  + x;
+        y = (float)sin(radian) * r  + y;
+        tx = cos(radian)* 0.5 + 0.5;
+        ty = sin(radian)* 0.5 + 0.5;
+        glTexCoord2f(tx, ty);
+        glVertex2f(x, y);
+    }
+    */
     for(int i = 0; i < num_segments; i++)
     {
         float theta = 2.0f * 3.14159f * float(i) / float(num_segments);
         float x = r * cosf(theta);//calculate the x component
         float y = r * sinf(theta);//calculate the y component
+        // glTexCoord2f((x/r)*.5+.5,(y/r)*.5+.5);
+        glTexCoord2f(cosf(theta)*.5+0.5,sinf(theta)*.5+0.5);
         glVertex2f(x, y);//output vertex
     }
     glEnd();
@@ -385,12 +409,12 @@ void drawCylinder(float radius,float height,GLint numMajor, GLint numMinor)
     }
 
     glPushMatrix();
-    glTranslatef(0.0,0.0,-0.6*height/2);
-    drawCircle(radius,32);
+    glTranslatef(0.0,0.0,height/2);
+    drawCircle(radius,32,9);//T.textures[TYRE]);
     glPopMatrix();
     glPushMatrix();
-    glTranslatef(0.0,0.0,0.6*height/2);
-    drawCircle(radius,32);
+    glTranslatef(0.0,0.0,height/2);
+    drawCircle(radius,32,9);//T.textures[TYRE]);
     glPopMatrix();
 }
 
