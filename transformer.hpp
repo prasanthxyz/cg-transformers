@@ -194,6 +194,7 @@ class Transformer
         //car movement functions
         void carMove(GLfloat,int,int);
         void wheelTurn(int);
+        void getCarFrontPoint(int &, int &, int &);
 };
 
 #endif

@@ -150,13 +150,31 @@ void Transformer::lCalfFB(int angle)
 
 void Transformer::carMove(GLfloat distance,int angle,int rotangle)
 {
-   carmove = carmove + distance;
-   wheelrot=(wheelrot+angle)%360;
-   fullx=(fullx+rotangle)%360;
-   if(camFlag)
-   {
-   }
+    int x,y,z;
+    carmove = carmove + distance;
+    wheelrot=(wheelrot+angle)%360;
+    fullx=(fullx+rotangle)%360;
+    if(camFlag)
+    {
+        glLoadIdentity();
+        getCarFrontPoint(x,y,z);
+        gluLookAt(-carmove,0,-prevcarmove, carmove-x,0+y,prevcarmove+z, 0,1,0);
+    }
 }
+
+void Transformer::getCarFrontPoint(int &x, int &y, int &z)
+{
+    x = -5;
+    y = 0;
+    z = 0;
+    /*glPushMatrix();
+    glLoadIdentity();
+    glRotatef(fullx, 1,0,0);
+    glRotatef(fully, 0,1,0);
+    glRotatef(fullz, 0,0,1);*/
+    
+}
+
 void Transformer::wheelTurn(int angle)
 {
    wheelturn=(wheelturn+angle)%360;

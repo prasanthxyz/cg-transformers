@@ -244,5 +244,9 @@ void Transformer::display()
     drawLeftHand();
     drawRightLeg();
     drawLeftLeg();
+    
+    if(camFlag)
+    {
+    }
 }
 
