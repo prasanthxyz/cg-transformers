@@ -1,10 +1,18 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "world.hpp"
 #include "transformer.hpp"
 #include "gl_framework.hpp"
+#include "texture.hpp"
 
-Transformer T;
+World W;
+//Transformer T;
+
+void displayWorld()
+{
+    W.display();
+}
 
 int main (int argc, char *argv[]) 
 {
@@ -46,7 +54,12 @@ int main (int argc, char *argv[])
     framebuffer_size_callback(window, win_width, win_height);
     //Initialize GL state
     initGL();
-    T = Transformer();
+   
+    //Texture tex;
+    //tex.loadTextures();
+
+    //T = Transformer();
+    W = World();
 
     // Loop until the user closes the window
     glEnable(GL_TEXTURE_2D);
@@ -55,7 +68,7 @@ int main (int argc, char *argv[])
 
         // Render here
         //renderGL();
-        T.display();
+        displayWorld();
 
 
         // Swap front and back buffers

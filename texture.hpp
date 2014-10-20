@@ -1,0 +1,20 @@
+#ifndef _TEXTURE_HPP_
+#define _TEXTURE_HPP_
+
+#include "bmp.hpp"
+
+#define NTEX 30
+
+class Texture
+{
+    public:
+        enum Textures {HDFRONT,TYRE,TYRETEX,MILITARY,VEHBACK,GRILL,RSIDE,LSIDE,HIPRSIDE,HIPLSIDE,RFOOT,LFOOT,FRONTPANE,FACELEFT,FACERIGHT,BACKLEFT,BACKRIGHT,FRONTRIGHT,FRONTLEFT,BONNETLEFT,BONNETRIGHT,BONNETMID,SPARETYRE,LIGHTFRONT, WFAR,WNEAR,WLEFT,WRIGHT, WTOP, WBOTTOM};
+        
+        BMP bmp;
+
+        GLuint textures[NTEX];
+
+        void loadTextures();
+};
+
+#endif

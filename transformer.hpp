@@ -5,23 +5,21 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "bmp.hpp"
 #include "drawing.hpp"
-
-#define NTEX 24
+#include "texture.hpp"
 
 class Transformer
 {
     public:
-        enum Textures {HDFRONT,TYRE,TYRETEX,MILITARY,VEHBACK,GRILL,RSIDE,LSIDE,HIPRSIDE,HIPLSIDE,RFOOT,LFOOT,FRONTPANE,FACELEFT,FACERIGHT,BACKLEFT,BACKRIGHT,FRONTRIGHT,FRONTLEFT,BONNETLEFT,BONNETRIGHT,BONNETMID,SPARETYRE,LIGHTFRONT};
-
         int flag;
         Drawing draw;
-        BMP bmp;
 
-        //Cube headObj;
-        GLuint textures[NTEX];
-        GLuint something;
+        //Textures
+        Texture tex;
+        
+        //Camera flag
+        bool camFlag;
+
         //angles and shifting lengths
         int fullx;
         int fully;
@@ -181,8 +179,6 @@ class Transformer
         void tocar();
         void tohuman();
         void transform();
-
-        void getTextures();
 
         //display functions
         void display();

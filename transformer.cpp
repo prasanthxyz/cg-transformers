@@ -2,39 +2,13 @@
 #include <iostream>
 using namespace std;
 
-void Transformer::getTextures()
-{
-    glGenTextures(NTEX, textures);
-
-    bmp.loadBmpTexture("textures/hdfront.bmp", textures[HDFRONT]);
-    bmp.loadBmpTexture("textures/back.bmp", textures[VEHBACK]);
-    bmp.loadBmpTexture("textures/tyre.bmp", textures[TYRE]);
-    bmp.loadBmpTexture("textures/tyreTex.bmp", textures[TYRETEX]);
-    bmp.loadBmpTexture("textures/military.bmp", textures[MILITARY]);
-    bmp.loadBmpTexture("textures/grill.bmp", textures[GRILL]);
-    bmp.loadBmpTexture("textures/rside.bmp", textures[RSIDE]);
-    bmp.loadBmpTexture("textures/lside.bmp", textures[LSIDE]);
-    bmp.loadBmpTexture("textures/hiprside.bmp", textures[HIPRSIDE]);
-    bmp.loadBmpTexture("textures/hiplside.bmp", textures[HIPLSIDE]);
-    bmp.loadBmpTexture("textures/rfoot.bmp", textures[RFOOT]);
-    bmp.loadBmpTexture("textures/lfoot.bmp", textures[LFOOT]);
-    bmp.loadBmpTexture("textures/frontPane.bmp", textures[FRONTPANE]);
-    bmp.loadBmpTexture("textures/faceleft.bmp", textures[FACELEFT]);
-    bmp.loadBmpTexture("textures/faceright.bmp", textures[FACERIGHT]);
-    bmp.loadBmpTexture("textures/vehiclebackleft.bmp", textures[BACKLEFT]);
-    bmp.loadBmpTexture("textures/vehiclebackright.bmp", textures[BACKRIGHT]);
-    bmp.loadBmpTexture("textures/frontright.bmp", textures[FRONTRIGHT]);
-    bmp.loadBmpTexture("textures/frontleft.bmp", textures[FRONTLEFT]);
-    bmp.loadBmpTexture("textures/bonnetright.bmp", textures[BONNETRIGHT]);
-    bmp.loadBmpTexture("textures/bonnetleft.bmp", textures[BONNETLEFT]);
-    bmp.loadBmpTexture("textures/bonnetmid.bmp", textures[BONNETMID]);
-    bmp.loadBmpTexture("textures/sparetyre.bmp", textures[SPARETYRE]);
-    bmp.loadBmpTexture("textures/lightfront.bmp", textures[LIGHTFRONT]);
-}
+void displayWorld();
 
 Transformer::Transformer()
 {
-    getTextures();
+    camFlag = false;
+
+    tex.loadTextures();
 
     flag=0;
 
@@ -173,15 +147,18 @@ void Transformer::lCalfFB(int angle)
 {
     llbforward = (llbforward + angle) % 360;
 }
+
 void Transformer::carMove(GLfloat distance,int angle,int rotangle)
 {
    carmove = carmove + distance;
    wheelrot=(wheelrot+angle)%360;
    fullx=(fullx+rotangle)%360;
+   if(camFlag)
+   {
+   }
 }
 void Transformer::wheelTurn(int angle)
 {
-
    wheelturn=(wheelturn+angle)%360;
 }
 
@@ -192,7 +169,7 @@ void Transformer::list_left_shoulder()
     left_shoulder = glGenLists(1);
     glNewList(left_shoulder, GL_COMPILE);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.35,0.4,32,32,textures[TYRE],textures[TYRE],textures[TYRETEX]);
+    draw.drawCylinder(0.35,0.4,32,32,tex.textures[tex.TYRE],tex.textures[tex.TYRE],tex.textures[tex.TYRETEX]);
     glEndList();
 }
 void Transformer::list_left_arm()
@@ -202,7 +179,7 @@ void Transformer::list_left_arm()
 
     glTranslatef (0.5, 0.0, 0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.3,1.2,32,32,textures[SPARETYRE],textures[SPARETYRE],textures[MILITARY]);
+    draw.drawCylinder(0.3,1.2,32,32,tex.textures[tex.SPARETYRE],tex.textures[tex.SPARETYRE],tex.textures[tex.MILITARY]);
 
     glEndList();
 }
@@ -220,7 +197,7 @@ void Transformer::list_left_forearm()
     glNewList(left_forearm,GL_COMPILE);
     glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.2,1.2,32,32,textures[MILITARY],textures[MILITARY],textures[MILITARY]);
+    draw.drawCylinder(0.2,1.2,32,32,tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY]);
     glEndList();
  }
 void Transformer::list_left_palm()
@@ -229,7 +206,7 @@ void Transformer::list_left_palm()
    glNewList(left_palm,GL_COMPILE);
    glTranslatef(1.5,0.0,0.0);
    glScalef(0.6,0.5,0.2);
-    draw.drawCube(textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY]);
+    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY]);
     glEndList();
 }
 
@@ -248,7 +225,7 @@ void Transformer::list_right_shoulder()
     right_shoulder = glGenLists(1);
     glNewList(right_shoulder, GL_COMPILE);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.35,0.4,32,32,textures[TYRE],textures[TYRE],textures[TYRETEX]);
+    draw.drawCylinder(0.35,0.4,32,32,tex.textures[tex.TYRE],tex.textures[tex.TYRE],tex.textures[tex.TYRETEX]);
     glEndList();
 }
 void Transformer::list_right_arm()
@@ -257,7 +234,7 @@ void Transformer::list_right_arm()
     glNewList(right_arm, GL_COMPILE);
     glTranslatef (0.5, 0.0, 0.0);
     glRotatef(90.0f, 0.0f,1.0f, 0.0f);
-    draw.drawCylinder(0.3,1.2,32,32,textures[SPARETYRE],textures[SPARETYRE],textures[MILITARY]);
+    draw.drawCylinder(0.3,1.2,32,32,tex.textures[tex.SPARETYRE],tex.textures[tex.SPARETYRE],tex.textures[tex.MILITARY]);
     glEndList();
 }
 void Transformer::list_right_forearm()
@@ -266,7 +243,7 @@ void Transformer::list_right_forearm()
     glNewList(right_forearm, GL_COMPILE);
     glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.2,1.2,32,32,textures[MILITARY],textures[MILITARY],textures[MILITARY]);
+    draw.drawCylinder(0.2,1.2,32,32,tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY]);
     glEndList();
  }
 void Transformer::list_right_palm()
@@ -275,7 +252,7 @@ void Transformer::list_right_palm()
    glNewList(right_palm,GL_COMPILE);
    glTranslatef(1.5,0.0,0.0);
    glScalef(0.6,0.5,0.2);
-    draw.drawCube(textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY]);
+    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY]);
     glEndList();
 }
 
@@ -285,7 +262,7 @@ void Transformer::list_hip()
     glNewList(hip, GL_COMPILE);
     glTranslatef(0.0,-1.1,0.0);
     glScalef(1.6,0.3,1.25);
-    draw.drawCube(textures[MILITARY],textures[FRONTPANE],textures[MILITARY],textures[MILITARY],textures[HIPRSIDE],textures[HIPLSIDE]);
+    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.FRONTPANE],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.HIPRSIDE],tex.textures[tex.HIPLSIDE]);
     glEndList();
 }
 void Transformer::list_torso()
@@ -293,7 +270,7 @@ void Transformer::list_torso()
     torso = glGenLists(1);
     glNewList(torso, GL_COMPILE);
     glScalef(1.6,2.0,1.25);
-    draw.drawCube(textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[RSIDE],textures[LSIDE]);
+    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.RSIDE],tex.textures[tex.LSIDE]);
     glEndList();
 }
 
@@ -301,7 +278,7 @@ void Transformer::list_head()
 {
     head = glGenLists(1);
     glNewList(head, GL_COMPILE);
-    draw.drawCube(textures[MILITARY],textures[VEHBACK],textures[MILITARY],textures[HDFRONT],textures[FACELEFT], textures[FACERIGHT]);
+    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.VEHBACK],tex.textures[tex.MILITARY],tex.textures[tex.HDFRONT],tex.textures[tex.FACELEFT], tex.textures[tex.FACERIGHT]);
     glEndList();
 }
 
@@ -309,7 +286,7 @@ void Transformer::list_back()
 {
     back = glGenLists(1);
     glNewList(back,GL_COMPILE);
-    draw.drawCube(textures[MILITARY],textures[VEHBACK],textures[MILITARY],textures[HDFRONT],textures[BACKLEFT], textures[BACKRIGHT]);
+    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.VEHBACK],tex.textures[tex.MILITARY],tex.textures[tex.HDFRONT],tex.textures[tex.BACKLEFT], tex.textures[tex.BACKRIGHT]);
     glEndList();
 }
 
@@ -329,7 +306,7 @@ void Transformer::list_right_butt()
     right_butt = glGenLists(1);
     glNewList(right_butt, GL_COMPILE);
     glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-    draw.drawCylinder(0.35,0.6,32,32, textures[TYRE],textures[TYRE],textures[TYRETEX]);
+    draw.drawCylinder(0.35,0.6,32,32, tex.textures[tex.TYRE],tex.textures[tex.TYRE],tex.textures[tex.TYRETEX]);
     glEndList();
 }
 void Transformer::list_right_thigh()
@@ -339,7 +316,7 @@ void Transformer::list_right_thigh()
     glTranslatef(0.6,0.0,0.0);
     glRotatef(90.0f, 0.0f,1.0f, 0.0f);
     glScalef(0.6,0.6,1.0);
-    draw.drawCube(textures[FRONTRIGHT],textures[FRONTRIGHT],textures[FRONTRIGHT],textures[LIGHTFRONT],textures[BONNETRIGHT],textures[FRONTRIGHT]);
+    draw.drawCube(tex.textures[tex.FRONTRIGHT],tex.textures[tex.FRONTRIGHT],tex.textures[tex.FRONTRIGHT],tex.textures[tex.LIGHTFRONT],tex.textures[tex.BONNETRIGHT],tex.textures[tex.FRONTRIGHT]);
     glEndList();
 }
 void Transformer::list_right_knee()
@@ -356,7 +333,7 @@ void Transformer::list_right_calf()
     glNewList(right_calf, GL_COMPILE);
     glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.3,1.2,32,32,textures[GRILL],textures[GRILL],textures[BONNETMID]);
+    draw.drawCylinder(0.3,1.2,32,32,tex.textures[tex.GRILL],tex.textures[tex.GRILL],tex.textures[tex.BONNETMID]);
     glEndList();
 }
 void Transformer::list_right_foot()
@@ -365,7 +342,7 @@ void Transformer::list_right_foot()
     glNewList(right_foot, GL_COMPILE);
     glTranslatef(1.3,0.0,0.2);
     glScalef(0.2,0.6,1.0);
-    draw.drawCube(textures[RFOOT],textures[RFOOT],textures[RFOOT],textures[RFOOT],textures[RFOOT],textures[RFOOT]);
+    draw.drawCube(tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT]);
     glEndList();
 }
 
@@ -374,7 +351,7 @@ void Transformer::list_left_butt()
     left_butt = glGenLists(1);
     glNewList(left_butt, GL_COMPILE);
     glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-    draw.drawCylinder(0.35,0.6,32,32,textures[TYRE],textures[TYRE],textures[TYRETEX]);
+    draw.drawCylinder(0.35,0.6,32,32,tex.textures[tex.TYRE],tex.textures[tex.TYRE],tex.textures[tex.TYRETEX]);
     glEndList();
 }
 void Transformer::list_left_thigh()
@@ -384,7 +361,7 @@ void Transformer::list_left_thigh()
     glTranslatef(0.6,0.0,0.0);   
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
     glScalef(0.6,0.6,1.0);
-    draw.drawCube(textures[FRONTLEFT],textures[FRONTLEFT],textures[FRONTLEFT],textures[LIGHTFRONT],textures[BONNETLEFT],textures[FRONTRIGHT]);
+    draw.drawCube(tex.textures[tex.FRONTLEFT],tex.textures[tex.FRONTLEFT],tex.textures[tex.FRONTLEFT],tex.textures[tex.LIGHTFRONT],tex.textures[tex.BONNETLEFT],tex.textures[tex.FRONTRIGHT]);
     glEndList();
 }
 void Transformer::list_left_knee()
@@ -401,7 +378,7 @@ void Transformer::list_left_calf()
     glNewList(left_calf, GL_COMPILE);
     glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.3,1.2,32,32,textures[GRILL],textures[GRILL],textures[BONNETMID]);
+    draw.drawCylinder(0.3,1.2,32,32,tex.textures[tex.GRILL],tex.textures[tex.GRILL],tex.textures[tex.BONNETMID]);
     glEndList();
 }
 void Transformer::list_left_foot()
@@ -410,7 +387,7 @@ void Transformer::list_left_foot()
     glNewList(left_foot, GL_COMPILE);
     glTranslatef(1.3,0.0,0.2);
     glScalef(0.2,0.6,1.0);
-    draw.drawCube(textures[LFOOT],textures[LFOOT],textures[LFOOT],textures[LFOOT],textures[LFOOT],textures[LFOOT]);
+    draw.drawCube(tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT]);
     glEndList();
 }
 
@@ -427,7 +404,7 @@ carmove =-prevcarmove;
         }
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         transform();
-                display();
+        displayWorld();
         GLFWwindow * win=glfwGetCurrentContext();
         glfwPollEvents();
         glfwSwapBuffers(win);
@@ -451,7 +428,7 @@ prevcarmove =-carmove;
          }
          glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         transform();
-                display();
+        displayWorld();
         GLFWwindow * win=glfwGetCurrentContext();
         glfwPollEvents();
         glfwSwapBuffers(win);

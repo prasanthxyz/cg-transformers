@@ -3,7 +3,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "transformer.hpp"
+#include "world.hpp"
 #include <iostream>
 
 void initGL(void);
