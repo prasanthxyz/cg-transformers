@@ -1,6 +1,6 @@
 OPENGLLIB= -lGL
 GLEWLIB= -lGLEW
-GLFWLIB = -lglfw3 -lX11 -lXxf86vm -lpthread -lXi -lXrandr
+GLFWLIB = -lglfw3 -lX11 -lXxf86vm -lpthread -lXi -lXrandr -lGLU
 LIBS=$(OPENGLLIB) $(GLEWLIB) $(GLFWLIB)
 LDFLAGS=-L/usr/local/lib 
 CPPFLAGS=-I/usr/local/include

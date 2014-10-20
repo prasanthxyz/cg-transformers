@@ -1,4 +1,6 @@
 #include "transformer.hpp"
+#include <iostream>
+using namespace std;
 
 void Transformer::getTextures()
 {
@@ -46,16 +48,21 @@ Transformer::Transformer()
     rltside=-90; rltforward=0; rltcurve=0; rlbforward=0;
     lltside=-90; lltforward=0; lltcurve=0; llbforward=0;
 
-    move=0.0; fronttyretrans=0.0; backtyretrans=0.0;
-    lbtyreshift=0.0; rbtyreshift=0.0;
-    vehiclefront=0; carfront=0.0; down=0.0;
+    move=0.0; backtyretrans=0.0; fronttyretrans=0.0;
+    lftyreshift=0.0; rftyreshift=0.0;
+    vehicleback=0; carback=0; down=0.0;
 
-    carback=0.0; carbackshift=0.0; carbackinsert=0.0;
+    carfront=0.0; carfrontshift=0.0; carfrontinsert=0.0;
 
-    list_left_shoulder(); list_left_arm(); list_left_elbow(); list_left_forearm();
-    list_right_shoulder(); list_right_arm(); list_right_elbow(); list_right_forearm();
+    carmove=0.0;
+    prevcarmove=0.0;
+    wheelrot=0;
+    wheelturn=0;
+
+    list_left_shoulder(); list_left_arm(); list_left_elbow(); list_left_forearm();list_left_palm();
+    list_right_shoulder(); list_right_arm(); list_right_elbow(); list_right_forearm();list_right_palm();
     list_hip(); list_torso();
-    list_head(); list_front(); list_neck();
+    list_head(); list_back(); list_neck();
 
     list_left_butt(); list_left_thigh(); list_left_knee(); list_left_calf(); list_left_foot();
     list_right_butt(); list_right_thigh(); list_right_knee(); list_right_calf(); list_right_foot();
@@ -166,6 +173,19 @@ void Transformer::lCalfFB(int angle)
 {
     llbforward = (llbforward + angle) % 360;
 }
+void Transformer::carMove(GLfloat distance,int angle,int rotangle)
+{
+   carmove = carmove + distance;
+   wheelrot=(wheelrot+angle)%360;
+   fullx=(fullx+rotangle)%360;
+}
+void Transformer::wheelTurn(int angle)
+{
+
+   wheelturn=(wheelturn+angle)%360;
+}
+
+
 
 void Transformer::list_left_shoulder()
 {
@@ -198,11 +218,22 @@ void Transformer::list_left_forearm()
 {
     left_forearm = glGenLists(1);
     glNewList(left_forearm,GL_COMPILE);
-    glTranslatef(0.8,0.0,0.0);
+    glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.2,1.5,32,32,textures[MILITARY],textures[MILITARY],textures[MILITARY]);
+    draw.drawCylinder(0.2,1.2,32,32,textures[MILITARY],textures[MILITARY],textures[MILITARY]);
+    glEndList();
+ }
+void Transformer::list_left_palm()
+{
+   left_palm = glGenLists(1);
+   glNewList(left_palm,GL_COMPILE);
+   glTranslatef(1.5,0.0,0.0);
+   glScalef(0.6,0.5,0.2);
+    draw.drawCube(textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY]);
     glEndList();
 }
+
+
 
 void Transformer::list_right_elbow()
 {
@@ -233,9 +264,18 @@ void Transformer::list_right_forearm()
 {
     right_forearm = glGenLists(1);
     glNewList(right_forearm, GL_COMPILE);
-    glTranslatef(0.8,0.0,0.0);
+    glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.2,1.5,32,32,textures[MILITARY],textures[MILITARY],textures[MILITARY]);
+    draw.drawCylinder(0.2,1.2,32,32,textures[MILITARY],textures[MILITARY],textures[MILITARY]);
+    glEndList();
+ }
+void Transformer::list_right_palm()
+{
+   right_palm = glGenLists(1);
+   glNewList(right_palm,GL_COMPILE);
+   glTranslatef(1.5,0.0,0.0);
+   glScalef(0.6,0.5,0.2);
+    draw.drawCube(textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY],textures[MILITARY]);
     glEndList();
 }
 
@@ -265,10 +305,10 @@ void Transformer::list_head()
     glEndList();
 }
 
-void Transformer::list_front()
+void Transformer::list_back()
 {
-    front = glGenLists(1);
-    glNewList(front, GL_COMPILE);
+    back = glGenLists(1);
+    glNewList(back,GL_COMPILE);
     draw.drawCube(textures[MILITARY],textures[VEHBACK],textures[MILITARY],textures[HDFRONT],textures[BACKLEFT], textures[BACKRIGHT]);
     glEndList();
 }
@@ -377,44 +417,54 @@ void Transformer::list_left_foot()
 void Transformer::tocar()
 {
     while(1){
-        if(rbtyreshift<=-0.25&&lbtyreshift>=0.25&&down<=-0.9&&carback<=-0.3&&carbackshift>=0.5&&carbackinsert<=-0.3&&rfootrot==-90&&lfootrot==90&&fronttyretrans<=-0.7&&backtyretrans<=-0.7&&fullx==0&&fully==90&&fullz==90&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==0&&rshoulderforward==0&&rshouldercurve==0&&relbow==-90&&lshoulderside==-180&&lshoulderforward==0&&lshouldercurve==0&&lelbow==90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==180&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==180&&vehiclefront==90&&carfront==90)
-        {
+       if(rftyreshift<=-0.25&&lftyreshift>=0.25&&down<=-0.9&&carfront<=-0.3&&carfrontshift>=0.5&&carfrontinsert<=-0.3&&rfootrot==-90&&lfootrot==90&&fronttyretrans<=-0.7&&backtyretrans<=-0.7&&fullx==0&&fully==90&&fullz==90&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==0&&rshoulderforward==0&&rshouldercurve==0&&relbow==-90&&lshoulderside==-180&&lshoulderforward==0&&lshouldercurve==0&&lelbow==90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==180&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==180&&vehicleback==90&&carback==90)
+       {
+carmove =-prevcarmove;
+        prevcarmove=0;
+
             flag=1;
             break;
         }
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         transform();
-        display();
+                display();
         GLFWwindow * win=glfwGetCurrentContext();
         glfwPollEvents();
         glfwSwapBuffers(win);
-        usleep(30000);
+        usleep(5000);
     }
-}
+   }
 
 void Transformer::tohuman()
 {
+//     carmove=0;
+
+GLfloat temp= carmove;
     while(1){
-        if(lbtyreshift<=0.025&&rbtyreshift>=-0.025&&down>=-0.05&&carback>=-0.05&&carbackshift<=0.05&&carbackinsert>=-0.05&&rfootrot==0.0&&lfootrot==0.0&&fronttyretrans>=-0.5&&backtyretrans>=-0.5&&fullx==0&&fully==0&&fullz==0&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==-135&&rshoulderforward==0&&rshouldercurve==0&&relbow==90&&lshoulderside==-45&&lshoulderforward==0&&lshouldercurve==0&&lelbow==-90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==0&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==0&&vehiclefront==0&&carfront==0)
-        {
+       if(lftyreshift<=0.025&&rftyreshift>=-0.025&&down>=-0.05&&carfront>=-0.05&&carfrontshift<=0.05&&carfrontinsert>=-0.05&&rfootrot==0.0&&lfootrot==0.0&&fronttyretrans>=-0.5&&backtyretrans>=-0.5&&fullx==0&&fully==0&&fullz==0&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==-135&&rshoulderforward==0&&rshouldercurve==0&&relbow==90&&lshoulderside==-45&&lshoulderforward==0&&lshouldercurve==0&&lelbow==-90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==0&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==0&&vehicleback==0&&carback==0)
+       {
+prevcarmove =-carmove;
+        carmove=0;
 
             flag=0;
             break;
-        }
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+         }
+         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         transform();
-        display();
+                display();
         GLFWwindow * win=glfwGetCurrentContext();
         glfwPollEvents();
         glfwSwapBuffers(win);
-        usleep(30000);
+        usleep(5000);
 
-    }
-}
+     }
+
+     }
 
 void Transformer::transform()
 {
-    if(flag==0){
+   if(flag==0){
+      wheelturn=0;
         if(bend>0){
             bend=(bend-5)%360;
             return;
@@ -577,30 +627,30 @@ void Transformer::transform()
             return;
         }
         move=-0.5;
-        if(vehiclefront>90){
-            vehiclefront=(vehiclefront-5)%360;
+        if(vehicleback>90){
+            vehicleback=(vehicleback-5)%360;
 
             return;
         }
-        else if(vehiclefront<90){
-            vehiclefront=(vehiclefront+5)%360;
+        else if(vehicleback<90){
+            vehicleback=(vehicleback+5)%360;
             return;
         }
-        if(rbtyreshift>-0.25)
+        if(rftyreshift>-0.25)
         {
-            rbtyreshift=rbtyreshift-0.05;
+            rftyreshift=rftyreshift-0.05;
         }
 
-        if(lbtyreshift<0.25)
+        if(lftyreshift<0.25)
         {
-            lbtyreshift=lbtyreshift+0.05;
+            lftyreshift=lftyreshift+0.05;
             return;
         }
 
 
         if(fullx>0){
-            fullx=(fullx-5)%360;
 
+            fullx=(fullx-5)%360;
             return;
         }
         else if(fullx<0){
@@ -617,6 +667,7 @@ void Transformer::transform()
             return;
         }
         if(fullz>90){
+
             fullz=(fullz-5)%360;
 
             return;
@@ -634,13 +685,13 @@ void Transformer::transform()
             backtyretrans=backtyretrans-0.1;
             return;
         }
-        if(carfront>90){
-            carfront=(carfront-5)%360;
+        if(carback>90){
+           carback=(carback-5)%360;
 
             return;
         }
-        else if(carfront<90){
-            carfront=(carfront+5)%360;
+        else if(carback<90){
+           carback=(carback+5)%360;
             return;
         }
         if(rfootrot>-90){
@@ -661,38 +712,40 @@ void Transformer::transform()
             lfootrot=(lfootrot+5)%360;
             return;
         }
-        if(carback>-0.3)
+        if(carfront>-0.3)
         {
-            carback=carback-0.1;
+           carfront=carfront-0.1;
             return;
 
         }
-        if(carbackshift<0.5)
+        if(carfrontshift<0.5)
         {
-            carbackshift=carbackshift+0.1;
+           carfrontshift=carfrontshift+0.1;
             return;
         }
-        if(carbackinsert>-0.3)
+        if(carfrontinsert>-0.3)
         {
-            carbackinsert=carbackinsert-0.1;
+           carfrontinsert=carfrontinsert-0.1;
             return;
-        }
+         }
+
     }
     else{
-        if(carbackinsert<-0.05)
+       wheelturn=0;
+       if(carfrontinsert<-0.05)
         {
-            carbackinsert=carbackinsert+0.1;
+           carfrontinsert=carfrontinsert+0.1;
             return;
         }
-        if(carbackshift>0.05)
+        if(carfrontshift>0.05)
         {
-            carbackshift=carbackshift-0.1;
+           carfrontshift=carfrontshift-0.1;
             return;
         }
 
-        if(carback<-0.05)
+        if(carfront<-0.05)
         {
-            carback=carback+0.1;
+           carfront=carfront+0.1;
             return;
 
         }
@@ -717,13 +770,13 @@ void Transformer::transform()
             return;
         }
 
-        if(carfront>0){
-            carfront=(carfront-5)%360;
+        if(carback>0){
+           carback=(carback-5)%360;
 
             return;
         }
-        else if(carfront<0){
-            carfront=(carfront+5)%360;
+        else if(carback<0){
+           carback=(carback+5)%360;
             return;
         }
 
@@ -762,22 +815,22 @@ void Transformer::transform()
             fullx=(fullx+5)%360;
             return;
         }
-        if(lbtyreshift>0.025)
+        if(lftyreshift>0.025)
         {
-            lbtyreshift=lbtyreshift-0.05;
+           lftyreshift=lftyreshift-0.05;
         }
-        if(rbtyreshift<-0.025)
+        if(rftyreshift<-0.025)
         {
-            rbtyreshift=rbtyreshift+0.05;
+           rftyreshift=rftyreshift+0.05;
             return;
         }
         move=0.0;
-        if(vehiclefront>0){
-            vehiclefront=(vehiclefront-5)%360;
+        if(vehicleback>0){
+           vehicleback=(vehicleback-5)%360;
             return;
         }
-        else if(vehiclefront<0){
-            vehiclefront=(vehiclefront+5)%360;
+        else if(vehicleback<0){
+           vehicleback=(vehicleback+5)%360;
             return;
         }
 
@@ -950,7 +1003,8 @@ void Transformer::transform()
         else if(bend<0){
             bend=(bend+5)%360;
             return;
-        }
+         }
+
     }
 }
 

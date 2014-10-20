@@ -55,31 +55,39 @@ class Transformer
         int llbforward;
         int lfootrot;
 
-        int vehiclefront;
-        int carfront;
+        int vehicleback;
+        int carback;
+
+        int wheelrot;
+        int wheelturn;
+
+        GLfloat carmove;
+        GLfloat prevcarmove;
 
         GLfloat move;
         GLfloat down;
 
         GLfloat fronttyretrans;
         GLfloat backtyretrans;
-        GLfloat rbtyreshift;
-        GLfloat lbtyreshift;
+        GLfloat rftyreshift;
+        GLfloat lftyreshift;
 
-        GLfloat carback;
-        GLfloat carbackshift;
-        GLfloat carbackinsert;
+        GLfloat carfront;
+        GLfloat carfrontshift;
+        GLfloat carfrontinsert;
 
         //display lists
         GLuint left_shoulder;
         GLuint left_arm;
         GLuint left_forearm;
         GLuint left_elbow;
+        GLuint left_palm;
 
         GLuint right_shoulder;
         GLuint right_arm;
         GLuint right_forearm;
         GLuint right_elbow;
+        GLuint right_palm;
 
         GLuint right_butt;
         GLuint right_thigh;
@@ -96,7 +104,7 @@ class Transformer
         GLuint hip;
         GLuint torso;
         GLuint head;
-        GLuint front;
+        GLuint back;
         GLuint eyes;
         GLuint neck;
 
@@ -141,17 +149,19 @@ class Transformer
         void list_left_arm();
         void list_left_elbow();
         void list_left_forearm();
+        void list_left_palm();
 
         void list_right_shoulder();
         void list_right_arm();
         void list_right_elbow();
         void list_right_forearm();
+        void list_right_palm();
 
         void list_hip();
         void list_torso();
 
         void list_head();
-        void list_front();
+        void list_back();
         void list_eyes();
         void list_neck();
 
@@ -185,6 +195,9 @@ class Transformer
         void drawRightLeg();
         void drawLeftLeg();
 
+        //car movement functions
+        void carMove(GLfloat,int,int);
+        void wheelTurn(int);
 };
 
 #endif
