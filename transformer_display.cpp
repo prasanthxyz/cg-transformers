@@ -1,4 +1,6 @@
 #include "transformer.hpp"
+#include <iostream>
+using namespace std;
   void Transformer::movement(GLFWwindow* window)
   {
      double result;
@@ -9,7 +11,7 @@
         wheelturn=0;
         result=fully*(M_PI/180);
         car_x=car_x+0.01*cos(result);
-        car_z=car_z+0.01*sin(result);
+        car_z=car_z-0.01*sin(result);
         wheelrot=(wheelrot+3)%360;
      }
 
@@ -19,7 +21,7 @@
         wheelturn=0;
         result=fully*(M_PI/180);
         car_x=car_x-0.01*cos(result);
-        car_z=car_z-0.01*sin(result);
+        car_z=car_z+0.01*sin(result);
         wheelrot=(wheelrot-3)%360;
 
      }
@@ -54,8 +56,9 @@ void Transformer::drawHip()
 {
     glPushMatrix(); //identity matrix pushed
     glColor3f(0,0,1);
-    glTranslatef(car_x,0.0,car_z);
-   glRotatef ((GLfloat)fully, 0.0, 1.0, 0.0);
+    glTranslatef(car_x,car_y,car_z);
+    glRotatef ((GLfloat)fully, 0.0, 1.0, 0.0);
+
     glRotatef ((GLfloat)fullx,1.0, 0.0, 0.0);
      glRotatef ((GLfloat)fullz, 0.0, 0.0, 1.0);
     glPushMatrix(); //rotations for EVERYTHING pushed
@@ -111,7 +114,6 @@ void Transformer::drawHead()
     glCallList(head);
     glPopMatrix();
     glPopMatrix();
-
     glPopMatrix();
 }
 
@@ -286,7 +288,8 @@ void Transformer::drawLeftLeg()
 
 void Transformer::display()
 {
-   movement(glfwGetCurrentContext());
+
+//   movement(glfwGetCurrentContext());
     drawHip();
     drawTorso();
     drawNeck();

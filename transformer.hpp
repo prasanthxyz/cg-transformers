@@ -61,6 +61,7 @@ class Transformer
         int wheelturn;
 
         GLfloat car_x;
+        GLfloat car_y;
         GLfloat car_z;
 
         GLfloat move;

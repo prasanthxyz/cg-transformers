@@ -9,7 +9,7 @@ void World::drawOutCube()
 {
     Drawing D;
     glPushMatrix();
-    glScalef(20,20,20);
+    glScalef(50,20,35);
     D.drawCube(tex.textures[tex.WTOP],tex.textures[tex.WBOTTOM], tex.textures[tex.WFAR],tex.textures[tex.WNEAR], tex.textures[tex.WLEFT],tex.textures[tex.WRIGHT]);
     glPopMatrix();
 }
