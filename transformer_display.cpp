@@ -1,22 +1,22 @@
 #include "transformer.hpp"
 #include <iostream>
 using namespace std;
-  void Transformer::movement(GLFWwindow* window)
-  {
-     double result;
-     int angle=0;
-     if(glfwGetKey(window, GLFW_KEY_UP)==GLFW_PRESS)
-     {
+void Transformer::movement(GLFWwindow* window)
+{
+    double result;
+    int angle=0;
+    if(glfwGetKey(window, GLFW_KEY_UP)==GLFW_PRESS)
+    {
         angle=5;
         wheelturn=0;
         result=fully*(M_PI/180);
         car_x=car_x+0.01*cos(result);
         car_z=car_z-0.01*sin(result);
         wheelrot=(wheelrot+3)%360;
-     }
+    }
 
-     else if(glfwGetKey(window, GLFW_KEY_DOWN)==GLFW_PRESS)
-     {
+    else if(glfwGetKey(window, GLFW_KEY_DOWN)==GLFW_PRESS)
+    {
         angle=-5;
         wheelturn=0;
         result=fully*(M_PI/180);
@@ -24,43 +24,75 @@ using namespace std;
         car_z=car_z+0.01*sin(result);
         wheelrot=(wheelrot-3)%360;
 
-     }
-     if(glfwGetKey(window, GLFW_KEY_RIGHT)==GLFW_PRESS)
-     {
+    }
+    if(glfwGetKey(window, GLFW_KEY_RIGHT)==GLFW_PRESS)
+    {
         wheelturn=-30;
         if(angle){
-        //   fully=fully+5;
-        fully=(fully-angle)%360;
-        if(fully<0)
-        fully=360+fully;
-        //cout <<fully<< " ";
-     }
+            //   fully=fully+5;
+            fully=(fully-angle)%360;
+            if(fully<0)
+                fully=360+fully;
+            //cout <<fully<< " ";
+        }
 
-     }
+    }
 
-     else if(glfwGetKey(window, GLFW_KEY_LEFT)==GLFW_PRESS)
-     {
+    else if(glfwGetKey(window, GLFW_KEY_LEFT)==GLFW_PRESS)
+    {
         wheelturn=30;
         if(angle){
-           fully=(fully+angle)%360;
-        if(fully<0)
-        fully=fully+360;
-     }
-     }
-     else
-     {
+            fully=(fully+angle)%360;
+            if(fully<0)
+                fully=fully+360;
+        }
+    }
+    else
+    {
         wheelturn=0;
-     }
-  }
+    }
+}
+
+/*float getFront(float *X, float *Z, float x, float z, float theta, float adder)
+{
+    float hyp = x/cos(-theta);
+    hyp += adder;
+    *X = hyp*cos(-theta);
+    *Z = hyp*sin(-theta);
+}
+*/
+
 void Transformer::drawHip()
 {
+    //float cx, cz;
+    //float fx, fz;
     glPushMatrix(); //identity matrix pushed
     glColor3f(0,0,1);
     glTranslatef(car_x,car_y,car_z);
-    glRotatef ((GLfloat)fully, 0.0, 1.0, 0.0);
 
+  /*  glPushMatrix();
+    glLoadIdentity();
+    Drawing D;
+    //getFront(&cx,&cz, car_x,car_z, fully, 0);
+    //getFront(&fx,&fz, car_x,car_z, fully, 1);
+    glScalef(0.2,0.2,0.2);
+    glTranslatef(cx,0,cz);
+    D.drawSphere(36,36);
+    glPopMatrix();
+*/
+    if(camFlag)
+    {
+        //Drawing D;
+        //getFront(&cx,&cz, car_x,car_z, fully, 0);
+        //getFront(&fx,&fz, car_x,car_z, fully, 1);
+        //glLoadIdentity();
+        //gluLookAt(car_x,0,car_z, 0,0,-10, 0,1,0);
+       // D.drawSphere(36,36);
+    }
+
+    glRotatef ((GLfloat)fully, 0.0, 1.0, 0.0);
     glRotatef ((GLfloat)fullx,1.0, 0.0, 0.0);
-     glRotatef ((GLfloat)fullz, 0.0, 0.0, 1.0);
+    glRotatef ((GLfloat)fullz, 0.0, 0.0, 1.0);
     glPushMatrix(); //rotations for EVERYTHING pushed
     glCallList(hip);
     glPopMatrix(); //ID; have rotations
@@ -289,7 +321,9 @@ void Transformer::drawLeftLeg()
 void Transformer::display()
 {
 
-//   movement(glfwGetCurrentContext());
+    //   movement(glfwGetCurrentContext());
+    //glMatrixMode(GL_MODELVIEW);
+    //glLoadIdentity();
     drawHip();
     drawTorso();
     drawNeck();

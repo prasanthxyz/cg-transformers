@@ -1041,3 +1041,21 @@ if(fullz>90){
 
 }
 
+float Transformer::getFront(float *X, float *Z, float x, float z, float theta, float adder)
+{
+    float hyp = x/cos(theta);
+    if(hyp > 0)
+    {
+        hyp += adder;
+        *X = hyp*cos(theta);
+        *Z = hyp*sin(theta);
+    }
+    else
+    {
+        hyp += adder;
+        *X = hyp*cos(theta);
+        *Z = hyp*sin(theta);
+    }
+}
+
+
