@@ -38,8 +38,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     fH = tan(90.0 / 360 * pi ) * 1.0;
     fW = fH * aspect;
     //glFrustum( -fW, fW, -fH, fH, 1.25, 20.0 );
-    gluPerspective(100, aspect, 1,2000);
-    //gluLookAt(0,0,2,0,0,0,0,1,0); 
+    gluPerspective(100, aspect, 1,5000);
+    gluLookAt(0,0,3,0,0,0,0,1,0); 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef (0.0, 0.8, -5.0);
@@ -48,7 +48,55 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    extern World W;
+   extern World W;
+/* double result;
+     int angle=0;
+     if(glfwGetKey(window, GLFW_KEY_UP)==GLFW_PRESS)
+     {
+        angle=5;
+        W.T.wheelturn=0;
+        result=W.T.fully*(M_PI/180);
+        W.T.car_x=W.T.car_x-0.1*cos(result);
+        W.T.car_z=W.T.car_z-0.1*sin(result);
+        W.T.wheelrot=(W.T.wheelrot+3)%360;
+     }
+
+     else if(glfwGetKey(window, GLFW_KEY_DOWN)==GLFW_PRESS)
+     {
+        angle=-5;
+        W.T.wheelturn=0;
+        result=W.T.fully*(M_PI/180);
+        W.T.car_x=W.T.car_x+0.1*cos(result);
+        W.T.car_z=W.T.car_z+0.1*sin(result);
+        W.T.wheelrot=(W.T.wheelrot-3)%360;
+
+     }
+     if(glfwGetKey(window, GLFW_KEY_RIGHT)==GLFW_PRESS)
+     {
+        W.T.wheelturn=-30;
+        if(angle){
+        //   fully=fully+5;
+        W.T.fully=(W.T.fully-angle)%360;
+        if(W.T.fully<0)
+        W.T.fully=360+W.T.fully;
+//        cout <<W.T.fully<< " ";
+     }
+
+     }
+
+     else if(glfwGetKey(window, GLFW_KEY_LEFT)==GLFW_PRESS)
+     {
+        W.T.wheelturn=30;
+        if(angle){
+           W.T.fully=(W.T.fully+angle)%360;
+        if(W.T.fully<0)
+        W.T.fully=W.T.fully+360;
+     }
+     }
+     else
+     {
+        W.T.wheelturn=0;
+     }*/
     switch(key)
     {
         case GLFW_KEY_ESCAPE:
@@ -250,84 +298,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
                     W.T.tohuman();
             }
             break;
-        case GLFW_KEY_UP:
-            if(W.T.flag==1){
-                if(glfwGetKey(window, GLFW_KEY_RIGHT))
-                {
-                    W.T.wheelturn=-30;
-                    W.T.carMove(-0.1,5,-5);
-
-                }
-
-                else if(glfwGetKey(window, GLFW_KEY_LEFT))
-                {
-                    W.T.wheelturn=30;
-                    W.T.carMove(-0.1,5,5);
-                }
-                else{
-                    W.T.wheelturn=0;
-                    W.T.carMove(-0.1,5,0);
-                }
-            }
-            break;
-        case GLFW_KEY_DOWN:
-            if(W.T.flag==1){
-                if(glfwGetKey(window, GLFW_KEY_RIGHT))
-                {
-                    W.T.wheelturn=-30;
-                    W.T.carMove(0.1,-5,5);
-
-                }
-
-                else if(glfwGetKey(window, GLFW_KEY_LEFT))
-                {
-                    W.T.wheelturn=30;
-                    W.T.carMove(0.1,-5,-5);
-                }
-                else {
-                    W.T.wheelturn=0;
-                    W.T.carMove(0.1,-5,0);
-                }
-            }
-            break;
-        case GLFW_KEY_LEFT:
-            if(W.T.flag==1){
-                W.T.wheelturn=30;
-                if(glfwGetKey(window, GLFW_KEY_UP))
-                {
-                    W.T.carMove(-0.1,5,5);
-
-                }
-                else if(glfwGetKey(window, GLFW_KEY_DOWN))
-                {
-                    W.T.carMove(0.1,-5,-5);
-
-                }
-                else if(action==GLFW_RELEASE){
-                    W.T.wheelturn=0;
-                }
-            }
-            break; 
-        case GLFW_KEY_RIGHT:
-            if(W.T.flag==1){
-
-                W.T.wheelturn=-30;
-                if(glfwGetKey(window, GLFW_KEY_UP))
-                {
-                    W.T.carMove(-0.1,5,-5);
-
-                }
-                else if(glfwGetKey(window, GLFW_KEY_DOWN))
-                {
-                    W.T.carMove(0.1,-5,5);
-
-                }
-                else if(action == GLFW_RELEASE){
-                    W.T.wheelturn=0;
-                }
-            }
-            break;
-
         case GLFW_KEY_1:
             W.T.camFlag = false;
             glLoadIdentity();

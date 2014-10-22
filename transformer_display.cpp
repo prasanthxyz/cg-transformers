@@ -1,13 +1,63 @@
 #include "transformer.hpp"
+  void Transformer::movement(GLFWwindow* window)
+  {
+     double result;
+     int angle=0;
+     if(glfwGetKey(window, GLFW_KEY_UP)==GLFW_PRESS)
+     {
+        angle=5;
+        wheelturn=0;
+        result=fully*(M_PI/180);
+        car_x=car_x+0.01*cos(result);
+        car_z=car_z+0.01*sin(result);
+        wheelrot=(wheelrot+3)%360;
+     }
 
+     else if(glfwGetKey(window, GLFW_KEY_DOWN)==GLFW_PRESS)
+     {
+        angle=-5;
+        wheelturn=0;
+        result=fully*(M_PI/180);
+        car_x=car_x-0.01*cos(result);
+        car_z=car_z-0.01*sin(result);
+        wheelrot=(wheelrot-3)%360;
+
+     }
+     if(glfwGetKey(window, GLFW_KEY_RIGHT)==GLFW_PRESS)
+     {
+        wheelturn=-30;
+        if(angle){
+        //   fully=fully+5;
+        fully=(fully-angle)%360;
+        if(fully<0)
+        fully=360+fully;
+        //cout <<fully<< " ";
+     }
+
+     }
+
+     else if(glfwGetKey(window, GLFW_KEY_LEFT)==GLFW_PRESS)
+     {
+        wheelturn=30;
+        if(angle){
+           fully=(fully+angle)%360;
+        if(fully<0)
+        fully=fully+360;
+     }
+     }
+     else
+     {
+        wheelturn=0;
+     }
+  }
 void Transformer::drawHip()
 {
     glPushMatrix(); //identity matrix pushed
     glColor3f(0,0,1);
-    glRotatef ((GLfloat)fullz, 0.0, 0.0, 1.0);
+    glTranslatef(car_x,0.0,car_z);
+   glRotatef ((GLfloat)fully, 0.0, 1.0, 0.0);
     glRotatef ((GLfloat)fullx,1.0, 0.0, 0.0);
-    glRotatef ((GLfloat)fully, 0.0, 1.0, 0.0);
-    glTranslatef(prevcarmove,carmove,0.0);
+     glRotatef ((GLfloat)fullz, 0.0, 0.0, 1.0);
     glPushMatrix(); //rotations for EVERYTHING pushed
     glCallList(hip);
     glPopMatrix(); //ID; have rotations
@@ -236,6 +286,7 @@ void Transformer::drawLeftLeg()
 
 void Transformer::display()
 {
+   movement(glfwGetCurrentContext());
     drawHip();
     drawTorso();
     drawNeck();
@@ -244,9 +295,5 @@ void Transformer::display()
     drawLeftHand();
     drawRightLeg();
     drawLeftLeg();
-    
-    if(camFlag)
-    {
-    }
 }
 

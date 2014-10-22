@@ -11,8 +11,60 @@ World W;
 
 void displayWorld()
 {
-    W.display();
+
+   W.display();
 }
+void movem(GLFWwindow* window)
+{
+double result;
+     int angle=0;
+     if(glfwGetKey(window, GLFW_KEY_UP)==GLFW_PRESS)
+     {
+        angle=5;
+        W.T.wheelturn=0;
+        result=W.T.fully*(M_PI/180);
+        W.T.car_x=W.T.car_x-0.1*cos(result);
+        W.T.car_z=W.T.car_z-0.1*sin(result);
+        W.T.wheelrot=(W.T.wheelrot+3)%360;
+     }
+
+     else if(glfwGetKey(window, GLFW_KEY_DOWN)==GLFW_PRESS)
+     {
+        angle=-5;
+        W.T.wheelturn=0;
+        result=W.T.fully*(M_PI/180);
+        W.T.car_x=W.T.car_x+0.1*cos(result);
+        W.T.car_z=W.T.car_z+0.1*sin(result);
+        W.T.wheelrot=(W.T.wheelrot-3)%360;
+
+     }
+     if(glfwGetKey(window, GLFW_KEY_RIGHT)==GLFW_PRESS)
+     {
+        W.T.wheelturn=-30;
+        if(angle){
+        //   fully=fully+5;
+        W.T.fully=(W.T.fully-angle)%360;
+        if(W.T.fully<0)
+        W.T.fully=360+W.T.fully;
+//        cout <<W.T.fully<< " ";
+     }
+
+     }
+
+     else if(glfwGetKey(window, GLFW_KEY_LEFT)==GLFW_PRESS)
+     {
+        W.T.wheelturn=30;
+        if(angle){
+           W.T.fully=(W.T.fully+angle)%360;
+        if(W.T.fully<0)
+        W.T.fully=W.T.fully+360;
+     }
+     }
+     else
+     {
+        W.T.wheelturn=0;
+     }
+     }
 
 int main (int argc, char *argv[]) 
 {
@@ -68,6 +120,7 @@ int main (int argc, char *argv[])
 
         // Render here
         //renderGL();
+        //movem(window);
         displayWorld();
 
 

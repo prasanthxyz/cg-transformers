@@ -2,6 +2,7 @@
 #define _TRANSFORMER_HPP_
 
 #include <unistd.h>
+#include <cmath>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -59,8 +60,8 @@ class Transformer
         int wheelrot;
         int wheelturn;
 
-        GLfloat carmove;
-        GLfloat prevcarmove;
+        GLfloat car_x;
+        GLfloat car_z;
 
         GLfloat move;
         GLfloat down;
@@ -192,8 +193,9 @@ class Transformer
         void drawLeftLeg();
 
         //car movement functions
+        
+        void movement(GLFWwindow*);
         void carMove(GLfloat,int,int);
-        void wheelTurn(int);
         void getCarFrontPoint(int &, int &, int &);
 };
 
