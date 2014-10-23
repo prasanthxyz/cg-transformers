@@ -123,7 +123,7 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     glEnd();
 }
 
-void Drawing::drawSphere(GLint slices, GLint stacks)
+void Drawing::drawSphere(GLint slices, GLint stacks,bool flag)
 {
     float x, y, z ;
     for(float i = 0; i < M_PI; i = i + M_PI/stacks)
@@ -135,14 +135,20 @@ void Drawing::drawSphere(GLint slices, GLint stacks)
             y = sinf(i) * sinf(j);
             z = cosf(j) ; 
 
-            glNormal3f( x, y, z ) ;
+            if(flag)
+                glNormal3f( x, y, z ) ;
+            else
+                glNormal3f( -x, -y, -z ) ;
 
             glVertex3f(x, y, z) ;
             x = cosf(i + M_PI/stacks) * sinf(j);
             y = sinf(i + M_PI/stacks) * sinf(j);
             z = cosf(j) ;
 
-            glNormal3f( x, y, z ) ;
+            if(flag)
+                glNormal3f( x, y, z ) ;
+            else
+                glNormal3f( -x, -y, -z ) ;
 
             glVertex3f(x, y, z) ;
         }
@@ -169,7 +175,7 @@ void Drawing::drawCircle( float r, int num_segments, GLuint Tex)
     glEnd();
 }
 
-void Drawing::drawCylinder(float radius,float height,GLint numMajor, GLint numMinor, GLuint TS1, GLuint TS2, GLuint Tex)
+void Drawing::drawCylinder(float radius,float height,GLint numMajor, GLint numMinor, GLuint TS1, GLuint TS2, GLuint Tex,bool flag)
 {
     double majorStep = height / numMajor;
     double minorStep = 2.0 * M_PI / numMinor;
@@ -185,10 +191,18 @@ void Drawing::drawCylinder(float radius,float height,GLint numMajor, GLint numMi
             double a = j * minorStep;
             GLfloat x = radius * cos(a);
             GLfloat y = radius * sin(a);
-            glNormal3f(x / radius, y / radius, 0.0);
+
+            if(flag)
+                glNormal3f(x / radius, y / radius, 0.0);
+            else
+                glNormal3f(-x / radius, -y / radius, 0.0);
+
             glTexCoord2f(j / (GLfloat) numMinor, i / (GLfloat) numMajor);
             glVertex3f(x, y, z0);
-            glNormal3f(x / radius, y / radius, 0.0);
+            if(flag)
+                glNormal3f(x / radius, y / radius, 0.0);
+            else
+                glNormal3f(-x / radius, -y / radius, 0.0);
             glTexCoord2f(j / (GLfloat) numMinor, (i + 1) / (GLfloat) numMajor);
             glVertex3f(x, y, z1);
         }
@@ -197,14 +211,20 @@ void Drawing::drawCylinder(float radius,float height,GLint numMajor, GLint numMi
     glPushMatrix();
     glTranslatef(0.0,0.0,-height/2);
 
-    glNormal3f(-1,0,0);
+    if(flag)
+        glNormal3f(-1,0,0);
+    else
+        glNormal3f(1,0,0);
 
     drawCircle(radius,36,TS1);
     glPopMatrix();
     glPushMatrix();
     glTranslatef(0.0,0.0,height/2);
 
-    glNormal3f(1,0,0);
+    if(flag)
+        glNormal3f(1,0,0);
+    else
+        glNormal3f(-1,0,0);
 
     drawCircle(radius,36,TS2);
     glPopMatrix();

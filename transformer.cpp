@@ -1070,6 +1070,7 @@ void Transformer::setLights()
     getFront(&hl2x,&hl2y,&hl2z, 2, fully-10);
     getFront(&hld2x,&hld2y,&hld2z, 4, fully);
 
+    /*
     glBegin(GL_LINES);
     glVertex3f(hl1x,-5,hl1z);
     glVertex3f(hld1x,-5,hld1z);
@@ -1079,6 +1080,7 @@ void Transformer::setLights()
     glVertex3f(hl2x,-5,hl2z);
     glVertex3f(hld2x,-5,hld2z);
     glEnd();
+    */
 
     hdL1.setPos(hl1x, -5, hl1z);
     hdL1.setDirn(hld1x-hl1x, -7, hld1z-hl1z);
