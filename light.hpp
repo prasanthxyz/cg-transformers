@@ -14,9 +14,9 @@ class Light
         GLenum light_id;
 
         Light();
-        Light(GLenum,GLfloat,GLfloat,GLfloat);
-        Light(GLenum,GLfloat,GLfloat,GLfloat,GLfloat *);
+        Light(GLenum,GLfloat,GLfloat,GLfloat,bool spotflag=false);
         void setPos(GLfloat,GLfloat,GLfloat);
+        void setDirn(GLfloat,GLfloat,GLfloat);
         void on();
         void off();
 };

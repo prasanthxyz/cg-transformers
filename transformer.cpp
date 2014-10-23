@@ -6,6 +6,10 @@ void displayWorld();
 Transformer::Transformer()
 {
     camFlag = false;
+    hdLights = false;
+    GLfloat dirn[] = {1,0,0};
+    hdL1 = Light(GL_LIGHT3, 0,0,0, true);
+    //hdL2 = Light(GL_LIGHT4, 0,0,0, true);
 
     tex.loadTextures();
 
@@ -1040,21 +1044,30 @@ if(fullz>90){
 
 }
 
-float Transformer::getFront(float *X, float *Z, float x, float z, float theta, float adder)
+float Transformer::getFront(float *X, float *Y, float *Z, float adder)
 {
-    float hyp = x/cos(theta);
-    if(hyp > 0)
-    {
-        hyp += adder;
-        *X = hyp*cos(theta);
-        *Z = hyp*sin(theta);
-    }
-    else
-    {
-        hyp += adder;
-        *X = hyp*cos(theta);
-        *Z = hyp*sin(theta);
-    }
+    float theta = fully*M_PI/180;
+    *X = car_x + adder*cos(theta);
+    *Z = car_z - adder*sin(theta);
 }
 
+void Transformer::setLights()
+{
+    float hl1x, hl1y, hl1z;
+    float hld1x, hld1y, hld1z;
+    hl1y = -5;
+
+    getFront(&hl1x,&hl1y,&hl1z, 1.5);
+    getFront(&hld1x,&hld1y,&hld1z, 4);
+
+    hdL1.setPos(hl1x, hl1y, hl1z);
+    hdL1.setDirn(hld1x, hld1y, hld1z);
+
+    Drawing D;
+    glPushMatrix();
+    //glLoadIdentity();
+    glTranslatef(hl1x, hl1y, hl1z);
+    D.drawSphere(36,36);
+    glPopMatrix();
+}
 

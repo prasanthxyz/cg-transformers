@@ -8,6 +8,7 @@
 
 #include "drawing.hpp"
 #include "texture.hpp"
+#include "light.hpp"
 
 class Transformer
 {
@@ -18,8 +19,15 @@ class Transformer
         //Textures
         Texture tex;
         
-        //Camera flag
+        //Camera
         bool camFlag;
+        GLfloat fcx, fcy, fcz;
+        GLfloat tcx, tcy, tcz;
+
+        //Headlights
+        bool hdLights;
+        Light hdL1;
+        Light hdL2;
 
         //angles and shifting lengths
         int fullx;
@@ -199,7 +207,8 @@ class Transformer
         void carMove(GLfloat,int,int);
         void getCarFrontPoint(int &, int &, int &);
 
-        float getFront(float*,float*,float,float,float,float);
+        float getFront(float*, float*, float*, float);
+        void setLights();
 };
 
 #endif

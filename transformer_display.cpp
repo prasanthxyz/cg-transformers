@@ -58,21 +58,6 @@ void Transformer::drawHip()
     glPushMatrix();
     glTranslatef(car_x, car_y, car_z);
 
-    //start cam testing
-    /*float cx, cz;
-    float fx, fz;
-
-    glPushMatrix();
-    glLoadIdentity();
-    Drawing D;
-    getFront(&cx,&cz, car_x,car_z, fully,0.5);
-    getFront(&fx,&fz, car_x,car_z, fully, 3);
-    glScalef(0.2,0.2,0.2);
-    glTranslatef(cx,0,cz);
-    D.drawSphere(36,36);
-    glPopMatrix();*/
-    //end cam testing
-
     glRotatef ((GLfloat)fully, 0.0, 1.0, 0.0);
     glRotatef ((GLfloat)fullx,1.0, 0.0, 0.0);
     glRotatef ((GLfloat)fullz, 0.0, 0.0, 1.0);
@@ -307,6 +292,7 @@ void Transformer::display()
     //   movement(glfwGetCurrentContext());
     //glMatrixMode(GL_MODELVIEW);
     //glLoadIdentity();
+    setLights();
     drawHip();
     drawTorso();
     drawNeck();
