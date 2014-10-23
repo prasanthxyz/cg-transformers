@@ -1,11 +1,17 @@
 #include "drawing.hpp"
 
-void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5)
+void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5, bool flag)
 {
     glColor3f(1,1,1);
     //top - back(right;left) - front(left;right)
     glBindTexture(GL_TEXTURE_2D, T0);
     glBegin(GL_QUADS);
+
+    if(flag)
+        glNormal3f(0,1,0);
+    else
+        glNormal3f(0,-1,0);
+
     glTexCoord2f(0,0);
     glVertex3f( 0.5f, 0.5f, -0.5f);
     glTexCoord2f(0,1);
@@ -20,6 +26,12 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     // bottom - front(right;left) - back(left;right)
     glBindTexture(GL_TEXTURE_2D, T1);
     glBegin(GL_QUADS);
+
+    if(flag)
+        glNormal3f(0,-1,0);
+    else
+        glNormal3f(0,1,0);
+
     glTexCoord2f(1,0);
     glVertex3f( 0.5f, -0.5f,  0.5f);
     glTexCoord2f(0,0);
@@ -34,6 +46,12 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     //back - top(right;left) - bottom(left;right)
     glBindTexture(GL_TEXTURE_2D, T2);
     glBegin(GL_QUADS);
+
+    if(flag)
+        glNormal3f(0,0,-1);
+    else
+        glNormal3f(0,0,1);
+
     glTexCoord2f(0,0);
     glVertex3f( 0.5f,  0.5f, -0.5f);
     glTexCoord2f(0,1);
@@ -48,6 +66,12 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     //front - bottom(right;left) - top(left;right)
     glBindTexture(GL_TEXTURE_2D, T3);
     glBegin(GL_QUADS);
+
+    if(flag)
+        glNormal3f(0,0,1);
+    else
+        glNormal3f(0,0,-1);
+
     glTexCoord2f(1,0);
     glVertex3f( 0.5f, -0.5f, 0.5f);
     glTexCoord2f(0,0);
@@ -62,6 +86,12 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     //left - top(front;back) - bottom(back;front)
     glBindTexture(GL_TEXTURE_2D, T4);
     glBegin(GL_QUADS);
+
+    if(flag)
+        glNormal3f(-1,0,0);
+    else
+        glNormal3f(1,0,0);
+
     glTexCoord2f(1,0);
     glVertex3f(-0.5f,  0.5f,  0.5f);
     glTexCoord2f(0,0);
@@ -76,6 +106,12 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     //right - front(back;front) - bottom(front;back)
     glBindTexture(GL_TEXTURE_2D, T5);
     glBegin(GL_QUADS);
+
+    if(flag)
+        glNormal3f(1,0,0);
+    else
+        glNormal3f(-1,0,0);
+
     glTexCoord2f(0,0);
     glVertex3f(0.5f,  0.5f, -0.5f);
     glTexCoord2f(0,1);
@@ -95,13 +131,19 @@ void Drawing::drawSphere(GLint slices, GLint stacks)
         glBegin(GL_QUAD_STRIP) ;
         for(float j = 0; j < 2*M_PI; j = j + 2*M_PI/slices)
         {
-            x = cosf(i) * sinf(j) ;
-            y = sinf(i) * sinf(j) ;
-            z = cosf(j) ;
+            x = cosf(i) * sinf(j);
+            y = sinf(i) * sinf(j);
+            z = cosf(j) ; 
+
+            glNormal3f( x, y, z ) ;
+
             glVertex3f(x, y, z) ;
-            x = cosf(i + M_PI/stacks) * sinf(j) ;
-            y = sinf(i + M_PI/stacks) * sinf(j) ;
+            x = cosf(i + M_PI/stacks) * sinf(j);
+            y = sinf(i + M_PI/stacks) * sinf(j);
             z = cosf(j) ;
+
+            glNormal3f( x, y, z ) ;
+
             glVertex3f(x, y, z) ;
         }
         glEnd() ;
@@ -118,6 +160,9 @@ void Drawing::drawCircle( float r, int num_segments, GLuint Tex)
         float theta = 2.0f * 3.14159f * float(i) / float(num_segments);
         float x = r * cosf(theta);//calculate the x component
         float y = r * sinf(theta);//calculate the y component
+
+        //glNormal3f(x, y, 0.0);
+
         glTexCoord2f(cosf(theta)*.5+0.5,sinf(theta)*.5+0.5);
         glVertex2f(x, y);//output vertex
     }
@@ -151,10 +196,16 @@ void Drawing::drawCylinder(float radius,float height,GLint numMajor, GLint numMi
     }
     glPushMatrix();
     glTranslatef(0.0,0.0,-height/2);
+
+    glNormal3f(-1,0,0);
+
     drawCircle(radius,32,TS1);
     glPopMatrix();
     glPushMatrix();
     glTranslatef(0.0,0.0,height/2);
+
+    glNormal3f(1,0,0);
+
     drawCircle(radius,32,TS2);
     glPopMatrix();
 }

@@ -23,7 +23,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
         height = 1;
     }
     glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
+    glLoadIdentity();
 
 
     glViewport(0, 0, width, height);
@@ -50,21 +50,20 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-   extern World W;
- double result;
-     int angle=0;
-     if(glfwGetKey(window, GLFW_KEY_UP))
-     {
+    extern World W;
+    double result;
+    int angle=0;
+    if(glfwGetKey(window, GLFW_KEY_UP))
+    {
         angle=5;
         W.T.wheelturn=0;
         result=W.T.fully*(M_PI/180);
         W.T.car_x=W.T.car_x+0.1*cos(result);
         W.T.car_z=W.T.car_z-0.1*sin(result);
         W.T.wheelrot=(W.T.wheelrot+3)%360;
-     }
-
-     else if(glfwGetKey(window, GLFW_KEY_DOWN))
-     {
+    }
+    else if(glfwGetKey(window, GLFW_KEY_DOWN))
+    {
         angle=-5;
         W.T.wheelturn=0;
         result=W.T.fully*(M_PI/180);
@@ -72,33 +71,33 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         W.T.car_z=W.T.car_z+0.1*sin(result);
         W.T.wheelrot=(W.T.wheelrot-3)%360;
 
-     }
-     if(glfwGetKey(window, GLFW_KEY_RIGHT))
-     {
+    }
+    if(glfwGetKey(window, GLFW_KEY_RIGHT))
+    {
         W.T.wheelturn=-30;
         if(angle)
-        W.T.fully=(W.T.fully-angle)%360;
-     }
-
-     else if(glfwGetKey(window, GLFW_KEY_LEFT))
-     {
+            W.T.fully=(W.T.fully-angle)%360;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_LEFT))
+    {
         W.T.wheelturn=30;
         if(angle)
-           W.T.fully=(W.T.fully+angle)%360;
-     }
-     else
-     {
+            W.T.fully=(W.T.fully+angle)%360;
+    }
+    else
+    {
         W.T.wheelturn=0;
-     }
-     if(W.T.camFlag){
-         float cx, cz;
-         float fx, fz;
-         W.T.getFront(&cx,&cz, W.T.car_x,W.T.car_z, W.T.fully,0.5);
-         W.T.getFront(&fx,&fz, W.T.car_x,W.T.car_z, W.T.fully, 3);
-         glLoadIdentity();
-         //gluLookAt(cx,W.T.car_y,cz, fx,W.T.car_y,fz, 0,1,0);
-         gluLookAt(cx,0,cz, fx,0,fz, 0,1,0);
-     }
+    }
+    if(W.T.camFlag)
+    {
+        float cx, cz;
+        float fx, fz;
+        W.T.getFront(&cx,&cz, W.T.car_x,W.T.car_z, W.T.fully,0.5);
+        W.T.getFront(&fx,&fz, W.T.car_x,W.T.car_z, W.T.fully, 3);
+        glLoadIdentity();
+        //gluLookAt(cx,W.T.car_y,cz, fx,W.T.car_y,fz, 0,1,0);
+        gluLookAt(cx,0,cz, fx,0,fz, 0,1,0);
+    }
     switch(key)
     {
         case GLFW_KEY_ESCAPE:
@@ -307,7 +306,18 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         case GLFW_KEY_2:
             W.T.camFlag = true;
             break;
-
+        case GLFW_KEY_3:
+            W.L1.on();
+            break;
+        case GLFW_KEY_4:
+            W.L1.off();
+            break;
+        case GLFW_KEY_5:
+            W.L2.on();
+            break;
+        case GLFW_KEY_6:
+            W.L2.off();
+            break;
         default:
             break;
     }

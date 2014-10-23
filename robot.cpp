@@ -62,6 +62,7 @@ int main (int argc, char *argv[])
 
     // Loop until the user closes the window
     glEnable(GL_TEXTURE_2D);
+    glEnable(GL_LIGHTING);
     while (glfwWindowShouldClose(window) == 0)
     {
 

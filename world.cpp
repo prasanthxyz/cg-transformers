@@ -3,6 +3,8 @@
 World::World()
 {
     tex.loadTextures();
+    L1 = Light(GL_LIGHT0, 5,5,5);
+    L2 = Light(GL_LIGHT1, -5,5,5);
 }
 
 void World::drawOutCube()

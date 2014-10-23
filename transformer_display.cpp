@@ -53,42 +53,25 @@ void Transformer::movement(GLFWwindow* window)
     }
 }
 
-/*float getFront(float *X, float *Z, float x, float z, float theta, float adder)
-{
-    float hyp = x/cos(-theta);
-    hyp += adder;
-    *X = hyp*cos(-theta);
-    *Z = hyp*sin(-theta);
-}
-*/
-
 void Transformer::drawHip()
 {
-    //float cx, cz;
-    //float fx, fz;
-    glPushMatrix(); //identity matrix pushed
-    glColor3f(0,0,1);
-    glTranslatef(car_x,car_y,car_z);
+    glPushMatrix();
+    glTranslatef(car_x, car_y, car_z);
 
-  /*  glPushMatrix();
+    //start cam testing
+    /*float cx, cz;
+    float fx, fz;
+
+    glPushMatrix();
     glLoadIdentity();
     Drawing D;
-    //getFront(&cx,&cz, car_x,car_z, fully, 0);
-    //getFront(&fx,&fz, car_x,car_z, fully, 1);
+    getFront(&cx,&cz, car_x,car_z, fully,0.5);
+    getFront(&fx,&fz, car_x,car_z, fully, 3);
     glScalef(0.2,0.2,0.2);
     glTranslatef(cx,0,cz);
     D.drawSphere(36,36);
-    glPopMatrix();
-*/
-    if(camFlag)
-    {
-        //Drawing D;
-        //getFront(&cx,&cz, car_x,car_z, fully, 0);
-        //getFront(&fx,&fz, car_x,car_z, fully, 1);
-        //glLoadIdentity();
-        //gluLookAt(car_x,0,car_z, 0,0,-10, 0,1,0);
-       // D.drawSphere(36,36);
-    }
+    glPopMatrix();*/
+    //end cam testing
 
     glRotatef ((GLfloat)fully, 0.0, 1.0, 0.0);
     glRotatef ((GLfloat)fullx,1.0, 0.0, 0.0);

@@ -343,7 +343,7 @@ void Transformer::list_right_foot()
     right_foot = glGenLists(1);
     glNewList(right_foot, GL_COMPILE);
     glTranslatef(1.3,0.0,0.2);
-    glScalef(0.2,0.6,1.0);
+    glScalef(0.2,0.6,0.8);
     draw.drawCube(tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT]);
     glEndList();
 }
@@ -388,14 +388,13 @@ void Transformer::list_left_foot()
     left_foot = glGenLists(1);
     glNewList(left_foot, GL_COMPILE);
     glTranslatef(1.3,0.0,0.2);
-    glScalef(0.2,0.6,1.0);
+    glScalef(0.2,0.6,0.8);
     draw.drawCube(tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT]);
     glEndList();
 }
 
 void Transformer::tocar()
 {
-
     while(1){
        if(car_y<0&&rftyreshift<=-0.25&&lftyreshift>=0.25&&down<=-0.9&&carfront<=-0.3&&carfrontshift>=0.5&&carfrontinsert<=-0.3&&rfootrot==-90&&lfootrot==90&&fronttyretrans<=-0.7&&backtyretrans<=-0.7&&fullx==-90&&fully==0&&fullz==90&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==0&&rshoulderforward==0&&rshouldercurve==0&&relbow==-90&&lshoulderside==-180&&lshoulderforward==0&&lshouldercurve==0&&lelbow==90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==180&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==180&&vehicleback==90&&carback==90)
        {
@@ -407,7 +406,7 @@ void Transformer::tocar()
         GLFWwindow * win=glfwGetCurrentContext();
 
         displayWorld();
-       //glfwPollEvents();
+        glfwPollEvents();
         glfwSwapBuffers(win);
         usleep(5000);
      }
@@ -427,7 +426,7 @@ void Transformer::tohuman()
         transform();
         GLFWwindow * win=glfwGetCurrentContext();
         displayWorld();
-        //glfwPollEvents();
+        glfwPollEvents();
         glfwSwapBuffers(win);
         usleep(5000);
 
