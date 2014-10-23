@@ -335,9 +335,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             break;
         case GLFW_KEY_8:
             W.T.hdL1.on();
+            W.T.hdL2.on();
             break;
         case GLFW_KEY_9:
             W.T.hdL1.off();
+            W.T.hdL2.off();
             break;
         default:
             break;

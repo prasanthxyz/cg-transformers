@@ -206,7 +206,7 @@ class Transformer
         void carMove(GLfloat,int,int);
         void getCarFrontPoint(int &, int &, int &);
 
-        float getFront(float*, float*, float*, float);
+        float getFront(float*, float*, float*, float, float theta = 1000);
         void setLights();
 };
 
