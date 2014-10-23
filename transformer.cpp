@@ -6,6 +6,7 @@ void displayWorld();
 Transformer::Transformer()
 {
     camFlag = false;
+    cam2Flag = false;
     hdLights = false;
     GLfloat dirn[] = {1,0,0};
     hdL1 = Light(GL_LIGHT3, 0,0,0, true);
@@ -1061,13 +1062,14 @@ void Transformer::setLights()
     getFront(&hld1x,&hld1y,&hld1z, 4);
 
     hdL1.setPos(hl1x, hl1y, hl1z);
+    //hdL1.setDirn(hld1x-hl1x, hld1y, hld1z-hl1z);
     hdL1.setDirn(hld1x, hld1y, hld1z);
 
     Drawing D;
     glPushMatrix();
     //glLoadIdentity();
     glTranslatef(hl1x, hl1y, hl1z);
-    D.drawSphere(36,36);
+    //D.drawSphere(36,36);
     glPopMatrix();
 }
 

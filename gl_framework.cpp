@@ -92,11 +92,21 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     {
         float cx, cy, cz;
         float fx, fy, fz;
-        W.T.getFront(&cx,&cy,&cz,0.5);
+        W.T.getFront(&cx,&cy,&cz,3.5);
+        W.T.getFront(&fx,&fy,&fz,6);
+        glLoadIdentity();
+        gluLookAt(cx,-4,cz, fx,-4.5,fz, 0,1,0);
+    }
+    if(W.T.cam2Flag)
+    {
+        float cx, cy, cz;
+        float fx, fy, fz;
+        W.T.getFront(&cx,&cy,&cz,-3.5);
         W.T.getFront(&fx,&fy,&fz, 3);
         glLoadIdentity();
-        gluLookAt(W.T.car_x,0,W.T.car_z, fx,0,fz, 0,1,0);
+        gluLookAt(cx,0,cz, W.T.car_x,0,W.T.car_z, 0,1,0);
     }
+
     switch(key)
     {
         case GLFW_KEY_ESCAPE:
@@ -299,28 +309,34 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             break;
         case GLFW_KEY_1:
             W.T.camFlag = false;
+            W.T.cam2Flag = false;
             glLoadIdentity();
             gluLookAt(0,5,5, 0,0,0, 0,1,0);
             break;
         case GLFW_KEY_2:
             W.T.camFlag = true;
+            W.T.cam2Flag = false;
             break;
         case GLFW_KEY_3:
-            W.L1.on();
+            W.T.cam2Flag = true;
+            W.T.camFlag = false;
             break;
         case GLFW_KEY_4:
-            W.L1.off();
+            W.L1.on();
             break;
         case GLFW_KEY_5:
-            W.L2.on();
+            W.L1.off();
             break;
         case GLFW_KEY_6:
-            W.L2.off();
+            W.L2.on();
             break;
         case GLFW_KEY_7:
-            W.T.hdL1.on();
+            W.L2.off();
             break;
         case GLFW_KEY_8:
+            W.T.hdL1.on();
+            break;
+        case GLFW_KEY_9:
             W.T.hdL1.off();
             break;
         default:

@@ -199,14 +199,14 @@ void Drawing::drawCylinder(float radius,float height,GLint numMajor, GLint numMi
 
     glNormal3f(-1,0,0);
 
-    drawCircle(radius,32,TS1);
+    drawCircle(radius,36,TS1);
     glPopMatrix();
     glPushMatrix();
     glTranslatef(0.0,0.0,height/2);
 
     glNormal3f(1,0,0);
 
-    drawCircle(radius,32,TS2);
+    drawCircle(radius,36,TS2);
     glPopMatrix();
 }
 

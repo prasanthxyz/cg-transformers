@@ -21,8 +21,7 @@ class Transformer
         
         //Camera
         bool camFlag;
-        GLfloat fcx, fcy, fcz;
-        GLfloat tcx, tcy, tcz;
+        bool cam2Flag;
 
         //Headlights
         bool hdLights;
