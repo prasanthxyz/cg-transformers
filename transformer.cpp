@@ -14,7 +14,7 @@ Transformer::Transformer()
 
     tex.loadTextures();
 
-    flag=0;
+    flag = 0;
 
     fullx=0; fully=0; fullz=0;
     bend=0;
@@ -401,9 +401,9 @@ void Transformer::list_left_foot()
 void Transformer::tocar()
 {
     while(1){
-       if(car_y<0&&rftyreshift<=-0.25&&lftyreshift>=0.25&&down<=-0.9&&carfront<=-0.3&&carfrontshift>=0.5&&carfrontinsert<=-0.3&&rfootrot==-90&&lfootrot==90&&fronttyretrans<=-0.7&&backtyretrans<=-0.7&&fullx==-90&&fully==0&&fullz==90&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==0&&rshoulderforward==0&&rshouldercurve==0&&relbow==-90&&lshoulderside==-180&&lshoulderforward==0&&lshouldercurve==0&&lelbow==90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==180&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==180&&vehicleback==90&&carback==90)
-       {
-            flag=1;
+        if(car_y<0&&rftyreshift<=-0.25&&lftyreshift>=0.25&&down<=-0.9&&carfront<=-0.3&&carfrontshift>=0.5&&carfrontinsert<=-0.3&&rfootrot==-90&&lfootrot==90&&fronttyretrans<=-0.7&&backtyretrans<=-0.7&&fullx==-90&&fully==0&&fullz==90&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==0&&rshoulderforward==0&&rshouldercurve==0&&relbow==-90&&lshoulderside==-180&&lshoulderforward==0&&lshouldercurve==0&&lelbow==90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==180&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==180&&vehicleback==90&&carback==90)
+        {
+            flag = 1;
             break;
         }
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -422,12 +422,12 @@ void Transformer::tocar()
 void Transformer::tohuman()
 {
     while(1){
-       if(car_y==0&&lftyreshift<=0.025&&rftyreshift>=-0.025&&down>=-0.05&&carfront>=-0.05&&carfrontshift<=0.05&&carfrontinsert>=-0.05&&rfootrot==0.0&&lfootrot==0.0&&fronttyretrans>=-0.5&&backtyretrans>=-0.5&&fullx==0&&fully==0&&fullz==0&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==-135&&rshoulderforward==0&&rshouldercurve==0&&relbow==90&&lshoulderside==-45&&lshoulderforward==0&&lshouldercurve==0&&lelbow==-90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==0&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==0&&vehicleback==0&&carback==0)
-       {
-            flag=0;
+        if(car_y==0&&lftyreshift<=0.025&&rftyreshift>=-0.025&&down>=-0.05&&carfront>=-0.05&&carfrontshift<=0.05&&carfrontinsert>=-0.05&&rfootrot==0.0&&lfootrot==0.0&&fronttyretrans>=-0.5&&backtyretrans>=-0.5&&fullx==0&&fully==0&&fullz==0&&bend==0&&headside==0&&headforward==0&&headcurve==0&&rshoulderside==-135&&rshoulderforward==0&&rshouldercurve==0&&relbow==90&&lshoulderside==-45&&lshoulderforward==0&&lshouldercurve==0&&lelbow==-90&&rltside==-90&&rltforward==0&&rltcurve==0&&rlbforward==0&&lltside==-90&&lltforward==0&&lltcurve==0&&llbforward==0&&vehicleback==0&&carback==0)
+        {
+            flag = 0;
             break;
-         }
-         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+        }
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         transform();
         GLFWwindow * win=glfwGetCurrentContext();
         displayWorld();
