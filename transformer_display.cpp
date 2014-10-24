@@ -1,57 +1,6 @@
 #include "transformer.hpp"
 #include <iostream>
 using namespace std;
-void Transformer::movement(GLFWwindow* window)
-{
-    double result;
-    int angle=0;
-    if(glfwGetKey(window, GLFW_KEY_UP)==GLFW_PRESS)
-    {
-        angle=5;
-        wheelturn=0;
-        result=fully*(M_PI/180);
-        car_x=car_x+0.01*cos(result);
-        car_z=car_z-0.01*sin(result);
-        wheelrot=(wheelrot+3)%360;
-    }
-
-    else if(glfwGetKey(window, GLFW_KEY_DOWN)==GLFW_PRESS)
-    {
-        angle=-5;
-        wheelturn=0;
-        result=fully*(M_PI/180);
-        car_x=car_x-0.01*cos(result);
-        car_z=car_z+0.01*sin(result);
-        wheelrot=(wheelrot-3)%360;
-
-    }
-    if(glfwGetKey(window, GLFW_KEY_RIGHT)==GLFW_PRESS)
-    {
-        wheelturn=-30;
-        if(angle){
-            //   fully=fully+5;
-            fully=(fully-angle)%360;
-            if(fully<0)
-                fully=360+fully;
-            //cout <<fully<< " ";
-        }
-
-    }
-
-    else if(glfwGetKey(window, GLFW_KEY_LEFT)==GLFW_PRESS)
-    {
-        wheelturn=30;
-        if(angle){
-            fully=(fully+angle)%360;
-            if(fully<0)
-                fully=fully+360;
-        }
-    }
-    else
-    {
-        wheelturn=0;
-    }
-}
 
 void Transformer::drawHip()
 {
@@ -204,6 +153,7 @@ void Transformer::drawRightLeg()
     glTranslatef(carfrontinsert,0.0,0.0);
 
     glPushMatrix();
+    glColor3f(1,1,1);
     glCallList(right_knee);
     glPopMatrix();
     glRotatef ((GLfloat) rlbforward, 0.0, 1.0, 0.0);
@@ -245,6 +195,7 @@ void Transformer::drawLeftLeg()
 
 
     glPushMatrix();
+    glColor3f(1,1,1);
     glCallList(left_knee);
     glPopMatrix();
     glRotatef ((GLfloat) llbforward, 0.0, 1.0, 0.0);
