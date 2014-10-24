@@ -1,7 +1,36 @@
 Assignment report link:
 
-www.cse.iitb.ac.in/~prasanth/cg_a21
+www.cse.iitb.ac.in/~prasanth/cg_a22
 
+---------------------------------------------------------------
+KEYBOARD BINDINGS for car-motion, lighting and camera
+
+MOVEMENT
+
+UP arrow : Move car forward
+DOWN arrow : Move car backward
+LEFT arrow : Turn car left
+RIGHT arrow : Turn car right
+
+LIGHTING
+
+4 : Turn light1 ON
+5 : Turn light1 OFF
+6 : Turn light2 ON
+7 : Turn light2 OFF
+
+8 : Turn headlights ON
+9 : Turn headlights OFF
+
+CAMERA
+
+1 : Global View
+2 : First Person View
+3 : Third Person View
+
+---------------------------------------------------------------
+
+README from PART 1 of the assignment
 
 KEYBOARD BINDINGS of the robot:
 

@@ -69,7 +69,6 @@ void Transformer::drawHip()
 void Transformer::drawTorso()
 {
     glPushMatrix();
-    glColor3f(0.5,.4,1);
     glTranslatef(0.0,-1.1,0.0);
     glRotatef ((GLfloat)bend, 1.0, 0.0, 0.0);
     glTranslatef(0.0,1.1,0.0);
@@ -81,7 +80,6 @@ void Transformer::drawTorso()
 void Transformer::drawNeck()
 {
     glPushMatrix();
-    glColor3f(0,0,1);
     glTranslatef(0.0,1.0,0.0);
     glRotatef ((GLfloat) vehicleback, 1.0, 0.0, 0.0);
     glTranslatef(0.0,-1.0,0.0);
@@ -99,7 +97,6 @@ void Transformer::drawHead()
     glRotatef ((GLfloat) headforward,1.0, 0.0, 0.0);
     glRotatef ((GLfloat) headcurve, 0.0, 1.0, 0.0);
 
-    glColor3f(1,1,1);
     glPushMatrix();
     glRotatef((GLfloat)carback,1.0,0.0,0.0);
     glTranslatef(0.0,0.0+move,0.2);
@@ -120,7 +117,6 @@ void Transformer::drawHead()
 void Transformer::drawRightHand()
 {
     glPushMatrix();
-    glColor3f(1,1,1);
     glTranslatef (-1.0, 0.9, 0.0);
     glRotatef ((GLfloat) rshoulderside, 0.0, 0.0, 1.0);
     glRotatef ((GLfloat) rshoulderforward,1.0, 0.0, 0.0);
@@ -132,18 +128,15 @@ void Transformer::drawRightHand()
     glCallList(right_shoulder);
     glPopMatrix();
 
-    glColor3f(1,1,1);
     glPushMatrix();
     glCallList(right_arm);
     glPopMatrix(); 
     glTranslatef(1.1,0.0,0.0);
 
-    glColor3f(1,0,0);
     glPushMatrix();
     glCallList(right_elbow);
     glPopMatrix();
     glRotatef ((GLfloat) relbow, 0.0, 0.0, 1.0);
-    glColor3f(1,1,1);
 
     glPushMatrix(); //rshoulder+relbow
     glCallList(right_forearm);
@@ -166,21 +159,17 @@ void Transformer::drawLeftHand()
     glTranslatef(0.0,0.0,(GLfloat)backtyretrans);
 
     glRotatef(-(GLfloat) wheelrot,1.0,0.0,0.0);
-    glColor3f(1,1,1);
     glCallList(left_shoulder);
     glPopMatrix();
-    glColor3f(1,1,1);
     glPushMatrix();
     glCallList(left_arm);
     glPopMatrix();
     glTranslatef(1.1,0.0,0.0);
 
-    glColor3f(1,0,0);
     glPushMatrix();
     glCallList(left_elbow);
     glPopMatrix();
     glRotatef ((GLfloat) lelbow, 0.0, 0.0, 1.0);
-    glColor3f(1,1,1);
     glPushMatrix(); //lshoulder+lelbow
     glCallList(left_forearm);
     glPopMatrix();
@@ -204,16 +193,13 @@ void Transformer::drawRightLeg()
     glTranslatef(0.0,0.0+rftyreshift,(GLfloat)fronttyretrans);
     glRotatef((GLfloat) wheelturn,0.0,0.0,1.0);
     glRotatef((GLfloat) wheelrot,0.0,1.0,0.0);
-    glColor3f(1,1,1);
     glCallList(right_butt);
     glPopMatrix();
     glTranslatef(carfront,0.0,carfront);
-    glColor3f(0,.4,1);
     glPushMatrix();
     glCallList(right_thigh);
     glPopMatrix();
     glTranslatef(1.2,0.0,0.0);
-    glColor3f(1,0,0);
     glPushMatrix();
     glTranslatef(carfrontinsert,0.0,0.0);
 
@@ -221,13 +207,11 @@ void Transformer::drawRightLeg()
     glCallList(right_knee);
     glPopMatrix();
     glRotatef ((GLfloat) rlbforward, 0.0, 1.0, 0.0);
-    glColor3f(1,1,1);
 
     glPushMatrix(); //rleg+rknee
     glTranslatef(0.0,carfrontshift,0.0);
     glCallList(right_calf);
     glPopMatrix();
-    glColor3f(0,0,1);
     glPushMatrix(); //rleg+rknee
     glRotatef((GLfloat)rfootrot,1.0,0.0,0.0);
     glCallList(right_foot);
@@ -240,7 +224,6 @@ void Transformer::drawRightLeg()
 void Transformer::drawLeftLeg()
 {
     glPushMatrix();
-    glColor3f(1,1,1);
     glTranslatef (0.58, -1.38, 0.0);
     glRotatef ((GLfloat) lltcurve, 0.0, 1.0, 0.0);
     glRotatef ((GLfloat) lltforward, 1.0, 0.0, 0.0);
@@ -252,13 +235,11 @@ void Transformer::drawLeftLeg()
     glRotatef((GLfloat) wheelrot,0.0,1.0,0.0);
     glCallList(left_butt);
     glPopMatrix();
-    glColor3f(0,.4,1);
     glTranslatef(carfront,0.0,carfront);
     glPushMatrix();
     glCallList(left_thigh);
     glPopMatrix();
     glTranslatef(1.2,0.0,0.0);
-    glColor3f(1,0,0);
     glPushMatrix();
     glTranslatef(carfrontinsert,0.0,0.0);
 
@@ -267,14 +248,12 @@ void Transformer::drawLeftLeg()
     glCallList(left_knee);
     glPopMatrix();
     glRotatef ((GLfloat) llbforward, 0.0, 1.0, 0.0);
-    glColor3f(1,1,1);
 
     glPushMatrix(); //lleg+lknee
     glTranslatef(0.0,-carfrontshift,0.0);
     glCallList(left_calf);
     glPopMatrix(); 
 
-    glColor3f(0,0,1);
     glPushMatrix(); //lleg+lknee
     glRotatef((GLfloat)lfootrot,1.0,0.0,0.0);
     glCallList(left_foot);

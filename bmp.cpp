@@ -26,7 +26,7 @@ void BMP::loadBmpTexture(const char *fileName, GLuint texture)
     size = width * height * 3;
     data = new unsigned char[size];
 
-    fseek(file, 54, SEEK_SET);
+    fseek(file, 128, SEEK_SET);
     fread(data, 1, size, file);
     fclose(file);
 
