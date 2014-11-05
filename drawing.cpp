@@ -2,230 +2,200 @@
 
 void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5, bool flag)
 {
-    glColor3f(1,1,1);
+    float i, j, k, l;
+
+    //----------------------------------------------------------------------------------------------------
     //top - back(right;left) - front(left;right)
     glBindTexture(GL_TEXTURE_2D, T0);
-    glBegin(GL_QUADS);
 
     if(flag)
         glNormal3f(0,1,0);
     else
         glNormal3f(0,-1,0);
 
-    glTexCoord2f(0,0);
-    glVertex3f( 0.5f, 0.5f, -0.5f);
-    glTexCoord2f(0,1);
-    glVertex3f(-0.5f, 0.5f, -0.5f);
-    glTexCoord2f(1,1);
-    glVertex3f(-0.5f, 0.5f,  0.5f);
-    glTexCoord2f(1,0);
-    glVertex3f( 0.5f, 0.5f,  0.5f);
-    glEnd();
+    for(i = -0.5; i < 0.499; i += .05)
+    {
+        for(j = -0.5; j < 0.499; j += .05)
+        {
+            glBegin(GL_QUADS);
+            glTexCoord2f(i+0.5,j+0.5);
+            glVertex3f( i, 0.5f, j);
 
-    glColor3f(1,1,1);
+            glTexCoord2f(i+0.55,j+0.5);
+            glVertex3f( i+.05f, 0.5f, j);
+
+            glTexCoord2f(i+0.55,j+0.55);
+            glVertex3f( i+.05f, 0.5f, j+.05f);
+
+            glTexCoord2f(i+0.5,j+0.55);
+            glVertex3f( i, 0.5f, j+.05f);
+            glEnd();
+        }
+    }
+    //----------------------------------------------------------------------------------------------------
+
+
+
+
+    //----------------------------------------------------------------------------------------------------
     // bottom - front(right;left) - back(left;right)
     glBindTexture(GL_TEXTURE_2D, T1);
-    glBegin(GL_QUADS);
 
     if(flag)
         glNormal3f(0,-1,0);
     else
         glNormal3f(0,1,0);
 
-    glTexCoord2f(1,0);
-    glVertex3f( 0.5f, -0.5f,  0.5f);
-    glTexCoord2f(0,0);
-    glVertex3f(-0.5f, -0.5f,  0.5f);
-    glTexCoord2f(0,1);
-    glVertex3f(-0.5f, -0.5f, -0.5f);
-    glTexCoord2f(1,1);
-    glVertex3f( 0.5f, -0.5f, -0.5f);
-    glEnd();
+    for(i = -0.5; i < 0.499; i += .05)
+    {
+        for(j = -0.5; j < 0.499; j += .05)
+        {
+            glBegin(GL_QUADS);
+            glTexCoord2f(i+0.5,j+0.5);
+            glVertex3f( i, -0.5f, j);
 
-    glColor3f(1,1,1);
+            glTexCoord2f(i+0.55,j+0.5);
+            glVertex3f( i+.05f, -0.5f, j);
+
+            glTexCoord2f(i+0.55,j+0.55);
+            glVertex3f( i+.05f, -0.5f, j+.05f);
+
+            glTexCoord2f(i+0.5,j+0.55);
+            glVertex3f( i, -0.5f, j+.05f);
+            glEnd();
+        }
+    }
+    //----------------------------------------------------------------------------------------------------
+
+
+
+
+    //----------------------------------------------------------------------------------------------------
     //back - top(right;left) - bottom(left;right)
     glBindTexture(GL_TEXTURE_2D, T2);
-    glBegin(GL_QUADS);
 
     if(flag)
         glNormal3f(0,0,-1);
     else
         glNormal3f(0,0,1);
 
-    glTexCoord2f(0,0);
-    glVertex3f( 0.5f,  0.5f, -0.5f);
-    glTexCoord2f(0,1);
-    glVertex3f(-0.5f,  0.5f, -0.5f);
-    glTexCoord2f(1,1);
-    glVertex3f(-0.5f, -0.5f, -0.5f);
-    glTexCoord2f(1,0);
-    glVertex3f( 0.5f, -0.5f, -0.5f);
-    glEnd();
+    for(i = -0.5; i < 0.499; i += .05)
+    {
+        for(j = -0.5; j < 0.499; j += .05)
+        {
+            glBegin(GL_QUADS);
+            glTexCoord2f(i+0.5,j+0.5);
+            glVertex3f( i, j, -0.5f);
 
-    glColor3f(1,1,1);
+            glTexCoord2f(i+0.55,j+0.5);
+            glVertex3f( i+.05f, j, -0.5f);
+
+            glTexCoord2f(i+0.55,j+0.55);
+            glVertex3f( i+.05f, j+.05f, -0.5f);
+
+            glTexCoord2f(i+0.5,j+0.55);
+            glVertex3f( i, j+.05f, -0.5f);
+            glEnd();
+        }
+    }
+    //----------------------------------------------------------------------------------------------------
+
+
+
+    //----------------------------------------------------------------------------------------------------
     //front - bottom(right;left) - top(left;right)
     glBindTexture(GL_TEXTURE_2D, T3);
-    glBegin(GL_QUADS);
 
     if(flag)
         glNormal3f(0,0,1);
     else
         glNormal3f(0,0,-1);
 
-    glTexCoord2f(1,0);
-    glVertex3f( 0.5f, -0.5f, 0.5f);
-    glTexCoord2f(0,0);
-    glVertex3f(-0.5f, -0.5f, 0.5f);
-    glTexCoord2f(0,1);
-    glVertex3f(-0.5f,  0.5f, 0.5f);
-    glTexCoord2f(1,1);
-    glVertex3f( 0.5f,  0.5f, 0.5f);
-    glEnd();
+    for(i = -0.5; i < 0.499; i += .05)
+    {
+        for(j = -0.5; j < 0.499; j += .05)
+        {
+            glBegin(GL_QUADS);
+            glTexCoord2f(i+0.5,j+0.5);
+            glVertex3f( i, j, 0.5f);
 
-    glColor3f(1,1,1);
+            glTexCoord2f(i+0.55,j+0.5);
+            glVertex3f( i+.05f, j, 0.5f);
+
+            glTexCoord2f(i+0.55,j+0.55);
+            glVertex3f( i+.05f, j+.05f, 0.5f);
+
+            glTexCoord2f(i+0.5,j+0.55);
+            glVertex3f( i, j+.05f, 0.5f);
+            glEnd();
+        }
+    }
+    //----------------------------------------------------------------------------------------------------
+
+
+
+    //----------------------------------------------------------------------------------------------------
     //left - top(front;back) - bottom(back;front)
     glBindTexture(GL_TEXTURE_2D, T4);
-    glBegin(GL_QUADS);
 
     if(flag)
         glNormal3f(-1,0,0);
     else
         glNormal3f(1,0,0);
 
-    glTexCoord2f(1,0);
-    glVertex3f(-0.5f,  0.5f,  0.5f);
-    glTexCoord2f(0,0);
-    glVertex3f(-0.5f,  0.5f, -0.5f);
-    glTexCoord2f(0,1);
-    glVertex3f(-0.5f, -0.5f, -0.5f);
-    glTexCoord2f(1,1);
-    glVertex3f(-0.5f, -0.5f,  0.5f);
-    glEnd();
+    for(i = -0.5; i < 0.499; i += .05)
+    {
+        for(j = -0.5; j < 0.499; j += .05)
+        {
+            glBegin(GL_QUADS);
+            glTexCoord2f(i+0.5,j+0.5);
+            glVertex3f(-0.5f, i, j);
 
-    glColor3f(1,1,1);
+            glTexCoord2f(i+0.55,j+0.5);
+            glVertex3f(-0.5f, i+.05f, j);
+
+            glTexCoord2f(i+0.55,j+0.55);
+            glVertex3f(-0.5f, i+.05f, j+.05f);
+
+            glTexCoord2f(i+0.5,j+0.55);
+            glVertex3f(-0.5f, i, j+.05f);
+            glEnd();
+        }
+    }
+    //----------------------------------------------------------------------------------------------------
+
+
+
+
+    //----------------------------------------------------------------------------------------------------
     //right - front(back;front) - bottom(front;back)
     glBindTexture(GL_TEXTURE_2D, T5);
-    glBegin(GL_QUADS);
 
     if(flag)
         glNormal3f(1,0,0);
     else
         glNormal3f(-1,0,0);
 
-    glTexCoord2f(0,0);
-    glVertex3f(0.5f,  0.5f, -0.5f);
-    glTexCoord2f(0,1);
-    glVertex3f(0.5f,  0.5f,  0.5f);
-    glTexCoord2f(1,1);
-    glVertex3f(0.5f, -0.5f,  0.5f);
-    glTexCoord2f(1,0);
-    glVertex3f(0.5f, -0.5f, -0.5f);
-    glEnd();
- }
- void Drawing::drawWorld(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5,GLfloat length,GLfloat breadth,GLfloat height)
-{
-    glColor3f(1,1,1);
-    //top - back(right;left) - front(left;right)
-    glBindTexture(GL_TEXTURE_2D, T0);
-    glBegin(GL_QUADS);
+    for(i = -0.5; i < 0.499; i += .05)
+    {
+        for(j = -0.5; j < 0.499; j += .05)
+        {
+            glBegin(GL_QUADS);
+            glTexCoord2f(i+0.5,j+0.5);
+            glVertex3f(0.5f, i, j);
 
-        glNormal3f(0,-1,0);
+            glTexCoord2f(i+0.55,j+0.5);
+            glVertex3f(0.5f, i+.05f, j);
 
-    glTexCoord2f(0,0);
-    glVertex3f( length/2, height/2, -breadth/2);
-    glTexCoord2f(0,1);
-    glVertex3f(- length/2, height/2, -breadth/2);
-    glTexCoord2f(1,1);
-    glVertex3f(-length/2, height/2, breadth/2);
-    glTexCoord2f(1,0);
-    glVertex3f(length/2, height/2, breadth/2);
-    glEnd();
+            glTexCoord2f(i+0.55,j+0.55);
+            glVertex3f(0.5f, i+.05f, j+.05f);
 
-    glColor3f(1,1,1);
-    // bottom - front(right;left) - back(left;right)
-    glBindTexture(GL_TEXTURE_2D, T1);
-    glBegin(GL_QUADS);
-
-        glNormal3f(0,1,0);
-
-        glTexCoord2f(1,0);
-
-    glVertex3f(length/2, -height/2, breadth/2);
-    glTexCoord2f(0,0);
-    glVertex3f(-length/2, -height/2, breadth/2);
-    glTexCoord2f(0,1);
-    glVertex3f(-length/2, -height/2, -breadth/2);
-    glTexCoord2f(1,1);
-    glVertex3f(length/2, -height/2, -breadth/2);
-    glEnd();
-
-    glColor3f(1,1,1);
-    //back - top(right;left) - bottom(left;right)
-    glBindTexture(GL_TEXTURE_2D, T2);
-    glBegin(GL_QUADS);
-
-        glNormal3f(0,0,1);
-
-    glTexCoord2f(0,0);
-    glVertex3f(length/2, height/2, -breadth/2);
-    glTexCoord2f(0,1);
-    glVertex3f(-length/2, height/2, -breadth/2);
-    glTexCoord2f(1,1);
-    glVertex3f(-length/2, -height/2, -breadth/2);
-    glTexCoord2f(1,0);
-    glVertex3f(length/2, -height/2, -breadth/2);
-    glEnd();
-
-    glColor3f(1,1,1);
-    //front - bottom(right;left) - top(left;right)
-    glBindTexture(GL_TEXTURE_2D, T3);
-    glBegin(GL_QUADS);
-
-        glNormal3f(0,0,-1);
-
-    glTexCoord2f(1,0);
-    glVertex3f(length/2, -height/2, breadth/2);
-    glTexCoord2f(0,0);
-    glVertex3f(-length/2, -height/2, breadth/2);
-    glTexCoord2f(0,1);
-    glVertex3f(-length/2, height/2, breadth/2);
-    glTexCoord2f(1,1);
-    glVertex3f(length/2, height/2, breadth/2);
-    glEnd();
-
-    glColor3f(1,1,1);
-    //left - top(front;back) - bottom(back;front)
-    glBindTexture(GL_TEXTURE_2D, T4);
-    glBegin(GL_QUADS);
-
-        glNormal3f(1,0,0);
-
-    glTexCoord2f(1,0);
-    glVertex3f(-length/2, height/2, breadth/2);
-    glTexCoord2f(0,0);
-    glVertex3f(-length/2, height/2, -breadth/2);
-    glTexCoord2f(0,1);
-    glVertex3f(-length/2, -height/2, -breadth/2);
-    glTexCoord2f(1,1);
-    glVertex3f(-length/2, -height/2, breadth/2);
-    glEnd();
-
-    glColor3f(1,1,1);
-    //right - front(back;front) - bottom(front;back)
-    glBindTexture(GL_TEXTURE_2D, T5);
-    glBegin(GL_QUADS);
-
-        glNormal3f(-1,0,0);
-
-    glTexCoord2f(0,0);
-    glVertex3f(length/2, height/2, -breadth/2);
-    glTexCoord2f(0,1);
-    glVertex3f(length/2, height/2, breadth/2);
-    glTexCoord2f(1,1);
-    glVertex3f(length/2, -height/2, breadth/2);
-    glTexCoord2f(1,0);
-    glVertex3f(length/2, -height/2, -breadth/2);
-    glEnd();
+            glTexCoord2f(i+0.5,j+0.55);
+            glVertex3f(0.5f, i, j+.05f);
+            glEnd();
+        }
+    }
+    //----------------------------------------------------------------------------------------------------
 }
 
 

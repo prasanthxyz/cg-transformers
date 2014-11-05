@@ -204,7 +204,6 @@ class Transformer
 
         //car movement functions
         
-        void movement(GLFWwindow*);
         void carMove(GLfloat,int,int);
         void getCarFrontPoint(int &, int &, int &);
 

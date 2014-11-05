@@ -11,9 +11,9 @@ void World::drawOutCube()
 {
     Drawing D;
     glPushMatrix();
-    glScalef(50,20,35);
-  D.drawCube(tex.textures[tex.WTOP],tex.textures[tex.WBOTTOM], tex.textures[tex.WFAR],tex.textures[tex.WNEAR], tex.textures[tex.WLEFT],tex.textures[tex.WRIGHT]);
-//D.drawWorld(tex.textures[tex.WTOP],tex.textures[tex.WBOTTOM], tex.textures[tex.WFAR],tex.textures[tex.WNEAR], tex.textures[tex.WLEFT],tex.textures[tex.WRIGHT],100.0,40.0,70.0);
+    //glScalef(50,20,35);
+    glScalef(70,70,70);
+    D.drawCube(tex.textures[tex.WTOP],tex.textures[tex.WBOTTOM], tex.textures[tex.WFAR],tex.textures[tex.WNEAR], tex.textures[tex.WLEFT],tex.textures[tex.WRIGHT]);
     //D.drawSphere(36,36,false);
     //D.drawCylinder(36,36,false);
     glPopMatrix();

@@ -1,6 +1,7 @@
 #include "transformer.hpp"
 #include <iostream>
 using namespace std;
+/*
 void Transformer::movement(GLFWwindow* window)
 {
     double result;
@@ -71,6 +72,7 @@ void Transformer::movement(GLFWwindow* window)
     }
 
 }
+*/
 
 void Transformer::drawHip()
 {
@@ -223,6 +225,7 @@ void Transformer::drawRightLeg()
     glTranslatef(carfrontinsert,0.0,0.0);
 
     glPushMatrix();
+    glColor3f(1,1,1);
     glCallList(right_knee);
     glPopMatrix();
     glRotatef ((GLfloat) rlbforward, 0.0, 1.0, 0.0);
@@ -264,6 +267,7 @@ void Transformer::drawLeftLeg()
 
 
     glPushMatrix();
+    glColor3f(1,1,1);
     glCallList(left_knee);
     glPopMatrix();
     glRotatef ((GLfloat) llbforward, 0.0, 1.0, 0.0);

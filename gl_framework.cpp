@@ -66,18 +66,18 @@ if(key==GLFW_KEY_F2&&action==GLFW_PRESS)
             angle=5;
             W.T.wheelturn=0;
             result=W.T.fully*(M_PI/180);
-            W.T.car_x=W.T.car_x+0.3*cos(result);
-            W.T.car_z=W.T.car_z-0.3*sin(result);
-            W.T.wheelrot=(W.T.wheelrot+3)%360;
+            W.T.car_x=W.T.car_x+0.25*cos(result);
+            W.T.car_z=W.T.car_z-0.25*sin(result);
+            W.T.wheelrot=(W.T.wheelrot+4)%360;
         }
         else if(glfwGetKey(window, GLFW_KEY_DOWN))
         {
             angle=-5;
             W.T.wheelturn=0;
             result=W.T.fully*(M_PI/180);
-            W.T.car_x=W.T.car_x-0.3*cos(result);
-            W.T.car_z=W.T.car_z+0.3*sin(result);
-            W.T.wheelrot=(W.T.wheelrot-3)%360;
+            W.T.car_x=W.T.car_x-0.25*cos(result);
+            W.T.car_z=W.T.car_z+0.25*sin(result);
+            W.T.wheelrot=(W.T.wheelrot-4)%360;
 
         }
         if(glfwGetKey(window, GLFW_KEY_RIGHT))

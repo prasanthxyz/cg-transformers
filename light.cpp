@@ -12,13 +12,11 @@ Light::Light()
     glLightfv(light_id, GL_SPECULAR,spec);
     glLightfv(light_id, GL_AMBIENT,amb);
 }
-#include <stdio.h>
 
 Light::Light(GLenum lid, GLfloat x,GLfloat y,GLfloat z, bool spotflag)
 {
     light_id = lid;
     pos[0] = x;     pos[1] = y;     pos[2] = z;    pos[3] = 1;
-    //amb[0] = .5;    amb[1] = .5;    amb[2] = .5;   amb[3] = 1;
     amb[0] = 1;    amb[1] = 1;    amb[2] = 1;   amb[3] = 1;
     dif[0] = 1;     dif[1] = 1;     dif[2] = 1;    dif[3] = 1;
     spec[0] = 1;    spec[1] = 1;    spec[2] = 1;   spec[3] = 1;
