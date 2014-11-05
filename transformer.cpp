@@ -1016,10 +1016,10 @@ void Transformer::setLights()
     */
 
     hdL1.setPos(hl1x, -5, hl1z);
-    hdL1.setDirn(hld1x-hl1x, -2, hld1z-hl1z);
+    hdL1.setDirn(hld1x-hl1x, 0, hld1z-hl1z);
 
     hdL2.setPos(hl2x, -5, hl2z);
-    hdL2.setDirn(hld2x-hl2x, -2, hld2z-hl2z);
+    hdL2.setDirn(hld2x-hl2x, 0, hld2z-hl2z);
 
     //sphere
     /*
