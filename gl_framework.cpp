@@ -50,10 +50,16 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    extern World W;
-    double result;
-    int angle=0;
-    if(W.T.flag)
+	extern World W;
+	Animation anim;
+	double result;
+	int angle=0;
+if(key==GLFW_KEY_F1&&action==GLFW_PRESS)
+	anim.playBack();
+
+if(key==GLFW_KEY_F2&&action==GLFW_PRESS)
+	anim.record();
+   if(W.T.flag)
     {
         if(glfwGetKey(window, GLFW_KEY_UP))
         {
@@ -88,65 +94,115 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         }
         else
         {
-            W.T.wheelturn=0;
-        }
-    }
-    if(W.T.camFlag)
-    {
-        float cx, cy, cz;
-        float fx, fy, fz;
-        W.T.getFront(&cx,&cy,&cz,3.5);
-        W.T.getFront(&fx,&fy,&fz,6);
-        glLoadIdentity();
-        gluLookAt(cx,-4,cz, fx,-4.5,fz, 0,1,0);
-    }
-    if(W.T.cam2Flag)
-    {
-        float cx, cy, cz;
-        float fx, fy, fz;
-        W.T.getFront(&cx,&cy,&cz,-3.5);
-        W.T.getFront(&fx,&fy,&fz, 3);
-        glLoadIdentity();
-        gluLookAt(cx,0,cz, W.T.car_x,0,W.T.car_z, 0,1,0);
-    }
+		W.T.wheelturn=0;
+	}
 
-    switch(key)
-    {
-        case GLFW_KEY_ESCAPE:
-            glfwSetWindowShouldClose(window, GL_TRUE);
-            break;
-        case GLFW_KEY_V:
-            if(mods==GLFW_MOD_SHIFT)
-                W.T.rotateX(5);
-            else 
-                W.T.rotateX(-5);
-            break;
-        case GLFW_KEY_B:
-            if(mods==GLFW_MOD_SHIFT)
-                W.T.rotateY(5);
-            else
-                W.T.rotateY(-5);
-            break;
-        case GLFW_KEY_N:
-            if(mods==GLFW_MOD_SHIFT)
-                W.T.rotateZ(5);
-            else
-                W.T.rotateZ(-5);
-            break;
-        case GLFW_KEY_Z:
-            if(W.T.flag==0){
-                if(mods==GLFW_MOD_SHIFT)
-                {if(W.T.headside<=45)
-                    W.T.tiltHeadSide(5);}
-                else{
-                    if(W.T.headside>=-45)
-                        W.T.tiltHeadSide(-5);
-                }
-            }break;
-        case GLFW_KEY_X:
-            if(W.T.flag==0){
-                if(mods==GLFW_MOD_SHIFT)
-                {if(W.T.headforward<45)
+    }
+   else{
+	   if(glfwGetKey(window, GLFW_KEY_UP))
+	   {
+		   W.T.lfootrot=0;
+		   W.T.rfootrot=0;
+		   angle=5;
+		   result=W.T.fully*(M_PI/180);
+		   W.T.car_z=W.T.car_z+0.3*cos(result);
+		   W.T.car_x=W.T.car_x+0.3*sin(result);
+		 /*  if(W.T.walkflag)
+		   W.T.car_y=W.T.car_y+0.2;
+		   else
+		   W.T.car_y=W.T.car_y-0.2;
+		   if(W.T.car_y>=-4.8)
+			   W.T.walkflag=0;
+		   if(W.T.car_y<=-5.0)
+			   W.T.walkflag=1;*/
+	   }
+	   else if(glfwGetKey(window, GLFW_KEY_DOWN))
+	   {
+		   W.T.lfootrot=0;
+		   W.T.rfootrot=0;
+
+		   angle=-5;
+		   result=W.T.fully*(M_PI/180);
+		   W.T.car_z=W.T.car_z-0.3*cos(result);
+		   W.T.car_x=W.T.car_x-0.3*sin(result);
+
+	   }
+	   if(glfwGetKey(window, GLFW_KEY_RIGHT))
+	   {
+		   W.T.lfootrot=30;
+		   W.T.rfootrot=30;
+		   if(angle)
+			   W.T.fully=(W.T.fully-angle)%360;
+	   }
+	   else if(glfwGetKey(window, GLFW_KEY_LEFT))
+	   {
+		   W.T.lfootrot=-30;
+		   W.T.rfootrot=-30;
+		   if(angle)
+			   W.T.fully=(W.T.fully+angle)%360;
+	   }
+	   else
+	   {
+		   W.T.lfootrot=0;
+		   W.T.rfootrot=0;
+
+	   }}
+
+   if(W.T.camFlag)
+   {
+	   float cx, cy, cz;
+	   float fx, fy, fz;
+	   W.T.getFront(&cx,&cy,&cz,3.5);
+	   W.T.getFront(&fx,&fy,&fz,6);
+	   glLoadIdentity();
+	   gluLookAt(cx,-4,cz, fx,-4.5,fz, 0,1,0);
+   }
+   if(W.T.cam2Flag)
+   {
+	   float cx, cy, cz;
+	   float fx, fy, fz;
+	   W.T.getFront(&cx,&cy,&cz,-3.5);
+	   W.T.getFront(&fx,&fy,&fz, 3);
+	   glLoadIdentity();
+	   gluLookAt(cx,0,cz, W.T.car_x,0,W.T.car_z, 0,1,0);
+   }
+   switch(key)
+   {
+	   case GLFW_KEY_ESCAPE:
+		   glfwSetWindowShouldClose(window, GL_TRUE);
+		   break;
+	   case GLFW_KEY_V:
+		   if(mods==GLFW_MOD_SHIFT)
+			   W.T.rotateX(5);
+		   else 
+			   W.T.rotateX(-5);
+		   break;
+	   case GLFW_KEY_B:
+		   if(mods==GLFW_MOD_SHIFT)
+			   W.T.rotateY(5);
+		   else
+			   W.T.rotateY(-5);
+		   break;
+	   case GLFW_KEY_N:
+		   if(mods==GLFW_MOD_SHIFT)
+			   W.T.rotateZ(5);
+		   else
+			   W.T.rotateZ(-5);
+		   break;
+	   case GLFW_KEY_Z:
+		   if(W.T.flag==0){
+			   if(mods==GLFW_MOD_SHIFT)
+			   {if(W.T.headside<=45)
+				   W.T.tiltHeadSide(5);}
+			   else{
+				   if(W.T.headside>=-45)
+					   W.T.tiltHeadSide(-5);
+			   }
+		   }break;
+	   case GLFW_KEY_X:
+		   if(W.T.flag==0){
+			   if(mods==GLFW_MOD_SHIFT)
+			   {if(W.T.headforward<45)
                     W.T.tiltHeadFB(5);
                 }
                 else{
@@ -331,27 +387,35 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             W.T.camFlag = false;
             break;
         case GLFW_KEY_4:
+	    W.T.light1=1;
             W.L1.on();
             break;
         case GLFW_KEY_5:
+	    W.T.light1=0;
             W.L1.off();
             break;
         case GLFW_KEY_6:
+	    W.T.light2=1;
             W.L2.on();
             break;
         case GLFW_KEY_7:
+	    W.T.light2=0;
             W.L2.off();
             break;
         case GLFW_KEY_8:
+	    W.T.hd1=1;
+	    W.T.hd2=1;
             W.T.hdL1.on();
             W.T.hdL2.on();
             break;
         case GLFW_KEY_9:
+	    W.T.hd1=0;
+	    W.T.hd2=0;
             W.T.hdL1.off();
             W.T.hdL2.off();
             break;
-        default:
-            break;
+        	 default:
+	    break;
     }
 }
 

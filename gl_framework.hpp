@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include "world.hpp"
 #include <iostream>
+#include "animation.hpp"
 
 void initGL(void);
 

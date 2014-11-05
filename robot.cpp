@@ -39,7 +39,6 @@ int main (int argc, char *argv[])
 
     //! Make the window's context current 
     glfwMakeContextCurrent(window);
-
     //Keyboard Callback
     //OurOwn: set up key_callback
     glfwSetKeyCallback(window, key_callback);

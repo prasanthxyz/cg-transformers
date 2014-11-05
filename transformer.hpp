@@ -27,6 +27,7 @@ class Transformer
         bool hdLights;
         Light hdL1;
         Light hdL2;
+	int hd1,hd2,light1,light2;
 
         //angles and shifting lengths
         int fullx;
@@ -66,6 +67,7 @@ class Transformer
 
         int wheelrot;
         int wheelturn;
+	int walkflag;
 
         GLfloat car_x;
         GLfloat car_y;

@@ -121,7 +121,114 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     glTexCoord2f(1,0);
     glVertex3f(0.5f, -0.5f, -0.5f);
     glEnd();
+ }
+ void Drawing::drawWorld(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GLuint T5,GLfloat length,GLfloat breadth,GLfloat height)
+{
+    glColor3f(1,1,1);
+    //top - back(right;left) - front(left;right)
+    glBindTexture(GL_TEXTURE_2D, T0);
+    glBegin(GL_QUADS);
+
+        glNormal3f(0,-1,0);
+
+    glTexCoord2f(0,0);
+    glVertex3f( length/2, height/2, -breadth/2);
+    glTexCoord2f(0,1);
+    glVertex3f(- length/2, height/2, -breadth/2);
+    glTexCoord2f(1,1);
+    glVertex3f(-length/2, height/2, breadth/2);
+    glTexCoord2f(1,0);
+    glVertex3f(length/2, height/2, breadth/2);
+    glEnd();
+
+    glColor3f(1,1,1);
+    // bottom - front(right;left) - back(left;right)
+    glBindTexture(GL_TEXTURE_2D, T1);
+    glBegin(GL_QUADS);
+
+        glNormal3f(0,1,0);
+
+        glTexCoord2f(1,0);
+
+    glVertex3f(length/2, -height/2, breadth/2);
+    glTexCoord2f(0,0);
+    glVertex3f(-length/2, -height/2, breadth/2);
+    glTexCoord2f(0,1);
+    glVertex3f(-length/2, -height/2, -breadth/2);
+    glTexCoord2f(1,1);
+    glVertex3f(length/2, -height/2, -breadth/2);
+    glEnd();
+
+    glColor3f(1,1,1);
+    //back - top(right;left) - bottom(left;right)
+    glBindTexture(GL_TEXTURE_2D, T2);
+    glBegin(GL_QUADS);
+
+        glNormal3f(0,0,1);
+
+    glTexCoord2f(0,0);
+    glVertex3f(length/2, height/2, -breadth/2);
+    glTexCoord2f(0,1);
+    glVertex3f(-length/2, height/2, -breadth/2);
+    glTexCoord2f(1,1);
+    glVertex3f(-length/2, -height/2, -breadth/2);
+    glTexCoord2f(1,0);
+    glVertex3f(length/2, -height/2, -breadth/2);
+    glEnd();
+
+    glColor3f(1,1,1);
+    //front - bottom(right;left) - top(left;right)
+    glBindTexture(GL_TEXTURE_2D, T3);
+    glBegin(GL_QUADS);
+
+        glNormal3f(0,0,-1);
+
+    glTexCoord2f(1,0);
+    glVertex3f(length/2, -height/2, breadth/2);
+    glTexCoord2f(0,0);
+    glVertex3f(-length/2, -height/2, breadth/2);
+    glTexCoord2f(0,1);
+    glVertex3f(-length/2, height/2, breadth/2);
+    glTexCoord2f(1,1);
+    glVertex3f(length/2, height/2, breadth/2);
+    glEnd();
+
+    glColor3f(1,1,1);
+    //left - top(front;back) - bottom(back;front)
+    glBindTexture(GL_TEXTURE_2D, T4);
+    glBegin(GL_QUADS);
+
+        glNormal3f(1,0,0);
+
+    glTexCoord2f(1,0);
+    glVertex3f(-length/2, height/2, breadth/2);
+    glTexCoord2f(0,0);
+    glVertex3f(-length/2, height/2, -breadth/2);
+    glTexCoord2f(0,1);
+    glVertex3f(-length/2, -height/2, -breadth/2);
+    glTexCoord2f(1,1);
+    glVertex3f(-length/2, -height/2, breadth/2);
+    glEnd();
+
+    glColor3f(1,1,1);
+    //right - front(back;front) - bottom(front;back)
+    glBindTexture(GL_TEXTURE_2D, T5);
+    glBegin(GL_QUADS);
+
+        glNormal3f(-1,0,0);
+
+    glTexCoord2f(0,0);
+    glVertex3f(length/2, height/2, -breadth/2);
+    glTexCoord2f(0,1);
+    glVertex3f(length/2, height/2, breadth/2);
+    glTexCoord2f(1,1);
+    glVertex3f(length/2, -height/2, breadth/2);
+    glTexCoord2f(1,0);
+    glVertex3f(length/2, -height/2, -breadth/2);
+    glEnd();
 }
+
+
 
 void Drawing::drawSphere(GLint slices, GLint stacks,bool flag)
 {
