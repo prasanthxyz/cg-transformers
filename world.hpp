@@ -16,10 +16,13 @@ class World
         Light L1;
         Light L2;
         Texture tex;
-
+	int light1,light2;
+	bool capture;
+	GLfloat ball_x,ball_y,ball_z;
         World();
         void drawOutCube();
         void display();
+	void drawBall();
 };
 
 #endif

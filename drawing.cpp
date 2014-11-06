@@ -216,7 +216,6 @@ void Drawing::drawSphere(GLint slices, GLint stacks,bool flag)
                 glNormal3f( x, y, z ) ;
             else
                 glNormal3f( -x, -y, -z ) ;
-
             glVertex3f(x, y, z) ;
             x = cosf(i + M_PI/stacks) * sinf(j);
             y = sinf(i + M_PI/stacks) * sinf(j);

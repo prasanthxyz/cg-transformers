@@ -3,6 +3,12 @@
 World::World()
 {
     tex.loadTextures();
+    light1=1;
+    light2=1;
+    capture=false;
+    ball_x=-8.0;
+    ball_y=-9.0;
+    ball_z=-10.0;
     L1 = Light(GL_LIGHT1, 5,5,5);
     L2 = Light(GL_LIGHT2, -5,-5,-5);
 }
@@ -27,5 +33,16 @@ void World::display()
     drawOutCube();
 //    T.movement(window);
     T.display();
+    drawBall();
 
+}
+
+void World::drawBall()
+{
+Drawing D;
+glPushMatrix();
+glColor3f(1,1,1);
+glTranslatef(ball_x,ball_y,ball_z);
+D.drawSphere(36,36,true);
+glPopMatrix();
 }

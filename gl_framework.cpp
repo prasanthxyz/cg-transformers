@@ -59,6 +59,10 @@ if(key==GLFW_KEY_F1&&action==GLFW_PRESS)
 
 if(key==GLFW_KEY_F2&&action==GLFW_PRESS)
 	anim.record();
+if(key==GLFW_KEY_F3&&action==GLFW_PRESS)
+	W.capture=true;
+if(key==GLFW_KEY_F4&&action==GLFW_PRESS)
+	W.capture=false;
    if(W.T.flag)
     {
         if(glfwGetKey(window, GLFW_KEY_UP))
@@ -82,24 +86,24 @@ if(key==GLFW_KEY_F2&&action==GLFW_PRESS)
         }
         if(glfwGetKey(window, GLFW_KEY_RIGHT))
         {
-            W.T.wheelturn=-30;
-            if(angle)
-                W.T.fully=(W.T.fully-angle)%360;
-        }
-        else if(glfwGetKey(window, GLFW_KEY_LEFT))
-        {
-            W.T.wheelturn=30;
-            if(angle)
-                W.T.fully=(W.T.fully+angle)%360;
-        }
-        else
-        {
+		W.T.wheelturn=-30;
+		if(angle)
+			W.T.fully=(W.T.fully-angle)%360;
+	}
+	else if(glfwGetKey(window, GLFW_KEY_LEFT))
+	{
+		W.T.wheelturn=30;
+		if(angle)
+			W.T.fully=(W.T.fully+angle)%360;
+	}
+	else
+	{
 		W.T.wheelturn=0;
 	}
 
     }
    else{
-	   if(glfwGetKey(window, GLFW_KEY_UP))
+	   if(key==GLFW_KEY_UP&&action==GLFW_PRESS)
 	   {
 		   W.T.lfootrot=0;
 		   W.T.rfootrot=0;
@@ -107,16 +111,90 @@ if(key==GLFW_KEY_F2&&action==GLFW_PRESS)
 		   result=W.T.fully*(M_PI/180);
 		   W.T.car_z=W.T.car_z+0.3*cos(result);
 		   W.T.car_x=W.T.car_x+0.3*sin(result);
-		 /*  if(W.T.walkflag)
-		   W.T.car_y=W.T.car_y+0.2;
-		   else
-		   W.T.car_y=W.T.car_y-0.2;
-		   if(W.T.car_y>=-4.8)
+		
+		   if(W.T.walkflag)
+		   {
+			   W.T.car_y=W.T.car_y+0.05;
+			   if(W.T.car_y<-4.93){
+				   W.T.rltforward=W.T.rltforward+10;
+				   W.T.rlbforward=W.T.rlbforward-5;
+				   W.T.lltforward=W.T.lltforward-10;
+				   W.T.llbforward=W.T.llbforward+5;
+				   W.T.rshoulderforward=W.T.rshoulderforward+50;
+				   W.T.lshoulderforward=W.T.lshoulderforward+50;
+		 W.T.relbow=60;
+				   W.T.lelbow=-60;
+	   }
+			   else
+			   {
+				   W.T.rltforward=W.T.rltforward-10;
+				   W.T.rlbforward=W.T.rlbforward+5;
+				   W.T.lltforward=W.T.lltforward+10;
+				   W.T.llbforward=W.T.llbforward-5;
+
+				   W.T.rshoulderforward=W.T.rshoulderforward-50;
+				   W.T.lshoulderforward=W.T.lshoulderforward-50;
+				   W.T.relbow=60;
+				   W.T.lelbow=-60;
+			   }
+
+		   }	   else
+		   {
+			   W.T.car_y=W.T.car_y-0.05;
+			   if(W.T.car_y>-4.97){
+				   W.T.rltforward=W.T.rltforward-10;
+				   W.T.rlbforward=W.T.rlbforward+5;
+				   W.T.lltforward=W.T.lltforward+10;
+				   W.T.llbforward=W.T.llbforward-5;
+
+				   W.T.rshoulderforward=W.T.rshoulderforward-50;
+				   W.T.lshoulderforward=W.T.lshoulderforward-50;
+				   W.T.relbow=60;
+				   W.T.lelbow=-60;
+			   }
+			   else{
+				   W.T.rltforward=W.T.rltforward+10;
+				   W.T.rlbforward=W.T.rlbforward-5;
+				   W.T.lltforward=W.T.lltforward-10;
+				   W.T.llbforward=W.T.llbforward+5;
+				   W.T.rshoulderforward=W.T.rshoulderforward+50;
+				   W.T.lshoulderforward=W.T.lshoulderforward+50;
+				   W.T.relbow=60;
+				   W.T.lelbow=-60;
+
+
+			   }
+		   }
+		   if(abs(W.T.car_x-W.ball_x)<1.0&&abs(W.T.car_z-W.ball_z)<1.0)
+		   {
+			if(W.T.car_x<=W.ball_x&&W.T.car_z>=W.ball_z)
+			{
+				W.ball_x=W.ball_x+abs(W.T.car_x-W.ball_x)*10.0;
+				W.ball_z=W.ball_z-abs(W.T.car_z-W.ball_z)*10.0;
+			}
+			else if(W.T.car_x>W.ball_x&&W.T.car_z>=W.ball_z)
+			{
+				W.ball_x=W.ball_x-abs(W.T.car_x-W.ball_x)*10.0;
+				W.ball_z=W.ball_z-abs(W.T.car_z-W.ball_z)*10.0;
+			}
+			else if(W.T.car_x<=W.ball_x&&W.T.car_z<=W.ball_z)
+			{
+				W.ball_x=W.ball_x+abs(W.T.car_x-W.ball_x)*10.0;
+				W.ball_z=W.ball_z+abs(W.T.car_z-W.ball_z)*10.0;
+			}
+			else if(W.T.car_x>W.ball_x&&W.T.car_z<=W.ball_z)
+			{
+				W.ball_x=W.ball_x-abs(W.T.car_x-W.ball_x)*10.0;
+				W.ball_z=W.ball_z+abs(W.T.car_z-W.ball_z)*10.0;
+			}
+
+		   }
+		   if(W.T.car_y>=-4.9)
 			   W.T.walkflag=0;
 		   if(W.T.car_y<=-5.0)
-			   W.T.walkflag=1;*/
+			   W.T.walkflag=1;
 	   }
-	   else if(glfwGetKey(window, GLFW_KEY_DOWN))
+	   else if(key==GLFW_KEY_DOWN&&action==GLFW_PRESS)
 	   {
 		   W.T.lfootrot=0;
 		   W.T.rfootrot=0;
@@ -125,6 +203,85 @@ if(key==GLFW_KEY_F2&&action==GLFW_PRESS)
 		   result=W.T.fully*(M_PI/180);
 		   W.T.car_z=W.T.car_z-0.3*cos(result);
 		   W.T.car_x=W.T.car_x-0.3*sin(result);
+		   if(W.T.walkflag)
+		   {
+			   W.T.car_y=W.T.car_y+0.05;
+			   if(W.T.car_y<-4.93){
+				   W.T.rltforward=W.T.rltforward+10;
+				   W.T.rlbforward=W.T.rlbforward-5;
+				   W.T.lltforward=W.T.lltforward-10;
+				   W.T.llbforward=W.T.llbforward+5;
+				   W.T.rshoulderforward=W.T.rshoulderforward+50;
+				   W.T.lshoulderforward=W.T.lshoulderforward+50;
+				   W.T.relbow=60;
+				   W.T.lelbow=-60;
+			   }
+			   else
+			   {
+				   W.T.rltforward=W.T.rltforward-10;
+				   W.T.rlbforward=W.T.rlbforward+5;
+				   W.T.lltforward=W.T.lltforward+10;
+				   W.T.llbforward=W.T.llbforward-5;
+				   W.T.rshoulderforward=W.T.rshoulderforward-50;
+				   W.T.lshoulderforward=W.T.lshoulderforward-50;
+				   W.T.relbow=60;
+				   W.T.lelbow=-60;
+
+			   }
+
+		   }	   else
+		   {
+			   W.T.car_y=W.T.car_y-0.05;
+			   if(W.T.car_y>-4.97){
+				   W.T.rltforward=W.T.rltforward-10;
+				   W.T.rlbforward=W.T.rlbforward+5;
+				   W.T.lltforward=W.T.lltforward+10;
+				   W.T.llbforward=W.T.llbforward-5;
+				   W.T.rshoulderforward=W.T.rshoulderforward-50;
+				   W.T.lshoulderforward=W.T.lshoulderforward-50;
+				   W.T.relbow=60;
+				   W.T.lelbow=-60;
+			   }
+			   else{
+				   W.T.rltforward=W.T.rltforward+10;
+				   W.T.rlbforward=W.T.rlbforward-5;
+				   W.T.lltforward=W.T.lltforward-10;
+				   W.T.llbforward=W.T.llbforward+5;
+				   W.T.rshoulderforward=W.T.rshoulderforward+50;
+				   W.T.lshoulderforward=W.T.lshoulderforward+50;
+				   W.T.relbow=60;
+				   W.T.lelbow=-60;
+			   }
+		   }
+		   if(abs(W.T.car_x-W.ball_x)<2.0&&abs(W.T.car_z-W.ball_z)<2.0)
+		   {
+			if(W.T.car_x<=W.ball_x&&W.T.car_z>=W.ball_z)
+			{
+				W.ball_x=W.ball_x+abs(W.T.car_x-W.ball_x)*10.0;
+				W.ball_z=W.ball_z-abs(W.T.car_z-W.ball_z)*10.0;
+			}
+			else if(W.T.car_x>=W.ball_x&&W.T.car_z>=W.ball_z)
+			{
+				W.ball_x=W.ball_x-abs(W.T.car_x-W.ball_x)*10.0;
+				W.ball_z=W.ball_z-abs(W.T.car_z-W.ball_z)*10.0;
+			}
+			else if(W.T.car_x<=W.ball_x&&W.T.car_z<=W.ball_z)
+			{
+				W.ball_x=W.ball_x+abs(W.T.car_x-W.ball_x)*10.0;
+				W.ball_z=W.ball_z+abs(W.T.car_z-W.ball_z)*10.0;
+			}
+			else if(W.T.car_x>=W.ball_x&&W.T.car_z<=W.ball_z)
+			{
+				W.ball_x=W.ball_x-abs(W.T.car_x-W.ball_x)*10.0;
+				W.ball_z=W.ball_z+abs(W.T.car_z-W.ball_z)*10.0;
+			}
+
+		   }
+		   
+		   if(W.T.car_y>=-4.9)
+			   W.T.walkflag=0;
+		   if(W.T.car_y<=-5.0)
+			   W.T.walkflag=1;
 
 	   }
 	   if(glfwGetKey(window, GLFW_KEY_RIGHT))
@@ -387,19 +544,19 @@ if(key==GLFW_KEY_F2&&action==GLFW_PRESS)
             W.T.camFlag = false;
             break;
         case GLFW_KEY_4:
-	    W.T.light1=1;
+	    W.light1=1;
             W.L1.on();
             break;
         case GLFW_KEY_5:
-	    W.T.light1=0;
+	    W.light1=0;
             W.L1.off();
             break;
         case GLFW_KEY_6:
-	    W.T.light2=1;
+	    W.light2=1;
             W.L2.on();
             break;
         case GLFW_KEY_7:
-	    W.T.light2=0;
+	    W.light2=0;
             W.L2.off();
             break;
         case GLFW_KEY_8:

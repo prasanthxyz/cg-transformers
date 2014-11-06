@@ -11,11 +11,12 @@
 using namespace std;
 class Animation{
 public:
-Transformer setVector(string s);
-string getVector(Transformer);
+World setVector(string s);
+string getVector(World);
+void capture_frame(unsigned int);
 void drawScene();
 void playBack();
-void interPolate(Transformer);
+void interPolate(World);
 void record();
 };
 

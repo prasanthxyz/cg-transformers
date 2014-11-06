@@ -17,8 +17,6 @@ Transformer::Transformer()
     flag = 0;
     hd1=0;
     hd2=0;
-    light1=0;
-    light2=0;
 
     fullx=0; fully=0; fullz=0;
     bend=0;walkflag=1;
@@ -391,7 +389,7 @@ void Transformer::tocar()
 	       move=-0.5; backtyretrans=-0.7; fronttyretrans=-0.7;
 	       lftyreshift=0.25; rftyreshift=-0.25;
 	       down=-0.9;
-
+		car_y=-5.0;
 	       carfront=-0.3; carfrontshift=0.5; carfrontinsert=-0.3;
 
 	       flag = 1;
@@ -417,7 +415,7 @@ void Transformer::tohuman()
 		    move=0.0; backtyretrans=0.0; fronttyretrans=0.0;
 		    lftyreshift=0.0; rftyreshift=0.0;
 		    down=0.0;
-
+		    car_y=-5.0;
 		    carfront=0.0; carfrontshift=0.0; carfrontinsert=0.0;
 
 		    flag = 0;
@@ -514,7 +512,7 @@ void Transformer::transform()
 
             return;
         }
-        else if(lshoulderforward<-0){
+        else if(lshoulderforward<0){
             lshoulderforward=(lshoulderforward+5)%360;
             return;
         }

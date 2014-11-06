@@ -27,7 +27,7 @@ class Transformer
         bool hdLights;
         Light hdL1;
         Light hdL2;
-	int hd1,hd2,light1,light2;
+	int hd1,hd2;
 
         //angles and shifting lengths
         int fullx;
