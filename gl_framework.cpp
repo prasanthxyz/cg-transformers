@@ -170,6 +170,7 @@ if(key==GLFW_KEY_F4&&action==GLFW_PRESS)
 			{
 				W.ball_x=W.ball_x+abs(W.T.car_x-W.ball_x)*10.0;
 				W.ball_z=W.ball_z-abs(W.T.car_z-W.ball_z)*10.0;
+                
 			}
 			else if(W.T.car_x>W.ball_x&&W.T.car_z>=W.ball_z)
 			{
