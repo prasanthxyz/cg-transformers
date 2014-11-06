@@ -25,7 +25,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-
     glViewport(0, 0, width, height);
     if(width > height)
     {
@@ -111,7 +110,8 @@ if(key==GLFW_KEY_F4&&action==GLFW_PRESS)
 		   result=W.T.fully*(M_PI/180);
 		   W.T.car_z=W.T.car_z+0.3*cos(result);
 		   W.T.car_x=W.T.car_x+0.3*sin(result);
-		
+
+	
 		   if(W.T.walkflag)
 		   {
 			   W.T.car_y=W.T.car_y+0.05;
@@ -122,7 +122,7 @@ if(key==GLFW_KEY_F4&&action==GLFW_PRESS)
 				   W.T.llbforward=W.T.llbforward+5;
 				   W.T.rshoulderforward=W.T.rshoulderforward+50;
 				   W.T.lshoulderforward=W.T.lshoulderforward+50;
-		 W.T.relbow=60;
+                   W.T.relbow=60;
 				   W.T.lelbow=-60;
 	   }
 			   else
@@ -162,7 +162,6 @@ if(key==GLFW_KEY_F4&&action==GLFW_PRESS)
 				   W.T.relbow=60;
 				   W.T.lelbow=-60;
 
-
 			   }
 		   }
 		   if(abs(W.T.car_x-W.ball_x)<1.0&&abs(W.T.car_z-W.ball_z)<1.0)
@@ -187,7 +186,6 @@ if(key==GLFW_KEY_F4&&action==GLFW_PRESS)
 				W.ball_x=W.ball_x-abs(W.T.car_x-W.ball_x)*10.0;
 				W.ball_z=W.ball_z+abs(W.T.car_z-W.ball_z)*10.0;
 			}
-
 		   }
 		   if(W.T.car_y>=-4.9)
 			   W.T.walkflag=0;
@@ -196,9 +194,10 @@ if(key==GLFW_KEY_F4&&action==GLFW_PRESS)
 	   }
 	   else if(key==GLFW_KEY_DOWN&&action==GLFW_PRESS)
 	   {
+
+
 		   W.T.lfootrot=0;
 		   W.T.rfootrot=0;
-
 		   angle=-5;
 		   result=W.T.fully*(M_PI/180);
 		   W.T.car_z=W.T.car_z-0.3*cos(result);

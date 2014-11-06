@@ -34,9 +34,6 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     }
     //----------------------------------------------------------------------------------------------------
 
-
-
-
     //----------------------------------------------------------------------------------------------------
     // bottom - front(right;left) - back(left;right)
     glBindTexture(GL_TEXTURE_2D, T1);

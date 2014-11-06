@@ -39,5 +39,5 @@ void BMP::loadBmpTexture(const char *fileName, GLuint texture)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
 
-    delete data;
+    delete[] data;
 }

@@ -391,8 +391,10 @@ void Transformer::tocar()
 	       down=-0.9;
 		car_y=-5.0;
 	       carfront=-0.3; carfrontshift=0.5; carfrontinsert=-0.3;
-
+walkflag=0;
 	       flag = 1;
+
+
 	       break;
        }
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -417,8 +419,9 @@ void Transformer::tohuman()
 		    down=0.0;
 		    car_y=-5.0;
 		    carfront=0.0; carfrontshift=0.0; carfrontinsert=0.0;
-
+walkflag=1;
 		    flag = 0;
+
 		    break;
         }
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);

@@ -29,9 +29,9 @@ void World::display()
 {
     glClear (GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
-//    GLFWwindow* window =glfwGetCurrentContext();
+    //    GLFWwindow* window =glfwGetCurrentContext();
     drawOutCube();
-//    T.movement(window);
+    //    T.movement(window);
     T.display();
     drawBall();
 
@@ -39,10 +39,10 @@ void World::display()
 
 void World::drawBall()
 {
-Drawing D;
-glPushMatrix();
-glColor3f(1,1,1);
-glTranslatef(ball_x,ball_y,ball_z);
-D.drawSphere(36,36,true);
-glPopMatrix();
+    Drawing D;
+    glPushMatrix();
+    glColor3f(1,1,1);
+    glTranslatef(ball_x,ball_y,ball_z);
+    D.drawSphere(36,36,true);
+    glPopMatrix();
 }

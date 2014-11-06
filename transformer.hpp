@@ -5,7 +5,6 @@
 #include <cmath>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
 #include "drawing.hpp"
 #include "texture.hpp"
 #include "light.hpp"

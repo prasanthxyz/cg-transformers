@@ -8,7 +8,9 @@
 #include <sstream>
 #include <string>
 #include <fstream>
+
 using namespace std;
+
 class Animation{
 public:
 World setVector(string s);
