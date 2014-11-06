@@ -11,15 +11,16 @@
 
 using namespace std;
 
-class Animation{
+class Animation
+{
 public:
-World setVector(string s);
-string getVector(World);
-void capture_frame(unsigned int);
-void drawScene();
-void playBack();
-void interPolate(World);
-void record();
+    World setVector(string s);
+    string getVector(World);
+    void capture_frame(unsigned int);
+    void drawScene();
+    void playBack();
+    void interPolate(World);
+    void record();
 };
 
 #endif

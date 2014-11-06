@@ -1,78 +1,6 @@
 #include "transformer.hpp"
 #include <iostream>
 using namespace std;
-/*
-void Transformer::movement(GLFWwindow* window)
-{
-    double result;
-    int angle=0;
-    if(glfwGetKey(window, GLFW_KEY_UP)==GLFW_PRESS)
-    {
-        angle=5;
-        wheelturn=0;
-        result=fully*(M_PI/180);
-        car_x=car_x+0.01*cos(result);
-        car_z=car_z-0.01*sin(result);
-        wheelrot=(wheelrot+3)%360;
-    }
-
-    else if(glfwGetKey(window, GLFW_KEY_DOWN)==GLFW_PRESS)
-    {
-        angle=-5;
-        wheelturn=0;
-        result=fully*(M_PI/180);
-        car_x=car_x-0.01*cos(result);
-        car_z=car_z+0.01*sin(result);
-        wheelrot=(wheelrot-3)%360;
-
-    }
-    if(glfwGetKey(window, GLFW_KEY_RIGHT)==GLFW_PRESS)
-    {
-        wheelturn=-30;
-        if(angle){
-            //   fully=fully+5;
-            fully=(fully-angle)%360;
-            if(fully<0)
-                fully=360+fully;
-            //cout <<fully<< " ";
-        }
-
-    }
-
-    else if(glfwGetKey(window, GLFW_KEY_LEFT)==GLFW_PRESS)
-    {
-        wheelturn=30;
-        if(angle){
-            fully=(fully+angle)%360;
-            if(fully<0)
-                fully=fully+360;
-        }
-    }
-    else
-    {
-        wheelturn=0;
-     }
-   if(camFlag)
-    {
-        float cx, cy, cz;
-        float fx, fy, fz;
-        getFront(&cx,&cy,&cz,3.5);
-        getFront(&fx,&fy,&fz,6);
-        glLoadIdentity();
-        gluLookAt(cx,-4,cz, fx,-4.5,fz, 0,1,0);
-    }
-    if(cam2Flag)
-    {
-        float cx, cy, cz;
-        float fx, fy, fz;
-        getFront(&cx,&cy,&cz,-3.5);
-        getFront(&fx,&fy,&fz, 3);
-        glLoadIdentity();
-        gluLookAt(cx,0,cz, car_x,0,car_z, 0,1,0);
-    }
-
-}
-*/
 
 void Transformer::drawHip()
 {
@@ -107,7 +35,7 @@ void Transformer::drawNeck()
     glTranslatef(0.0,0.0+down,0.0);
     glPushMatrix();
     glCallList(neck);
-    glPopMatrix(); 
+    glPopMatrix();
 }
 
 void Transformer::drawHead()
@@ -151,7 +79,7 @@ void Transformer::drawRightHand()
 
     glPushMatrix();
     glCallList(right_arm);
-    glPopMatrix(); 
+    glPopMatrix();
     glTranslatef(1.1,0.0,0.0);
 
     glPushMatrix();
@@ -237,7 +165,7 @@ void Transformer::drawRightLeg()
     glPushMatrix(); //rleg+rknee
     glRotatef((GLfloat)rfootrot,1.0,0.0,0.0);
     glCallList(right_foot);
-    glPopMatrix(); 
+    glPopMatrix();
     glPopMatrix();
 
     glPopMatrix();
@@ -275,12 +203,12 @@ void Transformer::drawLeftLeg()
     glPushMatrix(); //lleg+lknee
     glTranslatef(0.0,-carfrontshift,0.0);
     glCallList(left_calf);
-    glPopMatrix(); 
+    glPopMatrix();
 
     glPushMatrix(); //lleg+lknee
     glRotatef((GLfloat)lfootrot,1.0,0.0,0.0);
     glCallList(left_foot);
-    glPopMatrix(); 
+    glPopMatrix();
     glPopMatrix();
 
     glPopMatrix();
@@ -291,9 +219,6 @@ void Transformer::drawLeftLeg()
 void Transformer::display()
 {
 
-//     movement(glfwGetCurrentContext());
-    //glMatrixMode(GL_MODELVIEW);
-    //glLoadIdentity();
     setLights();
     drawHip();
     drawTorso();

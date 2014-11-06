@@ -7,13 +7,14 @@
 #include "texture.hpp"
 
 World W;
+Texture Tex;
 
 void displayWorld()
 {
-   W.display();
+    W.display();
 }
 
-int main (int argc, char *argv[]) 
+int main (int argc, char *argv[])
 {
     //! The pointer to the GLFW window
     GLFWwindow* window;
@@ -37,7 +38,7 @@ int main (int argc, char *argv[])
         return -1;
     }
 
-    //! Make the window's context current 
+    //! Make the window's context current
     glfwMakeContextCurrent(window);
     //Keyboard Callback
     //OurOwn: set up key_callback
@@ -52,11 +53,10 @@ int main (int argc, char *argv[])
     framebuffer_size_callback(window, win_width, win_height);
     //Initialize GL state
     initGL();
-   
-    //Texture tex;
-    //tex.loadTextures();
 
-    //T = Transformer();
+    //Load the textures
+    Tex.loadTextures();
+
     W = World();
 
     // Loop until the user closes the window

@@ -207,7 +207,7 @@ void Drawing::drawSphere(GLint slices, GLint stacks,bool flag)
         {
             x = cosf(i) * sinf(j);
             y = sinf(i) * sinf(j);
-            z = cosf(j) ; 
+            z = cosf(j) ;
 
             if(flag)
                 glNormal3f( x, y, z ) ;
@@ -255,12 +255,14 @@ void Drawing::drawCylinder(float radius,float height,GLint numMajor, GLint numMi
     int i, j;
 
     glBindTexture(GL_TEXTURE_2D, Tex);
-    for (i = 0; i < numMajor; ++i) {
+    for (i = 0; i < numMajor; ++i)
+    {
         GLfloat z0 = 0.5 * height - i * majorStep;
         GLfloat z1 = z0 - majorStep;
 
         glBegin(GL_TRIANGLE_STRIP);
-        for (j = 0; j <= numMinor; ++j) {
+        for (j = 0; j <= numMinor; ++j)
+        {
             double a = j * minorStep;
             GLfloat x = radius * cos(a);
             GLfloat y = radius * sin(a);
