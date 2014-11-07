@@ -39,7 +39,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     fH = tan(90.0 / 360 * pi ) * 1.0;
     fW = fH * aspect;
     gluPerspective(100, aspect, 1,5000);
-    gluLookAt(0,0,3,0,0,0,0,1,0);
+    gluLookAt(0,0,5,0,0,0,0,1,0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef (0.0, 0.0, -6.0);
@@ -158,8 +158,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             W.T.car_z=W.T.car_z+0.3*cos(result);
             W.T.car_x=W.T.car_x+0.3*sin(result);
 
-
-            if(W.T.walkflag)
+           if(W.T.walkflag)
             {
                 W.T.car_y=W.T.car_y+0.05;
                 if(W.T.car_y<-4.93)
@@ -179,7 +178,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
                     W.T.rlbforward=W.T.rlbforward+5;
                     W.T.lltforward=W.T.lltforward+10;
                     W.T.llbforward=W.T.llbforward-5;
-
                     W.T.rshoulderforward=W.T.rshoulderforward-50;
                     W.T.lshoulderforward=W.T.lshoulderforward-50;
                     W.T.relbow=60;

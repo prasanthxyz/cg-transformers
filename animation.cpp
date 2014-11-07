@@ -107,7 +107,7 @@ void Animation::interPolate(World nextState)
 
     while(1)
     {
-        if(abs(W.ball_x-nextState.ball_x)<0.06&&abs(W.ball_z-nextState.ball_z)<0.06&&abs(W.T.car_x-nextState.T.car_x)<0.06&&abs(W.T.car_y-nextState.T.car_y)<0.006&&abs(W.T.car_z-nextState.T.car_z)<0.06&&abs(W.T.rftyreshift-nextState.T.rftyreshift)<0.03&&abs(W.T.lftyreshift-nextState.T.lftyreshift)<0.03&&abs(W.T.down-nextState.T.down)<0.06&&abs(W.T.carfront-nextState.T.carfront)<0.06&&abs(W.T.carfrontshift-nextState.T.carfrontshift)<0.06&&abs(W.T.carfrontinsert-nextState.T.carfrontinsert)<0.06&&abs(W.T.rfootrot-nextState.T.rfootrot)<3&&abs(W.T.lfootrot-nextState.T.lfootrot)<3&&abs(W.T.fronttyretrans-nextState.T.fronttyretrans)<0.06&&abs(W.T.backtyretrans-nextState.T.backtyretrans)<0.06&&abs(W.T.fullx-nextState.T.fullx)<3&&abs(W.T.fully-nextState.T.fully)<3&&abs(W.T.fullz-nextState.T.fullz)<3&&abs(W.T.bend-nextState.T.bend)<3&&abs(W.T.headside-nextState.T.headside)<3&&abs(W.T.headforward-nextState.T.headforward)<3&&abs(W.T.headcurve-nextState.T.headcurve)<3&&abs(W.T.rshoulderside-nextState.T.rshoulderside)<3&&abs(W.T.rshoulderforward-nextState.T.rshoulderforward)<3&&abs(W.T.rshouldercurve-nextState.T.rshouldercurve)<3&&abs(W.T.relbow-nextState.T.relbow)<3&&abs(W.T.lshoulderside-nextState.T.lshoulderside)<3&&abs(W.T.lshoulderforward-nextState.T.lshoulderforward)<3&&abs(W.T.lshouldercurve-nextState.T.lshouldercurve)<3&&abs(W.T.lelbow-nextState.T.lelbow)<3&&abs(W.T.rltside-nextState.T.rltside)<3&&abs(W.T.rltforward-nextState.T.rltforward)<3&&abs(W.T.rltcurve-nextState.T.rltcurve)<3&&abs(W.T.rlbforward-nextState.T.rlbforward)<3&&abs(W.T.lltside-nextState.T.lltside)<3&&abs(W.T.lltforward-nextState.T.lltforward)<3&&abs(W.T.lltcurve-nextState.T.lltcurve)<3&&abs(W.T.llbforward-nextState.T.llbforward)<3&&abs(W.T.vehicleback-nextState.T.vehicleback)<3&&abs(W.T.carback-nextState.T.carback)<3)
+        if(abs(W.ball_x-nextState.ball_x)<0.06&&abs(W.ball_z-nextState.ball_z)<0.06&&abs(W.T.car_x-nextState.T.car_x)<0.06&&abs(W.T.car_y-nextState.T.car_y)<0.006&&abs(W.T.car_z-nextState.T.car_z)<0.06&&abs(W.T.rftyreshift-nextState.T.rftyreshift)<0.03&&abs(W.T.lftyreshift-nextState.T.lftyreshift)<0.03&&abs(W.T.down-nextState.T.down)<0.06&&abs(W.T.carfront-nextState.T.carfront)<0.06&&abs(W.T.carfrontshift-nextState.T.carfrontshift)<0.06&&abs(W.T.carfrontinsert-nextState.T.carfrontinsert)<0.06&&abs(W.T.rfootrot-nextState.T.rfootrot)<3&&abs(W.T.lfootrot-nextState.T.lfootrot)<3&&abs(W.T.fronttyretrans-nextState.T.fronttyretrans)<0.06&&abs(W.T.backtyretrans-nextState.T.backtyretrans)<0.06&&abs(W.T.fullx-nextState.T.fullx)<3&&abs(W.T.fully-nextState.T.fully)<3&&abs(W.T.fullz-nextState.T.fullz)<3&&abs(W.T.headside-nextState.T.headside)<3&&abs(W.T.headforward-nextState.T.headforward)<3&&abs(W.T.headcurve-nextState.T.headcurve)<3&&abs(W.T.rshoulderside-nextState.T.rshoulderside)<3&&abs(W.T.rshoulderforward-nextState.T.rshoulderforward)<3&&abs(W.T.rshouldercurve-nextState.T.rshouldercurve)<3&&abs(W.T.relbow-nextState.T.relbow)<3&&abs(W.T.lshoulderside-nextState.T.lshoulderside)<3&&abs(W.T.lshoulderforward-nextState.T.lshoulderforward)<3&&abs(W.T.lshouldercurve-nextState.T.lshouldercurve)<3&&abs(W.T.lelbow-nextState.T.lelbow)<3&&abs(W.T.rltside-nextState.T.rltside)<3&&abs(W.T.rltforward-nextState.T.rltforward)<3&&abs(W.T.rltcurve-nextState.T.rltcurve)<3&&abs(W.T.rlbforward-nextState.T.rlbforward)<3&&abs(W.T.lltside-nextState.T.lltside)<3&&abs(W.T.lltforward-nextState.T.lltforward)<3&&abs(W.T.lltcurve-nextState.T.lltcurve)<3&&abs(W.T.llbforward-nextState.T.llbforward)<3&&abs(W.T.vehicleback-nextState.T.vehicleback)<3&&abs(W.T.carback-nextState.T.carback)<3)
         {
             break;
         }
@@ -161,6 +161,7 @@ void Animation::interPolate(World nextState)
             W.T.hd2=0;
             W.T.hdL2.off();
         }
+        /*
         if(abs(W.T.bend-nextState.T.bend)>=3)
         {
             if(W.T.bend>nextState.T.bend)
@@ -171,7 +172,7 @@ void Animation::interPolate(World nextState)
             {
                 W.T.bend=(W.T.bend+5)%360;
             }
-        }
+        }*/
         if(abs(W.T.headside-nextState.T.headside)>=3)
         {
             if(W.T.headside>nextState.T.headside)
@@ -584,7 +585,7 @@ void Animation::interPolate(World nextState)
                 W.T.car_z=W.T.car_z+0.1;
             }
         }
-        if(abs(W.ball_x-nextState.ball_x)>=0.06||abs(W.ball_z-nextState.ball_z)>=0.06)
+        if(abs(W.ball_x-nextState.ball_x)>=0.06)
         {
             if(W.ball_x>nextState.ball_x)
             {
@@ -594,7 +595,7 @@ void Animation::interPolate(World nextState)
             {
                 W.ball_x=W.ball_x+0.1;
             }
-            if(W.ball_z>nextState.ball_z)
+           /* if(W.ball_z>nextState.ball_z)
             {
                 W.ball_z=W.ball_z-0.1;
             }
@@ -604,13 +605,16 @@ void Animation::interPolate(World nextState)
             }
             if(i<(balldiff/2))
                 W.ball_y=W.ball_y+0.1;
-            else
+            else{
                 W.ball_y=W.ball_y-0.1;
-            i=i+0.1;
+                W.ball_z=W.ball_z+0.1;
+
+            }
+            i=i+0.1;*/
 
         }
-        /*
-            if(abs(W.ball_y-nextState.ball_y)>=0.06)
+        
+           /* if(abs(W.ball_y-nextState.ball_y)>=0.06)
             {
             if(W.ball_y>nextState.ball_y)
             {
@@ -620,22 +624,28 @@ void Animation::interPolate(World nextState)
             {
             W.ball_y=W.ball_y+0.1;
             }
-
-
-
             }
+            */
             if(abs(W.ball_z-nextState.ball_z)>=0.06)
             {
             if(W.ball_z>nextState.ball_z)
             {
+             
+            W.ball_y=W.ball_y+0.1;
             W.ball_z=W.ball_z-0.1;
             }
             else if(W.ball_z<nextState.ball_z)
             {
+
+            W.ball_y=W.ball_y-0.07;
             W.ball_z=W.ball_z+0.1;
+if(W.ball_y<5){
+if(W.T.bend>-90.0)
+W.T.bend=W.T.bend-1;
+}
             }
             }
-            */
+            
         W.T.wheelturn=nextState.T.wheelturn;
 
 
@@ -663,8 +673,8 @@ void Animation::playBack()
 
     W.T.hd1=0;
     W.T.hd2=0;
-    W.light1=0;
-    W.light2=0;
+    W.light1=1;
+    W.light2=1;
     W.T.flag = 0;
 
     W.T.fullx=0;
