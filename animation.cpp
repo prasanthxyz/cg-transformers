@@ -82,9 +82,9 @@ void Animation::drawScene()
     GLFWwindow * win=glfwGetCurrentContext();
     displayWorld();
     glfwSwapBuffers(win);
+    glfwPollEvents();
     glfwSetTime(0);
-
-    while(glfwGetTime()<=0.05);
+    while(glfwGetTime()<=0.01);
 }
 void Animation::record()
 {
@@ -642,6 +642,7 @@ void Animation::interPolate(World nextState)
         drawScene();
         if(W.capture)
         {
+            framenum++;
             capture_frame(framenum);
         }
     }

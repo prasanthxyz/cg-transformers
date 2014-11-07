@@ -61,6 +61,53 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         W.capture=true;
     if(key==GLFW_KEY_F4&&action==GLFW_PRESS)
         W.capture=false;
+
+    //camera keys for matrix
+    if(key == GLFW_KEY_F5 && action == GLFW_PRESS)
+    {
+        glLoadIdentity();
+        //gluLookAt(5,-4,0, W.T.car_x,W.T.car_y,W.T.car_z, 0,1,0);
+        gluLookAt(5,-4,0, 0,0,0, 0,1,0);
+    }
+    if(key == GLFW_KEY_F6 && action == GLFW_PRESS)
+    {
+        glLoadIdentity();
+        //gluLookAt(5,-4,-25, W.T.car_x,W.T.car_y,W.T.car_z, 0,1,0);
+        gluLookAt(5,-4,-25, 0,0,0, 0,1,0);
+    }
+    if(key == GLFW_KEY_F7 && action == GLFW_PRESS)
+    {
+        glLoadIdentity();
+        //gluLookAt(0,-4,-25, W.T.car_x,W.T.car_y,W.T.car_z, 0,1,0);
+        gluLookAt(0,-4,-25, 0,0,0, 0,1,0);
+    }
+    if(key == GLFW_KEY_F8 && action == GLFW_PRESS)
+    {
+        glLoadIdentity();
+        //gluLookAt(-5,-4,-25, W.T.car_x,W.T.car_y,W.T.car_z, 0,1,0);
+        gluLookAt(-5,-4,-25, 0,0,0, 0,1,0);
+    }
+    if(key == GLFW_KEY_F9 && action == GLFW_PRESS)
+    {
+        glLoadIdentity();
+        //gluLookAt(-5,-4,0, W.T.car_x,W.T.car_y,W.T.car_z, 0,1,0);
+        gluLookAt(-5,-4,0, 0,0,0, 0,1,0);
+    }
+    if(key == GLFW_KEY_F10 && action == GLFW_PRESS)
+    {
+        
+    }
+    /*if(key == GLFW_KEY_F11 && action == GLFW_PRESS)
+      {
+      glLoadIdentity();
+      gluLookAt(5,0,0, W.T.car_x,W.T.car_y,W.T.car_z, 0,1,0);
+        }
+    if(key == GLFW_KEY_F12 && action == GLFW_PRESS)
+    {
+    glLoadIdentity();
+        gluLookAt(5,0,0, W.T.car_x,W.T.car_y,W.T.car_z, 0,1,0);
+    } */
+
     if(W.T.flag)
     {
         if(glfwGetKey(window, GLFW_KEY_UP))
@@ -612,11 +659,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             if(W.T.flag==0)
             {
                 W.T.tocar();
-                //W.T.flag = 1;
             }
             else
             {
-                //W.T.flag = 0;
                 W.T.tohuman();
             }
         }
