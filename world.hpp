@@ -15,7 +15,6 @@ class World
         Transformer T;
         Light L1;
         Light L2;
-        Texture tex;
 	int light1,light2;
 	bool capture;
 	GLfloat ball_x,ball_y,ball_z;

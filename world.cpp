@@ -2,7 +2,6 @@
 
 World::World()
 {
-    tex.loadTextures();
     light1=1;
     light2=1;
     capture=false;
@@ -15,11 +14,12 @@ World::World()
 
 void World::drawOutCube()
 {
+    extern Texture Tex;
     Drawing D;
     glPushMatrix();
     //glScalef(50,20,35);
     glScalef(70,70,70);
-    D.drawCube(tex.textures[tex.WTOP],tex.textures[tex.WBOTTOM], tex.textures[tex.WFAR],tex.textures[tex.WNEAR], tex.textures[tex.WLEFT],tex.textures[tex.WRIGHT]);
+    D.drawCube(Tex.textures[Tex.WTOP],Tex.textures[Tex.WBOTTOM], Tex.textures[Tex.WFAR],Tex.textures[Tex.WNEAR], Tex.textures[Tex.WLEFT],Tex.textures[Tex.WRIGHT]);
     //D.drawSphere(36,36,false);
     //D.drawCylinder(36,36,false);
     glPopMatrix();

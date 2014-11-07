@@ -12,8 +12,6 @@ Transformer::Transformer()
     hdL1 = Light(GL_LIGHT3, 0,0,0, true);
     hdL2 = Light(GL_LIGHT4, 0,0,0, true);
 
-    tex.loadTextures();
-
     flag = 0;
     hd1=0;
     hd2=0;
@@ -157,20 +155,22 @@ void Transformer::lCalfFB(int angle)
 
 void Transformer::list_left_shoulder()
 {
+    extern Texture Tex;
     left_shoulder = glGenLists(1);
     glNewList(left_shoulder, GL_COMPILE);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.35,0.4,36,36,tex.textures[tex.TYRE],tex.textures[tex.TYRE],tex.textures[tex.TYRETEX]);
+    draw.drawCylinder(0.35,0.4,36,36,Tex.textures[Tex.TYRE],Tex.textures[Tex.TYRE],Tex.textures[Tex.TYRETEX]);
     glEndList();
 }
 void Transformer::list_left_arm()
 {
+    extern Texture Tex;
     left_arm=glGenLists(1);
     glNewList(left_arm,GL_COMPILE);
 
     glTranslatef (0.5, 0.0, 0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.3,1.2,36,36,tex.textures[tex.SPARETYRE],tex.textures[tex.SPARETYRE],tex.textures[tex.MILITARY]);
+    draw.drawCylinder(0.3,1.2,36,36,Tex.textures[Tex.SPARETYRE],Tex.textures[Tex.SPARETYRE],Tex.textures[Tex.MILITARY]);
 
     glEndList();
 }
@@ -184,20 +184,22 @@ void Transformer::list_left_elbow()
 }
 void Transformer::list_left_forearm()
 {
+    extern Texture Tex;
     left_forearm = glGenLists(1);
     glNewList(left_forearm,GL_COMPILE);
     glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.2,1.2,36,36,tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY]);
+    draw.drawCylinder(0.2,1.2,36,36,Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY]);
     glEndList();
 }
 void Transformer::list_left_palm()
 {
+    extern Texture Tex;
     left_palm = glGenLists(1);
     glNewList(left_palm,GL_COMPILE);
     glTranslatef(1.5,0.0,0.0);
     glScalef(0.6,0.5,0.2);
-    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY]);
+    draw.drawCube(Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY]);
     glEndList();
 }
 
@@ -213,71 +215,79 @@ void Transformer::list_right_elbow()
 }
 void Transformer::list_right_shoulder()
 {
+    extern Texture Tex;
     right_shoulder = glGenLists(1);
     glNewList(right_shoulder, GL_COMPILE);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.35,0.4,36,36,tex.textures[tex.TYRE],tex.textures[tex.TYRE],tex.textures[tex.TYRETEX]);
+    draw.drawCylinder(0.35,0.4,36,36,Tex.textures[Tex.TYRE],Tex.textures[Tex.TYRE],Tex.textures[Tex.TYRETEX]);
     glEndList();
 }
 void Transformer::list_right_arm()
 {
+    extern Texture Tex;
     right_arm = glGenLists(1);
     glNewList(right_arm, GL_COMPILE);
     glTranslatef (0.5, 0.0, 0.0);
     glRotatef(90.0f, 0.0f,1.0f, 0.0f);
-    draw.drawCylinder(0.3,1.2,36,36,tex.textures[tex.SPARETYRE],tex.textures[tex.SPARETYRE],tex.textures[tex.MILITARY]);
+    draw.drawCylinder(0.3,1.2,36,36,Tex.textures[Tex.SPARETYRE],Tex.textures[Tex.SPARETYRE],Tex.textures[Tex.MILITARY]);
     glEndList();
 }
 void Transformer::list_right_forearm()
 {
+    extern Texture Tex;
     right_forearm = glGenLists(1);
     glNewList(right_forearm, GL_COMPILE);
     glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.2,1.2,36,36,tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY]);
+    draw.drawCylinder(0.2,1.2,36,36,Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY]);
     glEndList();
 }
 void Transformer::list_right_palm()
 {
+    extern Texture Tex;
     right_palm = glGenLists(1);
     glNewList(right_palm,GL_COMPILE);
     glTranslatef(1.5,0.0,0.0);
     glScalef(0.6,0.5,0.2);
-    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY]);
+    draw.drawCube(Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY]);
     glEndList();
 }
 
 void Transformer::list_hip()
 {
+    extern Texture Tex;
     hip = glGenLists(1);
     glNewList(hip, GL_COMPILE);
     glTranslatef(0.0,-1.1,0.0);
     glScalef(1.6,0.3,1.25);
-    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.FRONTPANE],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.HIPRSIDE],tex.textures[tex.HIPLSIDE]);
+    draw.drawCube(Tex.textures[Tex.MILITARY],Tex.textures[Tex.FRONTPANE],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.HIPRSIDE],Tex.textures[Tex.HIPLSIDE]);
     glEndList();
 }
 void Transformer::list_torso()
 {
+    extern Texture Tex;
     torso = glGenLists(1);
     glNewList(torso, GL_COMPILE);
     glScalef(1.6,2.0,1.25);
-    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.MILITARY],tex.textures[tex.RSIDE],tex.textures[tex.LSIDE]);
+    draw.drawCube(Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.MILITARY],Tex.textures[Tex.RSIDE],Tex.textures[Tex.LSIDE]);
     glEndList();
 }
 
 void Transformer::list_head()
 {
+    extern Texture Tex;
     head = glGenLists(1);
     glNewList(head, GL_COMPILE);
-    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.VEHBACK],tex.textures[tex.MILITARY],tex.textures[tex.HDFRONT],tex.textures[tex.FACELEFT], tex.textures[tex.FACERIGHT]);
+    draw.drawCube(Tex.textures[Tex.MILITARY],Tex.textures[Tex.VEHBACK],Tex.textures[Tex.MILITARY],Tex.textures[Tex.HDFRONT],Tex.textures[Tex.FACELEFT], Tex.textures[Tex.FACERIGHT]);
     glEndList();
 }
 
 void Transformer::list_back()
 {
+    extern Texture Tex;
     back = glGenLists(1);
     glNewList(back,GL_COMPILE);
-    draw.drawCube(tex.textures[tex.MILITARY],tex.textures[tex.VEHBACK],tex.textures[tex.MILITARY],tex.textures[tex.HDFRONT],tex.textures[tex.BACKLEFT], tex.textures[tex.BACKRIGHT]);
+    draw.drawCube(Tex.textures[Tex.MILITARY],Tex.textures[Tex.VEHBACK],Tex.textures[Tex.MILITARY],Tex.textures[Tex.HDFRONT],Tex.textures[Tex.BACKLEFT], Tex.textures[Tex.BACKRIGHT]);
     glEndList();
 }
 
@@ -293,20 +303,22 @@ void Transformer::list_neck()
 
 void Transformer::list_right_butt()
 {
+    extern Texture Tex;
     right_butt = glGenLists(1);
     glNewList(right_butt, GL_COMPILE);
     glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-    draw.drawCylinder(0.35,0.6,36,36, tex.textures[tex.TYRE],tex.textures[tex.TYRE],tex.textures[tex.TYRETEX]);
+    draw.drawCylinder(0.35,0.6,36,36, Tex.textures[Tex.TYRE],Tex.textures[Tex.TYRE],Tex.textures[Tex.TYRETEX]);
     glEndList();
 }
 void Transformer::list_right_thigh()
 {
+    extern Texture Tex;
     right_thigh = glGenLists(1);
     glNewList(right_thigh, GL_COMPILE);
     glTranslatef(0.6,0.0,0.0);
     glRotatef(90.0f, 0.0f,1.0f, 0.0f);
     glScalef(0.6,0.6,1.0);
-    draw.drawCube(tex.textures[tex.FRONTRIGHT],tex.textures[tex.FRONTRIGHT],tex.textures[tex.FRONTRIGHT],tex.textures[tex.LIGHTFRONT],tex.textures[tex.BONNETRIGHT],tex.textures[tex.FRONTRIGHT]);
+    draw.drawCube(Tex.textures[Tex.FRONTRIGHT],Tex.textures[Tex.FRONTRIGHT],Tex.textures[Tex.FRONTRIGHT],Tex.textures[Tex.LIGHTFRONT],Tex.textures[Tex.BONNETRIGHT],Tex.textures[Tex.FRONTRIGHT]);
     glEndList();
 }
 void Transformer::list_right_knee()
@@ -319,39 +331,43 @@ void Transformer::list_right_knee()
 }
 void Transformer::list_right_calf()
 {
+    extern Texture Tex;
     right_calf = glGenLists(1);
     glNewList(right_calf, GL_COMPILE);
     glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.3,1.2,36,36,tex.textures[tex.GRILL],tex.textures[tex.GRILL],tex.textures[tex.BONNETMID]);
+    draw.drawCylinder(0.3,1.2,36,36,Tex.textures[Tex.GRILL],Tex.textures[Tex.GRILL],Tex.textures[Tex.BONNETMID]);
     glEndList();
 }
 void Transformer::list_right_foot()
 {
+    extern Texture Tex;
     right_foot = glGenLists(1);
     glNewList(right_foot, GL_COMPILE);
     glTranslatef(1.3,0.0,0.2);
     glScalef(0.2,0.6,0.8);
-    draw.drawCube(tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT],tex.textures[tex.RFOOT]);
+    draw.drawCube(Tex.textures[Tex.RFOOT],Tex.textures[Tex.RFOOT],Tex.textures[Tex.RFOOT],Tex.textures[Tex.RFOOT],Tex.textures[Tex.RFOOT],Tex.textures[Tex.RFOOT]);
     glEndList();
 }
 
 void Transformer::list_left_butt()
 {
+    extern Texture Tex;
     left_butt = glGenLists(1);
     glNewList(left_butt, GL_COMPILE);
     glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-    draw.drawCylinder(0.35,0.6,36,36,tex.textures[tex.TYRE],tex.textures[tex.TYRE],tex.textures[tex.TYRETEX]);
+    draw.drawCylinder(0.35,0.6,36,36,Tex.textures[Tex.TYRE],Tex.textures[Tex.TYRE],Tex.textures[Tex.TYRETEX]);
     glEndList();
 }
 void Transformer::list_left_thigh()
 {
+    extern Texture Tex;
     left_thigh = glGenLists(1);
     glNewList(left_thigh, GL_COMPILE);
     glTranslatef(0.6,0.0,0.0);   
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
     glScalef(0.6,0.6,1.0);
-    draw.drawCube(tex.textures[tex.FRONTLEFT],tex.textures[tex.FRONTLEFT],tex.textures[tex.FRONTLEFT],tex.textures[tex.LIGHTFRONT],tex.textures[tex.BONNETLEFT],tex.textures[tex.FRONTRIGHT]);
+    draw.drawCube(Tex.textures[Tex.FRONTLEFT],Tex.textures[Tex.FRONTLEFT],Tex.textures[Tex.FRONTLEFT],Tex.textures[Tex.LIGHTFRONT],Tex.textures[Tex.BONNETLEFT],Tex.textures[Tex.FRONTRIGHT]);
     glEndList();
 }
 void Transformer::list_left_knee()
@@ -364,20 +380,22 @@ void Transformer::list_left_knee()
 }
 void Transformer::list_left_calf()
 { 
+    extern Texture Tex;
     left_calf = glGenLists(1);
     glNewList(left_calf, GL_COMPILE);
     glTranslatef(0.65,0.0,0.0);
     glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
-    draw.drawCylinder(0.3,1.2,36,36,tex.textures[tex.GRILL],tex.textures[tex.GRILL],tex.textures[tex.BONNETMID]);
+    draw.drawCylinder(0.3,1.2,36,36,Tex.textures[Tex.GRILL],Tex.textures[Tex.GRILL],Tex.textures[Tex.BONNETMID]);
     glEndList();
 }
 void Transformer::list_left_foot()
 { 
+    extern Texture Tex;
     left_foot = glGenLists(1);
     glNewList(left_foot, GL_COMPILE);
     glTranslatef(1.3,0.0,0.2);
     glScalef(0.2,0.6,0.8);
-    draw.drawCube(tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT],tex.textures[tex.LFOOT]);
+    draw.drawCube(Tex.textures[Tex.LFOOT],Tex.textures[Tex.LFOOT],Tex.textures[Tex.LFOOT],Tex.textures[Tex.LFOOT],Tex.textures[Tex.LFOOT],Tex.textures[Tex.LFOOT]);
     glEndList();
 }
 

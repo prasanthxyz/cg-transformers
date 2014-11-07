@@ -7,6 +7,7 @@
 #include "texture.hpp"
 
 World W;
+Texture Tex;
 
 void displayWorld()
 {
@@ -53,10 +54,8 @@ int main (int argc, char *argv[])
     //Initialize GL state
     initGL();
    
-    //Texture tex;
-    //tex.loadTextures();
+    Tex.loadTextures();
 
-    //T = Transformer();
     W = World();
 
     // Loop until the user closes the window

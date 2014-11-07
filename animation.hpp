@@ -12,14 +12,14 @@
 using namespace std;
 
 class Animation{
-public:
-World setVector(string s);
-string getVector(World);
-void capture_frame(unsigned int);
-void drawScene();
-void playBack();
-void interPolate(World);
-void record();
+    public:
+        World setVector(string s);
+        string getVector(World);
+        void capture_frame(unsigned int);
+        void drawScene();
+        void playBack();
+        void interPolate(World);
+        void record();
 };
 
 #endif

@@ -15,9 +15,6 @@ class Transformer
         int flag;
         Drawing draw;
 
-        //Textures
-        Texture tex;
-        
         //Camera
         bool camFlag;
         bool cam2Flag;
