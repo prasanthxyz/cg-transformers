@@ -90,7 +90,7 @@ void Animation::record()
 {
     extern World W;
     string newS=getVector(W);
-    ofstream outfile;	
+    ofstream outfile;
     outfile.open("keyframes.txt",ofstream::out | ofstream::app);
     outfile << newS << endl;
 }
@@ -105,7 +105,8 @@ void Animation::interPolate(World nextState)
     else
         balldiff=abs(W.ball_z-nextState.ball_z);
 
-    while(1){
+    while(1)
+    {
         if(abs(W.ball_x-nextState.ball_x)<0.06&&abs(W.ball_z-nextState.ball_z)<0.06&&abs(W.T.car_x-nextState.T.car_x)<0.06&&abs(W.T.car_y-nextState.T.car_y)<0.006&&abs(W.T.car_z-nextState.T.car_z)<0.06&&abs(W.T.rftyreshift-nextState.T.rftyreshift)<0.03&&abs(W.T.lftyreshift-nextState.T.lftyreshift)<0.03&&abs(W.T.down-nextState.T.down)<0.06&&abs(W.T.carfront-nextState.T.carfront)<0.06&&abs(W.T.carfrontshift-nextState.T.carfrontshift)<0.06&&abs(W.T.carfrontinsert-nextState.T.carfrontinsert)<0.06&&abs(W.T.rfootrot-nextState.T.rfootrot)<3&&abs(W.T.lfootrot-nextState.T.lfootrot)<3&&abs(W.T.fronttyretrans-nextState.T.fronttyretrans)<0.06&&abs(W.T.backtyretrans-nextState.T.backtyretrans)<0.06&&abs(W.T.fullx-nextState.T.fullx)<3&&abs(W.T.fully-nextState.T.fully)<3&&abs(W.T.fullz-nextState.T.fullz)<3&&abs(W.T.bend-nextState.T.bend)<3&&abs(W.T.headside-nextState.T.headside)<3&&abs(W.T.headforward-nextState.T.headforward)<3&&abs(W.T.headcurve-nextState.T.headcurve)<3&&abs(W.T.rshoulderside-nextState.T.rshoulderside)<3&&abs(W.T.rshoulderforward-nextState.T.rshoulderforward)<3&&abs(W.T.rshouldercurve-nextState.T.rshouldercurve)<3&&abs(W.T.relbow-nextState.T.relbow)<3&&abs(W.T.lshoulderside-nextState.T.lshoulderside)<3&&abs(W.T.lshoulderforward-nextState.T.lshoulderforward)<3&&abs(W.T.lshouldercurve-nextState.T.lshouldercurve)<3&&abs(W.T.lelbow-nextState.T.lelbow)<3&&abs(W.T.rltside-nextState.T.rltside)<3&&abs(W.T.rltforward-nextState.T.rltforward)<3&&abs(W.T.rltcurve-nextState.T.rltcurve)<3&&abs(W.T.rlbforward-nextState.T.rlbforward)<3&&abs(W.T.lltside-nextState.T.lltside)<3&&abs(W.T.lltforward-nextState.T.lltforward)<3&&abs(W.T.lltcurve-nextState.T.lltcurve)<3&&abs(W.T.llbforward-nextState.T.llbforward)<3&&abs(W.T.vehicleback-nextState.T.vehicleback)<3&&abs(W.T.carback-nextState.T.carback)<3)
         {
             break;
@@ -114,49 +115,60 @@ void Animation::interPolate(World nextState)
             W.T.flag=1;
         else
             W.T.flag=0;
-        if(W.T.flag){
+        if(W.T.flag)
+        {
             W.T.move=-0.5;
         }
         else
             W.T.move=0.0;
-        if(nextState.light1){
+        if(nextState.light1)
+        {
             W.light1=1;
             W.L1.on();
         }
-        else{
+        else
+        {
             W.light1=0;
             W.L1.off();
         }
-        if(nextState.light2){
+        if(nextState.light2)
+        {
             W.light2=1;
             W.L2.on();
         }
-        else{
+        else
+        {
             W.light2=0;
             W.L2.off();
         }
-        if(nextState.T.hd1){
+        if(nextState.T.hd1)
+        {
             W.T.hd1=1;
             W.T.hdL1.on();
         }
-        else{
+        else
+        {
             W.T.hd1=0;
             W.T.hdL1.off();
         }
-        if(nextState.T.hd2){
+        if(nextState.T.hd2)
+        {
             W.T.hd2=1;
             W.T.hdL2.on();
         }
-        else{
+        else
+        {
             W.T.hd2=0;
             W.T.hdL2.off();
         }
         if(abs(W.T.bend-nextState.T.bend)>=3)
         {
-            if(W.T.bend>nextState.T.bend){
+            if(W.T.bend>nextState.T.bend)
+            {
                 W.T.bend=(W.T.bend-5)%360;
             }
-            else if(W.T.bend<nextState.T.bend){
+            else if(W.T.bend<nextState.T.bend)
+            {
                 W.T.bend=(W.T.bend+5)%360;
             }
         }
@@ -418,7 +430,7 @@ void Animation::interPolate(World nextState)
             if(W.T.fullz>nextState.T.fullz)
             {
                 W.T.fullz=(W.T.fullz-5)%360;
-            } 
+            }
             else if(W.T.fullz<nextState.T.fullz)
             {
                 W.T.fullz=(W.T.fullz+5)%360;
@@ -466,7 +478,8 @@ void Animation::interPolate(World nextState)
             else if(W.T.backtyretrans<nextState.T.backtyretrans)
             {
                 W.T.backtyretrans=W.T.backtyretrans+0.1;
-            }}
+            }
+        }
         if(abs(W.T.carback-nextState.T.carback)>=3)
         {
             if(W.T.carback>nextState.T.carback)
@@ -489,15 +502,19 @@ void Animation::interPolate(World nextState)
                 W.T.rfootrot=(W.T.rfootrot+5)%360;
             }
         }
-        if(abs(W.T.lfootrot-nextState.T.lfootrot)>=3){
-            if(W.T.lfootrot>nextState.T.lfootrot){
+        if(abs(W.T.lfootrot-nextState.T.lfootrot)>=3)
+        {
+            if(W.T.lfootrot>nextState.T.lfootrot)
+            {
                 W.T.lfootrot=(W.T.lfootrot-5)%360;
             }
-            else if(W.T.lfootrot<nextState.T.lfootrot){
+            else if(W.T.lfootrot<nextState.T.lfootrot)
+            {
                 W.T.lfootrot=(W.T.lfootrot+5)%360;
             }
         }
-        if(abs(W.T.carfront-nextState.T.carfront)>=0.06){
+        if(abs(W.T.carfront-nextState.T.carfront)>=0.06)
+        {
             if(W.T.carfront>nextState.T.carfront)
             {
                 W.T.carfront=W.T.carfront-0.1;
@@ -507,7 +524,8 @@ void Animation::interPolate(World nextState)
                 W.T.carfront=W.T.carfront+0.1;
             }
         }
-        if(abs(W.T.carfrontshift-nextState.T.carfrontshift)>=0.06){
+        if(abs(W.T.carfrontshift-nextState.T.carfrontshift)>=0.06)
+        {
             if(W.T.carfrontshift<nextState.T.carfrontshift)
             {
                 W.T.carfrontshift=W.T.carfrontshift+0.1;
@@ -518,7 +536,8 @@ void Animation::interPolate(World nextState)
             }
 
         }
-        if(abs(W.T.carfrontinsert-nextState.T.carfrontinsert)>=0.06){
+        if(abs(W.T.carfrontinsert-nextState.T.carfrontinsert)>=0.06)
+        {
             if(W.T.carfrontinsert>nextState.T.carfrontinsert)
             {
                 W.T.carfrontinsert=W.T.carfrontinsert-0.1;
@@ -528,7 +547,8 @@ void Animation::interPolate(World nextState)
                 W.T.carfrontinsert=W.T.carfrontinsert+0.1;
             }
         }
-        if(abs(W.T.car_x-nextState.T.car_x)>=0.06){
+        if(abs(W.T.car_x-nextState.T.car_x)>=0.06)
+        {
             if(W.T.car_x>nextState.T.car_x)
             {
                 W.T.car_x=W.T.car_x-0.1;
@@ -542,7 +562,8 @@ void Animation::interPolate(World nextState)
                 W.T.wheelrot=(W.T.wheelrot+3)%360;
             }
         }
-        if(abs(W.T.car_y-nextState.T.car_y)>=0.006){
+        if(abs(W.T.car_y-nextState.T.car_y)>=0.006)
+        {
             if(W.T.car_y>nextState.T.car_y)
             {
                 W.T.car_y=W.T.car_y-0.01;
@@ -552,7 +573,8 @@ void Animation::interPolate(World nextState)
                 W.T.car_y=W.T.car_y+0.01;
             }
         }
-        if(abs(W.T.car_z-nextState.T.car_z)>=0.06){
+        if(abs(W.T.car_z-nextState.T.car_z)>=0.06)
+        {
             if(W.T.car_z>nextState.T.car_z)
             {
                 W.T.car_z=W.T.car_z-0.1;
@@ -587,7 +609,7 @@ void Animation::interPolate(World nextState)
             i=i+0.1;
 
         }
-        /*  
+        /*
             if(abs(W.ball_y-nextState.ball_y)>=0.06)
             {
             if(W.ball_y>nextState.ball_y)
@@ -624,7 +646,8 @@ void Animation::interPolate(World nextState)
         }
     }
 }
-void Animation::playBack(){
+void Animation::playBack()
+{
     extern World W;
     ifstream inputfile;
     inputfile.open("keyframes.txt");
@@ -643,21 +666,46 @@ void Animation::playBack(){
     W.light2=0;
     W.T.flag = 0;
 
-    W.T.fullx=0; W.T.fully=0; W.T.fullz=0;
+    W.T.fullx=0;
+    W.T.fully=0;
+    W.T.fullz=0;
     W.T.bend=0;
-    W.T.headside=0; W.T.headforward=0; W.T.headcurve=0;
+    W.T.headside=0;
+    W.T.headforward=0;
+    W.T.headcurve=0;
 
-    W.T.rshoulderside=-135; W.T.rshoulderforward=0; W.T.rshouldercurve=0; W.T.relbow=90; W.T.rfootrot=0.0; 
-    W.T.lshoulderside=-45; W.T.lshoulderforward=0; W.T.lshouldercurve=0; W.T.lelbow=-90; W.T.lfootrot=0.0;
+    W.T.rshoulderside=-135;
+    W.T.rshoulderforward=0;
+    W.T.rshouldercurve=0;
+    W.T.relbow=90;
+    W.T.rfootrot=0.0;
+    W.T.lshoulderside=-45;
+    W.T.lshoulderforward=0;
+    W.T.lshouldercurve=0;
+    W.T.lelbow=-90;
+    W.T.lfootrot=0.0;
 
-    W.T.rltside=-90; W.T.rltforward=0; W.T.rltcurve=0; W.T.rlbforward=0;
-    W.T.lltside=-90; W.T.lltforward=0; W.T.lltcurve=0; W.T.llbforward=0;
+    W.T.rltside=-90;
+    W.T.rltforward=0;
+    W.T.rltcurve=0;
+    W.T.rlbforward=0;
+    W.T.lltside=-90;
+    W.T.lltforward=0;
+    W.T.lltcurve=0;
+    W.T.llbforward=0;
 
-    W.T.move=0.0; W.T.backtyretrans=0.0; W.T.fronttyretrans=0.0;
-    W.T.lftyreshift=0.0; W.T.rftyreshift=0.0;
-    W.T.vehicleback=0; W.T.carback=0; W.T.down=0.0;
+    W.T.move=0.0;
+    W.T.backtyretrans=0.0;
+    W.T.fronttyretrans=0.0;
+    W.T.lftyreshift=0.0;
+    W.T.rftyreshift=0.0;
+    W.T.vehicleback=0;
+    W.T.carback=0;
+    W.T.down=0.0;
 
-    W.T.carfront=0.0; W.T.carfrontshift=0.0; W.T.carfrontinsert=0.0;
+    W.T.carfront=0.0;
+    W.T.carfrontshift=0.0;
+    W.T.carfrontinsert=0.0;
 
     W.T.car_x=0.0;
     W.T.car_y=-5.0;

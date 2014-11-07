@@ -6,8 +6,8 @@
 
 class BMP
 {
-    public:
-        void loadBmpTexture(const char*, GLuint);
+public:
+    void loadBmpTexture(const char*, GLuint);
 };
 
 #endif
