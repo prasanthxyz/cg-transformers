@@ -13,22 +13,22 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     else
         glNormal3f(0,-1,0);
 
-    for(i = -0.5; i < 0.499; i += .05)
+    for(i = -0.5; i < 0.499; i += .01)
     {
-        for(j = -0.5; j < 0.499; j += .05)
+        for(j = -0.5; j < 0.499; j += .01)
         {
             glBegin(GL_QUADS);
             glTexCoord2f(i+0.5,j+0.5);
             glVertex3f( i, 0.5f, j);
 
-            glTexCoord2f(i+0.55,j+0.5);
-            glVertex3f( i+.05f, 0.5f, j);
+            glTexCoord2f(i+0.51,j+0.5);
+            glVertex3f( i+.01f, 0.5f, j);
 
-            glTexCoord2f(i+0.55,j+0.55);
-            glVertex3f( i+.05f, 0.5f, j+.05f);
+            glTexCoord2f(i+0.51,j+0.51);
+            glVertex3f( i+.01f, 0.5f, j+.01f);
 
-            glTexCoord2f(i+0.5,j+0.55);
-            glVertex3f( i, 0.5f, j+.05f);
+            glTexCoord2f(i+0.5,j+0.51);
+            glVertex3f( i, 0.5f, j+.01f);
             glEnd();
         }
     }
@@ -43,22 +43,22 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     else
         glNormal3f(0,1,0);
 
-    for(i = -0.5; i < 0.499; i += .05)
+    for(i = -0.5; i < 0.499; i += .01)
     {
-        for(j = -0.5; j < 0.499; j += .05)
+        for(j = -0.5; j < 0.499; j += .01)
         {
             glBegin(GL_QUADS);
             glTexCoord2f(i+0.5,j+0.5);
             glVertex3f( i, -0.5f, j);
 
-            glTexCoord2f(i+0.55,j+0.5);
-            glVertex3f( i+.05f, -0.5f, j);
+            glTexCoord2f(i+0.51,j+0.5);
+            glVertex3f( i+.01f, -0.5f, j);
 
-            glTexCoord2f(i+0.55,j+0.55);
-            glVertex3f( i+.05f, -0.5f, j+.05f);
+            glTexCoord2f(i+0.51,j+0.51);
+            glVertex3f( i+.01f, -0.5f, j+.01f);
 
-            glTexCoord2f(i+0.5,j+0.55);
-            glVertex3f( i, -0.5f, j+.05f);
+            glTexCoord2f(i+0.5,j+0.51);
+            glVertex3f( i, -0.5f, j+.01f);
             glEnd();
         }
     }
@@ -76,22 +76,22 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     else
         glNormal3f(0,0,1);
 
-    for(i = -0.5; i < 0.499; i += .05)
+    for(i = -0.5; i < 0.499; i += .01)
     {
-        for(j = -0.5; j < 0.499; j += .05)
+        for(j = -0.5; j < 0.499; j += .01)
         {
             glBegin(GL_QUADS);
             glTexCoord2f(i+0.5,j+0.5);
             glVertex3f( i, j, -0.5f);
 
-            glTexCoord2f(i+0.55,j+0.5);
-            glVertex3f( i+.05f, j, -0.5f);
+            glTexCoord2f(i+0.51,j+0.5);
+            glVertex3f( i+.01f, j, -0.5f);
 
-            glTexCoord2f(i+0.55,j+0.55);
-            glVertex3f( i+.05f, j+.05f, -0.5f);
+            glTexCoord2f(i+0.51,j+0.51);
+            glVertex3f( i+.01f, j+.01f, -0.5f);
 
-            glTexCoord2f(i+0.5,j+0.55);
-            glVertex3f( i, j+.05f, -0.5f);
+            glTexCoord2f(i+0.5,j+0.51);
+            glVertex3f( i, j+.01f, -0.5f);
             glEnd();
         }
     }
@@ -108,22 +108,22 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     else
         glNormal3f(0,0,-1);
 
-    for(i = -0.5; i < 0.499; i += .05)
+    for(i = -0.5; i < 0.499; i += .01)
     {
-        for(j = -0.5; j < 0.499; j += .05)
+        for(j = -0.5; j < 0.499; j += .01)
         {
             glBegin(GL_QUADS);
             glTexCoord2f(i+0.5,j+0.5);
             glVertex3f( i, j, 0.5f);
 
-            glTexCoord2f(i+0.55,j+0.5);
-            glVertex3f( i+.05f, j, 0.5f);
+            glTexCoord2f(i+0.51,j+0.5);
+            glVertex3f( i+.01f, j, 0.5f);
 
-            glTexCoord2f(i+0.55,j+0.55);
-            glVertex3f( i+.05f, j+.05f, 0.5f);
+            glTexCoord2f(i+0.51,j+0.51);
+            glVertex3f( i+.01f, j+.01f, 0.5f);
 
-            glTexCoord2f(i+0.5,j+0.55);
-            glVertex3f( i, j+.05f, 0.5f);
+            glTexCoord2f(i+0.5,j+0.51);
+            glVertex3f( i, j+.01f, 0.5f);
             glEnd();
         }
     }
@@ -140,22 +140,22 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     else
         glNormal3f(1,0,0);
 
-    for(i = -0.5; i < 0.499; i += .05)
+    for(i = -0.5; i < 0.499; i += .01)
     {
-        for(j = -0.5; j < 0.499; j += .05)
+        for(j = -0.5; j < 0.499; j += .01)
         {
             glBegin(GL_QUADS);
             glTexCoord2f(i+0.5,j+0.5);
             glVertex3f(-0.5f, i, j);
 
-            glTexCoord2f(i+0.55,j+0.5);
-            glVertex3f(-0.5f, i+.05f, j);
+            glTexCoord2f(i+0.51,j+0.5);
+            glVertex3f(-0.5f, i+.01f, j);
 
-            glTexCoord2f(i+0.55,j+0.55);
-            glVertex3f(-0.5f, i+.05f, j+.05f);
+            glTexCoord2f(i+0.51,j+0.51);
+            glVertex3f(-0.5f, i+.01f, j+.01f);
 
-            glTexCoord2f(i+0.5,j+0.55);
-            glVertex3f(-0.5f, i, j+.05f);
+            glTexCoord2f(i+0.5,j+0.51);
+            glVertex3f(-0.5f, i, j+.01f);
             glEnd();
         }
     }
@@ -173,22 +173,22 @@ void Drawing::drawCube(GLuint T0, GLuint T1, GLuint T2, GLuint T3, GLuint T4, GL
     else
         glNormal3f(-1,0,0);
 
-    for(i = -0.5; i < 0.499; i += .05)
+    for(i = -0.5; i < 0.499; i += .01)
     {
-        for(j = -0.5; j < 0.499; j += .05)
+        for(j = -0.5; j < 0.499; j += .01)
         {
             glBegin(GL_QUADS);
             glTexCoord2f(i+0.5,j+0.5);
             glVertex3f(0.5f, i, j);
 
-            glTexCoord2f(i+0.55,j+0.5);
-            glVertex3f(0.5f, i+.05f, j);
+            glTexCoord2f(i+0.51,j+0.5);
+            glVertex3f(0.5f, i+.01f, j);
 
-            glTexCoord2f(i+0.55,j+0.55);
-            glVertex3f(0.5f, i+.05f, j+.05f);
+            glTexCoord2f(i+0.51,j+0.51);
+            glVertex3f(0.5f, i+.01f, j+.01f);
 
-            glTexCoord2f(i+0.5,j+0.55);
-            glVertex3f(0.5f, i, j+.05f);
+            glTexCoord2f(i+0.5,j+0.51);
+            glVertex3f(0.5f, i, j+.01f);
             glEnd();
         }
     }

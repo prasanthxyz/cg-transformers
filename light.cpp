@@ -51,7 +51,7 @@ Light::Light(GLenum lid, GLfloat x,GLfloat y,GLfloat z, bool spotflag)
     if(spotflag)
     {
         glLightf(light_id, GL_SPOT_CUTOFF, 40.0f);
-        glLightf(light_id, GL_SPOT_EXPONENT, 1.0f);
+        glLightf(light_id, GL_SPOT_EXPONENT, 5.0f);
     }
 }
 
