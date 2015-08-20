@@ -4,7 +4,7 @@ Youtube Video&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
         [http://youtu.be/mhNh_tMyaXA](http://youtu.be/mhNh_tMyaXA)
 
 Assignment report&nbsp;:
-[www.cse.iitb.ac.in/~prasanth/cg_a23](www.cse.iitb.ac.in/~prasanth/cg_a23)
+[www.cse.iitb.ac.in/~prasanth/cg_a23](http://www.cse.iitb.ac.in/~prasanth/cg_a23)
 
 ## KEYBOARD BINDINGS: (car-motion, lighting and camera)
 
@@ -36,7 +36,7 @@ RIGHT arrow &nbsp;: Turn car right
 ## Assignment PART 2
 
 Assignment report:
-[www.cse.iitb.ac.in/~prasanth/cg_a22](www.cse.iitb.ac.in/~prasanth/cg_a22)
+[www.cse.iitb.ac.in/~prasanth/cg_a22](http://www.cse.iitb.ac.in/~prasanth/cg_a22)
 
 ---
 
